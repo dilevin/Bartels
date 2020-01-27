@@ -11,12 +11,12 @@ namespace sim {
 
     //assemble over graph to a vector
     template<typename Func, typename ...Params, typename DerivedRet,  typename DerivedTmp>
-    void assemble(Eigen::SparseMatrixBase<DerivedRet> &assembled, 
+    void assemble(Eigen::SparseMatrix<DerivedRet> &assembled, 
                 unsigned int rows, unsigned int cols, 
                 Eigen::Ref<Eigen::MatrixXi> E_from,  
                 Eigen::Ref<Eigen::MatrixXi> E_to,  
-                Func func, Params && ... params,
-                Eigen::MatrixBase<DerivedTmp> &tmp);
+                Func func, Eigen::MatrixBase<DerivedTmp> &tmp, 
+                Params && ... params);
 
     //assemble over graph to sparse matrix
     template<typename Func, typename ...Params, typename DerivedRet,  typename DerivedTmp>

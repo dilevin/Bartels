@@ -5,7 +5,7 @@
 #include <d2psi_neo_hookean_dq2.h>
 
 template<typename HessianType, typename ParameterType>
-void d2psi_neo_hookean_dF2(Eigen::DenseBase<HessianType> &ddw, Eigen::DenseBase<HessianType> &F, ParameterType &&C, ParameterType &&D) {
+void sim::d2psi_neo_hookean_dF2(Eigen::DenseBase<HessianType> &ddw, Eigen::DenseBase<HessianType> &F, ParameterType &&C, ParameterType &&D) {
 
     double f11, f12, f13, f21, f22, f23, f31, f32, f33;
         

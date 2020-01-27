@@ -8,7 +8,7 @@ namespace sim {
 
     template<typename HessianType, typename ParameterType>
     void d2psi_neo_hookean_dF2(Eigen::DenseBase<HessianType> &ddw, Eigen::DenseBase<HessianType> &F, ParameterType &&C, ParameterType &&D) {
-        
+            
 }
 
 #ifndef SIM_STATIC_LIBRARY
