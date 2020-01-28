@@ -1,5 +1,5 @@
  
- #ifdef SIM_STATIC_LIBRARY
+#ifdef SIM_STATIC_LIBRARY
 # include<../include/linear_tet_mass_matrix>
 #endif
 

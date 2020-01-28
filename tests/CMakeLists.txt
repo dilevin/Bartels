@@ -7,6 +7,10 @@ set(CMAKE_CXX_STANDARD 17)
 
 include(../cmake/bartels.cmake)
 
+include_directories(${bartels_INCLUDE_DIR})
+
+message(WARNING ${bartels_INCLUDE_DIR})
+
 #executables for tests
 add_executable(test_flatten_multiply test_flatten_multiply.cpp)
 target_link_libraries(test_flatten_multiply bartels)
