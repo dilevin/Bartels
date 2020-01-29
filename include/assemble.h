@@ -18,22 +18,6 @@ namespace sim {
                 Func func, Eigen::MatrixBase<DerivedTmp> &tmp, 
                 Params && ... params);
 
-    //assemble over graph to sparse matrix
-    template<typename Func, typename ...Params, typename DerivedRet,  typename DerivedTmp>
-    void assemble(Eigen::SparseMatrixBase<DerivedRet> &assembled, 
-                  Eigen::Ref<Eigen::MatrixXi> E, 
-                  Func func, Params &&... params, 
-                  Eigen::MatrixBase<DerivedTmp> &tmp);
-
-    //assemble to sparse matrix using a flatten operator
-    template<typename Func, typename ...Params, typename DerivedRet,  typename DerivedTmpA, typename DerivedTmpB>
-    void assemble(Eigen::SparseMatrixBase<DerivedRet> &assembled, 
-                  Eigen::Ref<Eigen::MatrixXi> E,  
-                  Func func, Params &&... params, 
-                  Flatten_Multiply<DerivedTmpA, DerivedTmpB> &tmp);
-
-    //TODO: assemble to dense matrix 
-
 }
 
 #ifndef SIM_STATIC_LIBRARY

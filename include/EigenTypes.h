@@ -23,6 +23,10 @@ namespace Eigen {
     using Matrix1212d = Eigen::Matrix<double, 12,12>;
     using Matrix44f = Eigen::Matrix<float, 4,4>;
     
+    //some templated aliases that I find useful
+    template<typename Scalar>
+    using VectorXx = Eigen::Matrix<Scalar, Eigen::Dynamic, 1>;
+    
     //sparse types
     using SparseMatrixd = Eigen::SparseMatrix<double>;
 

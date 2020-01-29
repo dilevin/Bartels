@@ -15,7 +15,7 @@ inline void relay_params(unsigned int eid, Func &func, Ret && tmp, Params && ...
   relay_params_struct{ func, tmp, (params.row(eid))...};
 }
 
-//assembler code
+//assemble over a graph to a vector 
 template<typename Func, typename ...Params, typename DerivedRet,  typename DerivedTmp>
 void sim::assemble(
                 Eigen::SparseMatrix<DerivedRet> &assembled, 
@@ -70,11 +70,34 @@ void sim::assemble(
 
  }
 
-template<typename Func, typename ...Params, typename DerivedRet,  typename DerivedTmpA, typename DerivedTmpB>
-void sim::assemble(
-                Eigen::SparseMatrixBase<DerivedRet> &assembled, 
-                Eigen::Ref<Eigen::MatrixXi> E,  
-                Func func, Params && ... params, 
-                Flatten_Multiply<DerivedTmpA, DerivedTmpB> &tmp) {
+//assemble over graph to a vector
+template<typename Func, typename ...Params, typename DerivedRet,  typename DerivedTmp>
+void sim::assemble(Eigen::VectorXx<DerivedRet> &assembled, 
+            unsigned int rows, 
+            Eigen::Ref<Eigen::MatrixXi> E_from,  
+            Eigen::Ref<Eigen::MatrixXi> E_to,  
+            Func func, Eigen::DenseBase<DerivedTmp> &tmp, 
+            Params && ... params) {
+
+    using Scalar = typename DerivedTmp::Scalar;
+
+    //init triplet list
+    unsigned int block_size_to, block_size_from;
+
+    assembled.resize(rows, 1); 
+    assembled.setZero();
+
+    //iterate through element hypergraph
+    for(unsigned int ie=0; ie < E_from.rows(); ++ie) {
+        
+        relay_params(ie, func,tmp, E_from, params...);
+        
+        block_size_to = tmp.rows()/E_to.cols();
+        
+        for(unsigned int iblock_to=0; iblock_to <E_to.cols(); ++iblock_to) {
+            for(unsigned int iblk_r=0; iblk_r < block_size_to; ++iblk_r) {
+                 assembled(block_size_to*E_to(ie, iblock_to) + iblk_r, 1) += tmp(block_size_to*iblock_to+iblk_r, 1);
+            } 
+        }
 
 }
