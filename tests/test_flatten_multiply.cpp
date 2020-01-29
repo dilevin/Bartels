@@ -24,10 +24,11 @@ int main(int argc, char **argv) {
     Eigen::Matrix<double, 9,1> B1 = Eigen::Map<Eigen::Matrix<double, 9,1>>(B.data());
     double test_val = (Eigen::Map<Eigen::Matrix<double,9,1>>(C.data()) - A.flatten()*Eigen::Map<Eigen::Matrix<double, 9,1>>(B.data())).norm();
 
+
     if( test_val < 1e-8) {
-        std::cout<<"Success \n";
+        std::cout<<"PASSED \n";
     } else {
-        std::cout<<"Fail \n";
+        std::cout<<"FAIL \n";
     }
 
     return 0;

@@ -13,8 +13,8 @@ message(WARNING ${bartels_INCLUDE_DIR})
 
 #executables for tests
 add_executable(test_flatten_multiply test_flatten_multiply.cpp)
-target_link_libraries(test_flatten_multiply bartels)
+target_link_libraries(test_flatten_multiply igl::core bartels)
 
 add_executable(test_assemble test_assemble.cpp)
-target_link_libraries(test_assemble bartels)
+target_link_libraries(test_assemble igl::core bartels)
 

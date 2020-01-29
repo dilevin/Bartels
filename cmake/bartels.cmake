@@ -6,7 +6,11 @@ option(bartels_USE_STATIC_LIBRARY "Use libigl as static library" OFF)
 
 set(bartels_ROOT "${CMAKE_CURRENT_LIST_DIR}/..")
 set(bartels_SOURCE_DIR "${bartels_ROOT}")
-set(bartels_INCLUDE_DIR ${bartels_ROOT}/include ${bartels_SOURCE_DIR}/extern/Eigen)
+set(bartels_INCLUDE_DIR ${bartels_ROOT}/include)
+
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${bartels_SOURCE_DIR}/cmake)
+
+find_package(LIBIGL REQUIRED)
 
 # Dependencies are linked as INTERFACE targets unless libigl is compiled as a static library
 if(bartels_USE_STATIC_LIBRARY)
@@ -34,3 +38,4 @@ else()
 endif()
 
 target_compile_definitions(bartels INTERFACE -DSIM_DATA_DIRECTORY=${bartels_ROOT}/data)
+target_link_libraries(bartels INTERFACE igl::core)

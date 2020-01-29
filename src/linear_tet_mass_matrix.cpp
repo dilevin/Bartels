@@ -7,8 +7,7 @@
 
 template<typename MassMatrixType, typename  Scalar>
 void sim::linear_tet_mass_matrix(Eigen::DenseBase<MassMatrixType> &M, Eigen::Ref<const Eigen::RowVectorXi> element, Scalar density, Scalar volume) {
-
-    std::cout<<"Mass A: "<<M<<" \n";        
+     
     //setup the mass matrix
     double mass = density*volume;
     double c0 = (1.0/10.0)*mass;
@@ -23,8 +22,6 @@ void sim::linear_tet_mass_matrix(Eigen::DenseBase<MassMatrixType> &M, Eigen::Ref
 
     //Assemble these bad boys //really big 4x4 block matrix
     M.block(p0,p0, 3,3) = c0*Eigen::Matrix<double,3,3>::Identity();
-
-    std::cout<<"Mass B \n";
     M.block(p0,p1, 3,3) = c1*Eigen::Matrix<double,3,3>::Identity();
     M.block(p0,p2, 3,3) = c1*Eigen::Matrix<double,3,3>::Identity();
     M.block(p0,p3, 3,3) = c1*Eigen::Matrix<double,3,3>::Identity();
@@ -44,5 +41,4 @@ void sim::linear_tet_mass_matrix(Eigen::DenseBase<MassMatrixType> &M, Eigen::Ref
     M.block(p3,p2, 3,3) = c1*Eigen::Matrix<double,3,3>::Identity();
     M.block(p3,p3, 3,3) = c0*Eigen::Matrix<double,3,3>::Identity();
 
-    std::cout<<"Mass D \n";
  }
