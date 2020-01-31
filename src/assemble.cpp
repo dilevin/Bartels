@@ -2,7 +2,16 @@
 # include<../include/assemble.h>
 #endif
 
-//utility objects
+template <typename DerivedV>
+inline auto get_param(Eigen::MatrixBase<DerivedV> &V, unsigned int i) {
+    return V.row(i);
+}
+
+template <typename DerivedV>
+inline auto & get_param(std::vector<DerivedV> &V, unsigned int i) {
+    return V[i];
+}
+
 struct relay_params_struct {
   template <typename Func, typename ...Params>
   inline relay_params_struct(Func &func, Params && ... params) {
@@ -12,7 +21,8 @@ struct relay_params_struct {
 
 template<typename Func, typename Ret, typename ...Params>
 inline void relay_params(unsigned int eid, Func &func, Ret && tmp, Params && ... params) {
-  relay_params_struct{ func, tmp, (params.row(eid))...};
+  //relay_params_struct{ func, tmp, (params.row(eid))...};
+  relay_params_struct{ func, tmp, (get_param(params,eid))...};
 }
 
 //assemble over a graph to a vector 
@@ -96,8 +106,11 @@ void sim::assemble(Eigen::VectorXx<DerivedRet> &assembled,
         
         for(unsigned int iblock_to=0; iblock_to <E_to.cols(); ++iblock_to) {
             for(unsigned int iblk_r=0; iblk_r < block_size_to; ++iblk_r) {
-                 assembled(block_size_to*E_to(ie, iblock_to) + iblk_r, 1) += tmp(block_size_to*iblock_to+iblk_r, 1);
+              
+                 assembled(block_size_to*E_to(ie, iblock_to) + iblk_r) += tmp(block_size_to*iblock_to+iblk_r);
             } 
         }
+    }
+
 
 }

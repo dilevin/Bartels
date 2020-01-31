@@ -12,7 +12,7 @@ void phi_linear_tetrahedron(Eigen::Vector4x<DataType> &phi,
                             const Eigen::DenseBase<Eigen::Vector3x<DataType> > &x);
 
 #ifndef SIM_STATIC_LIBRARY
-#   include <../src/linear_tet_phi.cpp>
+#   include <../src/phi_linear_tetrahedron.cpp>
 #endif
 
 #endif

@@ -1,6 +1,6 @@
  
 #ifdef SIM_STATIC_LIBRARY
-# include<../include/linear_tet_mass_matrix>
+# include<../include/linear_tet_mass_matrix.h>
 #endif
 
 #include <iostream>

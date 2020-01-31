@@ -6,8 +6,8 @@
 
 namespace sim {
 
-template<typename VectorType, typename TractionType>
-void linear_tet_const_ext_force(Eigen::DenseBase<VectorType> &f, Eigen::Ref<const Eigen::RowVectorXi> element, const Eigen::DenseBase<TractionType> &traction);
+template<typename VectorType, typename TractionType, typename ScalarType>
+void linear_tet_const_ext_force(Eigen::DenseBase<VectorType> &f, Eigen::Ref<const Eigen::RowVectorXi> element, const ScalarType volume, const Eigen::DenseBase<TractionType> &traction);
 
 }
 
