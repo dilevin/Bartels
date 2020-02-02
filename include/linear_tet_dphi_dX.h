@@ -5,10 +5,10 @@
 #include <EigenTypes.h>
 
 namespace sim {
-    template<typename DerivedP, typename DerivedV>
+    template<typename DerivedP, typename DerivedV, typename DerivedR>
     void linear_tet_dphi_dX(Eigen::DenseBase<DerivedP> &dphi, const Eigen::MatrixBase<DerivedV> &V, 
                             Eigen::Ref<const Eigen::RowVectorXi> element, 
-                            const Eigen::DenseBase<DerivedV> &X);
+                            Eigen::MatrixBase<DerivedR> const & X);
 
 }
 

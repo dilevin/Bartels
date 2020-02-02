@@ -17,7 +17,7 @@ int main(int argc, char **argv) {
     Eigen::SparseMatrixd M_test; //test data 
     Eigen::Matrix1212d Me = Eigen::Matrix1212d::Identity(); //tmp storage
 
-    Eigen::MatrixXd V, quad_points, quad_weights; 
+    Eigen::MatrixXd V;
     Eigen::MatrixXi E;
     Eigen::MatrixXi F; 
     Eigen::VectorXd v; //volumes
@@ -60,7 +60,7 @@ int main(int argc, char **argv) {
     sim::assemble(f, 3*V.rows(), E, E, assemble_vec_func, f_tmp, v);
 
     error = (f - M*g.replicate(V.rows(),1)).norm();
-    
+
     if(error > 1e-8) {
         std::cout<<"Error: "<<error<<" is too high, assemble vector failed: quitting \n";
         exit(0);

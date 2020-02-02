@@ -1,3 +1,4 @@
+#include <flatten.h>
 #include <flatten_multiply.h>
 
 using namespace sim;
@@ -22,7 +23,7 @@ int main(int argc, char **argv) {
 
     Eigen::Matrix3d C = A*B;
     
-    double test_val = (Eigen::Map<Eigen::Matrix<double,9,1>>(C.data()) - A.flatten()*Eigen::Map<Eigen::Matrix<double, 9,1>>(B.data())).norm();
+    double test_val = (sim::flatten(C) - A.flatten()*Eigen::Map<Eigen::Matrix<double, 9,1>>(B.data())).norm();
 
 
     if( test_val < 1e-8) {
@@ -31,12 +32,28 @@ int main(int argc, char **argv) {
         std::cout<<"FAIL \n";
     }
 
-    test_val = (Eigen::Map<Eigen::Matrix<double,9,1>>(C.data()) - B.flatten()*Eigen::Map<Eigen::Matrix<double, 9,1>>(A.data())).norm();
+    test_val = (sim::flatten(C) - B.flatten()*Eigen::Map<Eigen::Matrix<double, 9,1>>(A.data())).norm();
+
+    std::cout<<sim::flatten_eigen(C)<<"\n";
+
+    std::cout<<C<<"\n";
+
+    std::cout<<sim::unflatten_eigen<3,1>(C.row(0))<<"\n";
 
     if( test_val < 1e-8) {
         std::cout<<"PASSED Reverse\n";
     } else {
         std::cout<<"FAIL Reverse\n";
+    }
+
+    std::cout<<"Test unflatten \n";
+
+    test_val = (sim::unflatten<3,3>(sim::flatten(C)) - C).norm();
+
+    if(test_val < 1e-8) {
+        std::cout<<"PASSED\n";
+    } else {
+        std::cout<<"FAIL\n";
     }
 
     return 0;

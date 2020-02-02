@@ -167,7 +167,7 @@ namespace sim {
         //flatten so you can multiply in reverse order
         //i.e vec(A*B) = B.flatten_r()*A
         inline Eigen::Matrix<Scalar, 9,12> flatten() {
-             Eigen::Matrix<Scalar, 9,9> M;
+             Eigen::Matrix<Scalar, 9,12> M;
            M << (*this)(0,0),0,                0,         (*this)(1,0),        0,           0,         (*this)(2,0),    0,           0,         (*this)(3,0),    0,           0,
                     0,       (*this)(0,0),     0,            0,         (*this)(1,0),       0,           0,         (*this)(2,0),    0,           0,         (*this)(3,0),    0,                   
                     0,       0,            (*this)(0,0),     0,                0,         (*this)(1,0),  0,           0,         (*this)(2,0),    0,           0,         (*this)(3,0),           
@@ -187,9 +187,47 @@ namespace sim {
 
     };
 
+    //try to do this eigen style so I avoid copying so much data
+    //expression A*B
+    /*template<class ArgTypeA, class ArgTypeB>
+    struct flatten_multiply_helper {
 
+        //flatten to a column vector
+        typedef Eigen::Matrix<typename ArgTypeA::Scalar,
+                       ArgTypeA::RowsAtCompileTime*ArgTypeB::ColsAtCompileTime,
+                       ArgTypeB::RowsAtCompileTime*ArgTypeB::ColsAtCompileTime,
+                       Eigen::ColMajor,
+                       ArgTypeA::RowsAtCompileTime*ArgTypeB::ColsAtCompileTime,
+                       ArgTypeB::RowsAtCompileTime*ArgTypeB::ColsAtCompileTime> MatrixType;
+
+    };
+
+    //access approriate parts of matrix to flatten
+    template<class ArgTypeA, class ArgTypeB>
+    class flatten_multiply_functor {
+        const ArgTypeA &m_flatten;
+
+        public:
+            flatten_multiply_functor(const ArgTypeA &arg) : m_to_flatten(arg) { }
+
+            const typename ArgType::Scalar operator()(size_t row, size_t col) const {
+
+                return 0;
+            }
+    };
+
+    template<class ArgTypeA, class ArgTypeB>
+    Eigen::CwiseNullaryOp<flatten_multiply_functor<ArgTypeA, ArgTypeB>,
+                          typename flatten_multiply_helper<ArgTypeA, ArgTypeB>::MatrixType>
+    flatten_multiply_eigen(const Eigen::MatrixBase<ArgTypeA> &arg) {
+
+        using MatrixType = typename flatten_multiply_helper<ArgTypeA, ArgTypeB>::MatrixType;
+
+        return MatrixType::NullaryExpr(arg.size(), 1, flatten_multiply_functor<ArgTypeA, ArgTypeB>(arg.derived()));
+    }*/
 
 }
+
 #ifndef SIM_STATIC_LIBRARY
 # include<../src/flatten_multiply.cpp>
 #endif

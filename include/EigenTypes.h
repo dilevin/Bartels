@@ -28,6 +28,9 @@ namespace Eigen {
     using VectorXx = Eigen::Matrix<Scalar, Eigen::Dynamic, 1>;
 
     template<typename Scalar>
+    using Matrix43x = Eigen::Matrix<Scalar, 4,3>;
+    
+    template<typename Scalar>
     using Matrix12x = Eigen::Matrix<Scalar, 12,12>;
     
 

@@ -18,3 +18,6 @@ target_link_libraries(test_flatten_multiply igl::core bartels)
 add_executable(test_assemble test_assemble.cpp)
 target_link_libraries(test_assemble igl::core bartels)
 
+add_executable(test_constitutive_model test_constitutive_model.cpp)
+target_link_libraries(test_constitutive_model igl::core bartels)
+
