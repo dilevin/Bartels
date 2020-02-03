@@ -39,7 +39,7 @@ int main(int argc, char **argv) {
 
     for(unsigned int ii=0; ii<E.rows(); ++ii) {
         q_ele << q.segment<3>(3*E(ii,0)), q.segment<3>(3*E(ii,1)), q.segment<3>(3*E(ii,2)), q.segment<3>(3*E(ii,3));
-        error = (sim::Flatten_Multiply_Right<Eigen::Matrix<double, 3,4>,Eigen::Matrix<double, 4,3>>(sim::unflatten_row<4,3>(dXinv.row(ii))).flatten()*q_ele - test_I).norm();
+        error = (sim::flatten_multiply_right<Eigen::Matrix<double, 3,4>>(sim::unflatten<4,3>(dXinv.row(ii)))*q_ele - test_I).norm();
 
         if(fabs(error) > 1e-8) {
             std::cout<<"FAILED\n";
