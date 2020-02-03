@@ -13,49 +13,6 @@
 
 namespace sim {
 
-    /*template<typename Scalar, int Rows, int Cols>
-    inline auto flatten(Eigen::Matrix<Scalar, Rows, Cols> &&A) {
-        return flatten(A);
-    }
-
-    template<typename Scalar, int Rows, int Cols>
-    inline auto flatten(Eigen::Matrix<Scalar, Rows, Cols> &A) {
-
-        return Eigen::Map<Eigen::Matrix<Scalar, Rows*Cols, 1> >(A.data(), A.size()); 
-    }
-
-    
-    //unflatten back to indicated matrix type
-    template<int RowsOut, int ColsOut, typename Derived>
-    inline auto unflatten(Eigen::MatrixBase<Derived> &a) {
-
-        
-        //std::cout<<a<<"\n";
-        using Scalar = typename Derived::Scalar;
-        constexpr int Rows = Derived::RowsAtCompileTime;
-        constexpr int Cols = Derived::ColsAtCompileTime;
-
-        return Eigen::Map<Eigen::Matrix<Scalar, RowsOut, ColsOut> >((Eigen::Ref<Eigen::Matrix<Scalar, Rows, Cols> >(a)).data());
-    }
-
-    template<int RowsOut, int ColsOut, typename Derived>
-    inline auto unflatten(Eigen::MatrixBase<Derived> &&a) {
-        return unflatten<RowsOut, ColsOut>(a);
-    }
-
-    //alternate unflatten that works on block operations
-    template<int RowsOut, int ColsOut, typename DerivedIn>
-    inline auto unflatten_row(const Eigen::MatrixBase<DerivedIn> &in) {
-        Eigen::Matrix<typename DerivedIn::Scalar, RowsOut, ColsOut> tmp;
-
-        for(unsigned int jj=0; jj<ColsOut; ++jj)
-            for(unsigned int ii=0; ii<RowsOut; ++ii) {
-                tmp(ii,jj) = in(jj*RowsOut+ii);
-            }
-
-        return tmp;
-    }*/
-
     //try to do this eigen style so I avoid copying so much data
     template<class ArgType>
     struct flatten_helper {
