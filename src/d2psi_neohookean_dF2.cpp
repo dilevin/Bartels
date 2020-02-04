@@ -1,11 +1,9 @@
 #ifdef SIM_STATIC_LIBRARY
-# include<../src/d2psi_neo_hooean_dF2.h>
+# include<../src/d2psi_neohookean_dF2.h>
 #endif
 
-#include <d2psi_neo_hookean_dq2.h>
-
-template<typename HessianType, typename ParameterType>
-void sim::d2psi_neo_hookean_dF2(Eigen::DenseBase<HessianType> &ddw, Eigen::DenseBase<HessianType> &F, ParameterType &&C, ParameterType &&D) {
+template<typename HessianType, typename DefoType, typename ParameterType>
+void sim::d2psi_neohookean_dF2(Eigen::MatrixBase<HessianType> &ddw, const Eigen::MatrixBase<DefoType> &F, ParameterType &&C, ParameterType &&D) {
 
     double f11, f12, f13, f21, f22, f23, f31, f32, f33;
         

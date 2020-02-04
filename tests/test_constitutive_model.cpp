@@ -1,4 +1,6 @@
 #include <linear_tet_dphi_dX.h>
+#include <linear_tet_neohookean_dq2.h>
+
 #include <flatten.h>
 #include <flatten_multiply.h>
 #include <eval_at_point.h>
@@ -55,6 +57,22 @@ int main(int argc, char **argv) {
     std::cout<<"PASSED\n";
 
     //to do assemble a stiffness matrix for fun
+
+    //d2psi_neo_hookean_dF2(Eigen::DenseBase<HessianType> &ddw, Eigen::DenseBase<HessianType> &F, ParameterType &&C, ParameterType &&D)
+    double YM = 6e5; //young's modulus
+    double mu = 0.4; //poissons ratio
+    double D = 0.5*(YM*mu)/((1.0+mu)*(1.0-2.0*mu));
+    double C = 0.5*YM/(2.0*(1.0+mu));
+    
+    Eigen::Matrix12d H;
+
+    linear_tet_neohookean_dq2(H, q, E.row(0), sim::unflatten<4,3>(dXinv.row(0)), C, D, v(0));
+
+    std::cout<<"H: "<<H<<"\n";
+    //auto Ke = [&C, &D](auto &ddw, auto &F, auto &C, auto &D) { 
+      //  d2psi_neo_hookean_dF2(ddw, F, C, D)
+   // };
+    //NOTE: Will need some callbacks for filtering per element matrices etc 
 
     //assemble the force vector (which should be zero in the underformed state)
 

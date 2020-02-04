@@ -15,7 +15,7 @@ int main(int argc, char **argv) {
     Eigen::SparseMatrixd M; //assembled 
     Eigen::VectorXd f; //assembled forces 
     Eigen::SparseMatrixd M_test; //test data 
-    Eigen::Matrix1212d Me = Eigen::Matrix1212d::Identity(); //tmp storage
+    Eigen::Matrix12d Me = Eigen::Matrix12d::Identity(); //tmp storage
 
     Eigen::MatrixXd V;
     Eigen::MatrixXi E;

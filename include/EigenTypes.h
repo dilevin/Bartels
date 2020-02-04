@@ -18,10 +18,10 @@ namespace Eigen {
     using Matrix34d = Eigen::Matrix<double, 3,4>;
     using Matrix36d = Eigen::Matrix<double, 3,6>;
     using Matrix43d = Eigen::Matrix<double, 4,3>;
-    using Matrix66d  = Eigen::Matrix<double, 6,6>;
-    using Matrix99d = Eigen::Matrix<double, 9, 9>;
-    using Matrix1212d = Eigen::Matrix<double, 12,12>;
-    using Matrix44f = Eigen::Matrix<float, 4,4>;
+    using Matrix6d  = Eigen::Matrix<double, 6,6>;
+    using Matrix9d = Eigen::Matrix<double, 9, 9>;
+    using Matrix12d = Eigen::Matrix<double, 12,12>;
+    using Matrix4f = Eigen::Matrix<float, 4,4>;
     
     //some templated aliases that I find useful
     template<typename Scalar>
@@ -31,9 +31,21 @@ namespace Eigen {
     using Matrix43x = Eigen::Matrix<Scalar, 4,3>;
     
     template<typename Scalar>
+    using Matrix9x = Eigen::Matrix<Scalar, 9,9>;
+
+    template<typename Scalar>
+    using Matrix912 = Eigen::Matrix<Scalar, 9,12>;
+
+    template<typename Scalar>
     using Matrix12x = Eigen::Matrix<Scalar, 12,12>;
     
+    template<typename Scalar>
+    using Vector9x = Eigen::Matrix<Scalar, 9,1>;
+    
 
+    template<typename Scalar>
+    using Vector12x = Eigen::Matrix<Scalar, 12,1>;
+    
     //sparse types
     using SparseMatrixd = Eigen::SparseMatrix<double>;
 
@@ -64,6 +76,8 @@ inline void inverse33(Eigen::Ref<Eigen::Matrix3d> result, Eigen::Ref<const Eigen
     result.transposeInPlace();
 }
 
-
+//include flatten operations
+#include <flatten.h>
+#include <flatten_multiply.h>
 
 #endif 
