@@ -100,10 +100,21 @@ int main(int argc, char **argv) {
 
     bool did_it_load = Eigen::loadMarket(H_test, sim::data_dir()+pathsep+"matrices"+pathsep+"H_neohookean_coarser_bunny.txt");
 
-    std::cout<<H.coeffRef(1499,1499)<<"\n";
     if(!did_it_load) {
         std::cout<<"Test data didn't load: quitting \n";
         exit(0);
     }
+
+    //relative error
+    error = (H-H_test).norm()/H.coeff(0,0);
+
+    std::cout<<"Test neohookean hessian \n";
+
+    if(error > 1e-8) {
+        std::cout<<"FAILED: "<<error<<"\n";
+        exit(0);
+    }
+
+    std::cout<<"PASSED\n";
 
 }

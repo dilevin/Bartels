@@ -1,11 +1,11 @@
 #ifdef SIM_STATIC_LIBRARY
-# include<../src/d2psi_neohookean_dF2.h>
+# include<../include/d2psi_neohookean_dF2.h>
 #endif
 
 template<typename HessianType, typename DefoType, typename ParameterType>
 void sim::d2psi_neohookean_dF2(Eigen::MatrixBase<HessianType> &ddw, const Eigen::MatrixBase<DefoType> &F, ParameterType &&C, ParameterType &&D) {
 
-    double f11, f12, f13, f21, f22, f23, f31, f32, f33;
+    typename DefoType::Scalar f11, f12, f13, f21, f22, f23, f31, f32, f33;
         
     f11 = F(0,0);
     f12 = F(0,1);

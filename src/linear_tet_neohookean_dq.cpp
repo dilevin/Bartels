@@ -1,13 +1,13 @@
 #ifdef SIM_STATIC_LIBRARY
-# include<../include/linear_tet_neohookean_dq2.h>
+# include<../include/linear_tet_neohookean_dq.h>
 #endif
 
-template<typename HessianType, typename DefoType, typename DerivedV, typename  Scalar>
-void sim::linear_tet_neohookean_dq2(Eigen::DenseBase<HessianType> &H, const Eigen::MatrixBase<DerivedV> &q, Eigen::Ref<const Eigen::RowVectorXi> element,  
+template<typename GradientType, typename DefoType, typename DerivedV, typename  Scalar>
+void sim::linear_tet_neohookean_dq2(Eigen::DenseBase<GradientType> &g, const Eigen::MatrixBase<DerivedV> &q, Eigen::Ref<const Eigen::RowVectorXi> element,  
                                     const Eigen::MatrixBase<DefoType> &dXinv, Scalar C, Scalar D, Scalar volume) {
 
     //get dpsi/dF2
-    Eigen::Matrix9x<typename DerivedV::Scalar> dF2; 
+    Eigen::Matrix9x<typename DerivedV::Scalar> dF; 
     Eigen::Matrix<typename DefoType::Scalar, 9,12> B = sim::flatten_multiply_right<Eigen::Matrix<typename DefoType::Scalar, 3,4> >(dXinv);
 
     //local positions
@@ -15,8 +15,8 @@ void sim::linear_tet_neohookean_dq2(Eigen::DenseBase<HessianType> &H, const Eige
     qe << q.segment(3*element(0),3), q.segment(3*element(1),3), q.segment(3*element(2),3), q.segment(3*element(3),3);
 
     //grab per element positions
-    d2psi_neohookean_dF2(dF2, unflatten<3,3>((B*qe).eval()), C, D);
+    dpsi_neohookean_dF(dF, unflatten<3,3>((B*qe).eval()), C, D);
 
-    H = B.transpose()*dF2*B*volume;
+    g= B.transpose()*dF*volume;
 
 }
