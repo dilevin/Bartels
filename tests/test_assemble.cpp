@@ -1,5 +1,5 @@
 #include <get_data_directory.h>
-#include <linear_tet_const_ext_force.h>
+#include <linear_tetmesh_const_ext_force.h>
 #include <linear_tetmesh_mass_matrix.h>
 
 #include <unsupported/Eigen/SparseExtra>
@@ -52,15 +52,17 @@ int main(int argc, char **argv) {
     //check if assembled gravity vector = M*g 
     //assemble function
     Eigen::Vector3d g; //acceleration due to gravity
-    Eigen::Vector12d f_tmp;
+    //Eigen::Vector12d f_tmp;
     g << 0, -9.8, 0;
 
-    auto assemble_vec_func = [&g](Eigen::DenseBase<Eigen::Vector12d> &f,  Eigen::Ref<const Eigen::RowVectorXi> e, Eigen::Ref<const Eigen::RowVectorXd> volume) { sim::linear_tet_const_ext_force(f, e, volume(0), 0.1*g); };
+    ///auto assemble_vec_func = [&g](Eigen::DenseBase<Eigen::Vector12d> &f,  Eigen::Ref<const Eigen::RowVectorXi> e, Eigen::Ref<const Eigen::RowVectorXd> volume) { sim::linear_tet_const_ext_force(f, e, volume(0), 0.1*g); };
     
-    sim::assemble(f, 3*V.rows(), E, E, assemble_vec_func, f_tmp, v);
+    //sim::assemble(f, 3*V.rows(), E, E, assemble_vec_func, f_tmp, v);
 
+    sim::linear_tetmesh_const_ext_force(f, V, E, v, 0.1*g);
     error = (f - M*g.replicate(V.rows(),1)).norm();
 
+    //std::cout<<f<<"\n";
     if(error > 1e-8) {
         std::cout<<"Error: "<<error<<" is too high, assemble vector failed: quitting \n";
         exit(0);

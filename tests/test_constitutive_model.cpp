@@ -4,6 +4,7 @@
 #include <flatten.h>
 #include <flatten_multiply.h>
 #include <eval_at_point.h>
+#include <linear_tetmesh_dphi_dX.h>
 
 #include <get_data_directory.h>
 #include <igl/readMESH.h>
@@ -23,13 +24,17 @@ int main(int argc, char **argv) {
     igl::volume(V,E, v);
     Eigen::VectorXd density = Eigen::VectorXd::Constant(E.rows(), 0.1);
     
-    X.resize(E.rows(), 3);
+    /*X.resize(E.rows(), 3);
 
     auto dx = [](auto &a, auto &b, auto c, auto &d) { sim::linear_tet_dphi_dX(a, b, c, d); };
                     
-    sim::eval_at_point(dXinv, V, E, dx, Eigen::Matrix43d(), X);
+    sim::eval_at_point(dXinv, V, E, dx, Eigen::Matrix43d(), X);*/
 
     //test some random dXinvs by building random B's and multiplying by q's
+    sim::linear_tetmesh_dphi_dX(dXinv, V, E);
+
+    std::cout<<dXinv.rows()<<" "<<dXinv.cols()<<"\n";
+
     //simulation state
     Eigen::MatrixXd Vt = V.transpose();
     Vt.row(0) *= 2;
@@ -66,32 +71,6 @@ int main(int argc, char **argv) {
     double D = 0.5*(YM*mu)/((1.0+mu)*(1.0-2.0*mu));
     double C = 0.5*YM/(2.0*(1.0+mu));
     
-    //Eigen::Matrix12d H;
-
-    //linear_tet_neohookean_dq2(H, q, E.row(0), sim::unflatten<4,3>(dXinv.row(0)), C, D, v(0));
-
-    //Yuck but I don't know the proper syntax for template lambdas
-    /*auto assemble_func = [&C, &D, &q](auto &H,  auto &e, 
-                            auto &dXinv,
-                            auto &volume) 
-                           { //sim::linear_tet_mass_matrix(M, e, density(0), volume(0)); 
-                             linear_tet_neohookean_dq2(H, q, e, sim::unflatten<4,3>(dXinv), C, D, volume(0));
-                           };
-    
-
-    Eigen::Matrix12d Htmp;
-    Eigen::SparseMatrixd H;
-
-    sim::assemble(H, 3*V.rows(), 3*V.rows(), E, E, assemble_func, Htmp, dXinv, v);*/
-
-    //std::cout<<"H: "<<H<<"\n";
-    //auto Ke = [&C, &D](auto &ddw, auto &F, auto &C, auto &D) { 
-      //  d2psi_neo_hookean_dF2(ddw, F, C, D)
-   // };
-    //NOTE: Will need some callbacks for filtering per element matrices etc 
-
-    //assemble the force vector (which should be zero in the underformed state)
-
     Eigen::SparseMatrixd H, H_test;
 
     sim::linear_tetmesh_neohookean_dq2(H, V, E, q, dXinv, v, C, D);

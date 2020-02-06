@@ -14,26 +14,31 @@
 #include <igl/list_to_matrix.h>
 
 //bartels
-#include <linear_tetmesh_mass_matrix.h>
+#include <linear_tetmesh_neohookean_dq2.h>
 
 /* The gateway function */
 void mexFunction(int nlhs, mxArray *plhs[],
                  int nrhs, const mxArray *prhs[]) {
     /* variable declarations here */
-    Eigen::SparseMatrix<double> M;
+    Eigen::SparseMatrix<double> H;
 
     Eigen::MatrixXd V;
     Eigen::MatrixXi E;
-    Eigen::VectorXd densities;
+    Eigen::VectorXd q;
+    Eigen::MatrixXd dXinv;
     Eigen::VectorXd volumes; 
+    double C,D;
 
     igl::matlab::parse_rhs_double(prhs+0,V);
     igl::matlab::parse_rhs_index(prhs+1,E);
-    igl::matlab::parse_rhs_double(prhs+2, densities);
-    igl::matlab::parse_rhs_double(prhs+3, volumes);
+    igl::matlab::parse_rhs_index(prhs+2,q);
+    igl::matlab::parse_rhs_double(prhs+3, dXinv);
+    igl::matlab::parse_rhs_double(prhs+4, volumes);
+    C = mxGetScalar(prhs[5]);
+    D = mxGetScalar(prhs[6]);
 
-    sim::linear_tetmesh_mass_matrix(M, V, E, densities, volumes);
+    sim::linear_tetmesh_neohookean_dq2(H, V, E, q, dXinv, volumes,  C,  D);
 
-    igl::matlab::prepare_lhs_double(M, plhs);
+    igl::matlab::prepare_lhs_double(H, plhs);
    
 }

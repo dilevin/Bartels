@@ -14,7 +14,7 @@
 #include <igl/list_to_matrix.h>
 
 //bartels
-#include <linear_tetmesh_mass_matrix.h>
+#include <linear_tetmesh_dphi_dX.h>
 
 /* The gateway function */
 void mexFunction(int nlhs, mxArray *plhs[],

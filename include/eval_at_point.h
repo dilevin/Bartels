@@ -8,8 +8,8 @@
 
 namespace sim {
 
-    template<typename Scalar, int Rows, int Cols, typename Func2, typename DerivedV>
-    void eval_at_point(Eigen::MatrixXd &results, const Eigen::MatrixXd &V, Eigen::Ref<const Eigen::MatrixXi> E, 
+    template<typename DerivedRet, typename Scalar, int Rows, int Cols, typename Func2, typename DerivedV>
+    void eval_at_point(Eigen::MatrixXx<DerivedRet> &results, const Eigen::MatrixXd &V, Eigen::Ref<const Eigen::MatrixXi> E, 
                        Func2 func, Eigen::Matrix<Scalar, Rows, Cols> tmp, const Eigen::MatrixBase<DerivedV> &X);
 
 }

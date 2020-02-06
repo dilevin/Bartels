@@ -40,6 +40,9 @@ namespace Eigen {
     using Matrix12x = Eigen::Matrix<Scalar, 12,12>;
     
     template<typename Scalar>
+    using MatrixXx = Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic>;
+    
+    template<typename Scalar>
     using Vector9x = Eigen::Matrix<Scalar, 9,1>;
     
 

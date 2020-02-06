@@ -140,7 +140,7 @@ CMAKE_PROJECT_DESCRIPTION:STATIC=
 CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
-CMAKE_PROJECT_NAME:STATIC=bartles_matlab
+CMAKE_PROJECT_NAME:STATIC=bartels_matlab
 
 //Path to a program.
 CMAKE_RANLIB:FILEPATH=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib
@@ -289,13 +289,25 @@ Matlab_ROOT_DIR:PATH=/Applications/MATLAB_R2019b.app
 bartels_USE_STATIC_LIBRARY:BOOL=OFF
 
 //Value Computed by CMake
+bartels_matlab_BINARY_DIR:STATIC=/Users/dilevin/Documents/Research/Development/bartels/matlab/build
+
+//Value Computed by CMake
+bartels_matlab_SOURCE_DIR:STATIC=/Users/dilevin/Documents/Research/Development/bartels/matlab
+
+//Value Computed by CMake
 bartles_matlab_BINARY_DIR:STATIC=/Users/dilevin/Documents/Research/Development/bartels/matlab/build
 
 //Value Computed by CMake
 bartles_matlab_SOURCE_DIR:STATIC=/Users/dilevin/Documents/Research/Development/bartels/matlab
 
 //Dependencies for the target
+linear_tetmesh_mass_matrix.cpp_LIB_DEPENDS:STATIC=general;/Applications/MATLAB_R2019b.app/extern/bin/maci64/libMatlabEngine.dylib;general;/Applications/MATLAB_R2019b.app/bin/maci64/libMatlabDataArray.dylib;general;/Applications/MATLAB_R2019b.app/bin/maci64/libmex.dylib;general;/Applications/MATLAB_R2019b.app/bin/maci64/libmx.dylib;general;/Applications/MATLAB_R2019b.app/bin/maci64/libmx.dylib;general;/Applications/MATLAB_R2019b.app/bin/maci64/libmex.dylib;
+
+//Dependencies for the target
 linear_tetmesh_mass_matrix_LIB_DEPENDS:STATIC=general;/Applications/MATLAB_R2019b.app/extern/bin/maci64/libMatlabEngine.dylib;general;/Applications/MATLAB_R2019b.app/bin/maci64/libMatlabDataArray.dylib;general;/Applications/MATLAB_R2019b.app/bin/maci64/libmex.dylib;general;/Applications/MATLAB_R2019b.app/bin/maci64/libmx.dylib;general;/Applications/MATLAB_R2019b.app/bin/maci64/libmx.dylib;general;/Applications/MATLAB_R2019b.app/bin/maci64/libmex.dylib;
+
+//Dependencies for the target
+linear_tetmesh_neohookean_dq2.cpp_LIB_DEPENDS:STATIC=general;/Applications/MATLAB_R2019b.app/extern/bin/maci64/libMatlabEngine.dylib;general;/Applications/MATLAB_R2019b.app/bin/maci64/libMatlabDataArray.dylib;general;/Applications/MATLAB_R2019b.app/bin/maci64/libmex.dylib;general;/Applications/MATLAB_R2019b.app/bin/maci64/libmx.dylib;general;/Applications/MATLAB_R2019b.app/bin/maci64/libmx.dylib;general;/Applications/MATLAB_R2019b.app/bin/maci64/libmex.dylib;
 
 
 ########################
