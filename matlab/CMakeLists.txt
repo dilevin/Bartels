@@ -13,7 +13,7 @@ include_directories(${bartels_INCLUDE_DIR} ${Matlab_INCLUDE_DIRS})
 file(GLOB BARTELS_MATLAB_SRCS ${CMAKE_SOURCE_DIR}/*.cpp)
 
 foreach( file ${BARTELS_MATLAB_SRCS})
-	get_filename_component(name ${file} NAME)
+	get_filename_component(name ${file} NAME_WE)
 	
 	matlab_add_mex(NAME ${name} 
 			SRC ${file}
