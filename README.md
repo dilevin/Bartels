@@ -37,5 +37,5 @@ Bartels includes MATLAB wrappers for usefull functions. To compile the MATLAB wr
 To enable Bartels in MATLAB open MATLAB and issue the following commands: 
 
     addpath('${BARTELS_SOURCE_DIRECTORY}/matlab')
-  	addpath('${BARTELS_SOURCE_DIRECTORY}/matlab/mex')
-	  savepath
+    addpath('${BARTELS_SOURCE_DIRECTORY}/matlab/mex')
+    savepath
