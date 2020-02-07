@@ -10,8 +10,8 @@
 namespace sim {
 
 template<typename DerivedRet, typename  DerivedV, typename DerivedVol>
-void linear_tetmesh_mass_matrix(Eigen::SparseMatrix<DerivedRet> &M, Eigen::DenseBase<DerivedV> &V, Eigen::Ref<Eigen::MatrixXi> E, 
-                                Eigen::MatrixBase<DerivedVol>  &density, Eigen::MatrixBase<DerivedVol>  &volume);
+void linear_tetmesh_mass_matrix(Eigen::SparseMatrix<DerivedRet> &M, const Eigen::DenseBase<DerivedV> &V, Eigen::Ref<const Eigen::MatrixXi> E, 
+                                const Eigen::MatrixBase<DerivedVol>  &density, const Eigen::MatrixBase<DerivedVol>  &volume);
 
 }
 

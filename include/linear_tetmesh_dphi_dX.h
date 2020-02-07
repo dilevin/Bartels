@@ -11,7 +11,7 @@
 namespace sim {
 
 template<typename DerivedRet, typename DerivedV>
-void linear_tetmesh_dphi_dX(Eigen::MatrixXx<DerivedRet> &dX, Eigen::DenseBase<DerivedV> &V,  Eigen::Ref<Eigen::MatrixXi> E); 
+void linear_tetmesh_dphi_dX(Eigen::MatrixXx<DerivedRet> &dX, const Eigen::DenseBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E); 
 
 }
 

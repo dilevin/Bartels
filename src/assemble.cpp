@@ -3,24 +3,24 @@
 #endif
 
 template <typename DerivedV>
-inline auto get_param(Eigen::MatrixBase<DerivedV> &V, unsigned int i) {
+inline const auto get_param(const Eigen::DenseBase<DerivedV> &V, unsigned int i) {
     return V.row(i);
 }
 
 template <typename DerivedV>
-inline auto & get_param(std::vector<DerivedV> &V, unsigned int i) {
+inline const auto & get_param(const std::vector<DerivedV> &V, unsigned int i) {
     return V[i];
 }
 
 struct relay_params_struct {
-  template <typename Func, typename ...Params>
-  inline relay_params_struct(Func &func, Params && ... params) {
-    func(params ...);
+  template <typename Func, typename Ret, typename ...Params>
+  inline relay_params_struct(Func &func, Ret &&tmp, const Params & ... params) {
+    func(tmp, params ...);
   }
 };
 
 template<typename Func, typename Ret, typename ...Params>
-inline void relay_params(unsigned int eid, Func &func, Ret && tmp, Params && ... params) {
+inline void relay_params(unsigned int eid, Func &func, Ret && tmp, const Params & ... params) {
   //relay_params_struct{ func, tmp, (params.row(eid))...};
   relay_params_struct{ func, tmp, (get_param(params,eid))...};
 }
@@ -30,10 +30,10 @@ template<typename Func, typename ...Params, typename DerivedRet,  typename Deriv
 void sim::assemble(
                 Eigen::SparseMatrix<DerivedRet> &assembled, 
                 unsigned int rows, unsigned int cols, 
-                Eigen::Ref<Eigen::MatrixXi> E_from,  
-                Eigen::Ref<Eigen::MatrixXi> E_to,  
+                Eigen::Ref<const Eigen::MatrixXi> E_from,  
+                Eigen::Ref<const Eigen::MatrixXi> E_to,  
                 Func func, Eigen::MatrixBase<DerivedTmp> &tmp,
-                Params && ... params) {
+                const Params & ... params) {
 
     using Scalar = typename DerivedTmp::Scalar;
 
@@ -84,10 +84,10 @@ void sim::assemble(
 template<typename Func, typename ...Params, typename DerivedRet,  typename DerivedTmp>
 void sim::assemble(Eigen::VectorXx<DerivedRet> &assembled, 
             unsigned int rows, 
-            Eigen::Ref<Eigen::MatrixXi> E_from,  
-            Eigen::Ref<Eigen::MatrixXi> E_to,  
+            Eigen::Ref<const Eigen::MatrixXi> E_from,  
+            Eigen::Ref<const Eigen::MatrixXi> E_to,  
             Func func, Eigen::DenseBase<DerivedTmp> &tmp, 
-            Params && ... params) {
+            const Params & ... params) {
 
     using Scalar = typename DerivedTmp::Scalar;
 

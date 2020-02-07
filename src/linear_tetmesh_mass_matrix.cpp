@@ -5,15 +5,15 @@
 #include <iostream>
 
 template<typename DerivedRet, typename  DerivedV, typename DerivedVol>
-void sim::linear_tetmesh_mass_matrix(Eigen::SparseMatrix<DerivedRet> &M, Eigen::DenseBase<DerivedV> &V, Eigen::Ref<Eigen::MatrixXi> E, 
-                                     Eigen::MatrixBase<DerivedVol>  &density,  Eigen::MatrixBase<DerivedVol>  &volume) {
+void sim::linear_tetmesh_mass_matrix(Eigen::SparseMatrix<DerivedRet> &M, const Eigen::DenseBase<DerivedV> &V, Eigen::Ref<const Eigen::MatrixXi> E, 
+                                     const Eigen::MatrixBase<DerivedVol>  &density,  const Eigen::MatrixBase<DerivedVol>  &volume) {
 
     using Scalar = typename DerivedV::Scalar;
 
     //Yuck but I don't know the proper syntax for template lambdas
-    auto assemble_func = [](auto &M,  auto &e, 
-                            auto &density,
-                            auto &volume) 
+    auto assemble_func = [](auto &M,  const auto &e, 
+                            const auto &density,
+                            const auto &volume) 
                            { sim::linear_tet_mass_matrix(M, e, density(0), volume(0)); };
     
 
