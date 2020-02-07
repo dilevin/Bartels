@@ -9,8 +9,8 @@
 namespace sim {
 
 template<typename GradientType, typename DefoType, typename DerivedV, typename  Scalar>
-void linear_tet_neohookean_dq2(Eigen::DenseBase<GradientType> &g, const Eigen::MatrixBase<DerivedV> &q, Eigen::Ref<const Eigen::RowVectorXi> element,  
-                                        const Eigen::MatrixBase<DefoType> &dXinv, Scalar C, Scalar D, Scalar volume);
+void linear_tet_neohookean_dq(Eigen::DenseBase<GradientType> &g, const Eigen::MatrixBase<DerivedV> &q, Eigen::Ref<const Eigen::RowVectorXi> element,  
+                                    const Eigen::MatrixBase<DefoType> &dXinv, Scalar C, Scalar D, Scalar volume);
 
 }
 

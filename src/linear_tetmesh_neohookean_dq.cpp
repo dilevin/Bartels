@@ -2,22 +2,22 @@
 # include<../include/linear_tetmesh_neohookean_dq.h>
 #endif
 
-template<typename DerivedRet, typename DerivedV, typename DerivedQ, typename DefoType, typename DerivedVol, typename Scalar>
-void sim::linear_tetmesh_neohookean_dq(Eigen::MatrixBase<DerivedRet> &g, Eigen::DenseBase<DerivedV> &V,  const Eigen::Ref<Eigen::MatrixXi> E,
+template<typename DerivedRet, typename DerivedV, typename DerivedQ, typename DefoType, typename DerivedVol, typename DerivedParam1, typename DerivedParam2>
+void sim::linear_tetmesh_neohookean_dq(Eigen::VectorXx<DerivedRet> &g, const Eigen::DenseBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E,
                                         const Eigen::MatrixBase<DerivedQ> &q, 
-                                        Eigen::MatrixBase<DefoType> &dXinv, Eigen::MatrixBase<DerivedVol>  &volume, 
-                                        Eigen::MatrixBase<DerivedVol> &C, Eigen::MatrixBase<DerivedVol> &D) {
+                                        const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<DerivedVol>  &volume, 
+                                        const Eigen::MatrixBase<DerivedParam1> &C, const Eigen::MatrixBase<DerivedParam2> &D) {
 
-    auto assemble_func = [&C, &D, &q](auto &g,  auto &e, 
-                            auto &dXinv,
-                            auto &volume
-                            auto &C, auto &D) 
+    auto assemble_func = [&q](auto &g,  const auto &e, 
+                            const auto &dXinv,
+                            const auto &volume,
+                            const auto &C, const auto &D) 
                            { 
-                             linear_tet_neohookean_dq2(g, q, e, sim::unflatten<4,3>(dXinv), C(0), D(0), volume(0));
+                             linear_tet_neohookean_dq(g, q, e, sim::unflatten<4,3>(dXinv), C(0), D(0), volume(0));
                            };
     
 
-    Eigen::Vector12x<typename DerivedRet::Scalar> g_tmp;
+    Eigen::Vector12x<DerivedRet> g_tmp;
     sim::assemble(g, 3*V.rows(), E, E, assemble_func, g_tmp, dXinv, volume, C, D);
 }
 

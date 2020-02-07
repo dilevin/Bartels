@@ -2,8 +2,8 @@
 # include<../include/dpsi_neohookean_dF.h>
 #endif
 
-template<typename GradientType, typename DefoType, typename ParamterType, typename ParameterType>
-void sim::dpsi_neo_hookean_dF(Eigen::MatrixBase<GradientType> &dw, const Eigen::MatrixBase<DefoType> &F, ParameterType C, ParameterType D) {
+template<typename GradientType, typename DefoType, typename ParameterType>
+void sim::dpsi_neohookean_dF(Eigen::MatrixBase<GradientType> &dw, const Eigen::MatrixBase<DefoType> &F, ParameterType &&C, ParameterType &&D) {
 
     typename DefoType::Scalar f11, f12, f13, f21, f22, f23, f31, f32, f33;
         
