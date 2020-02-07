@@ -11,7 +11,7 @@ None so far
 
 > **To get started:** Clone this repository and all its [submodule](https://git-scm.com/book/en/v2/Git-Tools-Submodules) dependencies using:
 > 
->     git clone --recursive https://github.com/dilevin/https://github.com/dilevin/bartels.git
+>     git clone --recursive https://github.com/dilevin/Bartels.git
 
 ## Compilation
 Bartels is a header only library but includes somethings that need to be compiled or use.
