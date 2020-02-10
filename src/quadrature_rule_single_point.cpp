@@ -1,5 +1,5 @@
 #ifdef SIM_STATIC_LIBRARY
-# include<../include/assemble.h>
+# include<../include/quadrature_single_point.h>
 #endif
 
 template<typename PointsType, typename WeightsType>

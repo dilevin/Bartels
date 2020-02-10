@@ -5,6 +5,7 @@
 #include <flatten_multiply.h>
 #include <eval_at_point.h>
 #include <linear_tetmesh_dphi_dX.h>
+#include <simple_psd_fix.h>
 
 #include <get_data_directory.h>
 #include <igl/readMESH.h>
