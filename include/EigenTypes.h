@@ -28,8 +28,21 @@ namespace Eigen {
     using VectorXx = Eigen::Matrix<Scalar, Eigen::Dynamic, 1>;
 
     template<typename Scalar>
+    using Matrix23x = Eigen::Matrix<Scalar, 2,3>;
+
+    template<typename Scalar>
+    using Matrix32x = Eigen::Matrix<Scalar, 3,2>;
+
+    template<typename Scalar>
+    using Matrix3x = Eigen::Matrix<Scalar, 3,3>;
+
+
+    template<typename Scalar>
     using Matrix43x = Eigen::Matrix<Scalar, 4,3>;
     
+    template<typename Scalar>
+    using Matrix6x = Eigen::Matrix<Scalar, 6,6>;
+
     template<typename Scalar>
     using Matrix9x = Eigen::Matrix<Scalar, 9,9>;
 
@@ -43,8 +56,10 @@ namespace Eigen {
     using MatrixXx = Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic>;
     
     template<typename Scalar>
-    using Vector9x = Eigen::Matrix<Scalar, 9,1>;
+    using Vector6x = Eigen::Matrix<Scalar, 6,1>;
     
+    template<typename Scalar>
+    using Vector9x = Eigen::Matrix<Scalar, 9,1>;
 
     template<typename Scalar>
     using Vector12x = Eigen::Matrix<Scalar, 12,1>;
@@ -77,6 +92,17 @@ inline void inverse33(Eigen::Ref<Eigen::Matrix3d> result, Eigen::Ref<const Eigen
     result(1,2) = -(A(0,0)*A(2,1)-A(2,0)*A(0,1))*invdet;
     result(2,2) =  (A(0,0)*A(1,1)-A(1,0)*A(0,1))*invdet;
     result.transposeInPlace();
+}
+
+inline void inverse22(Eigen::Ref<Eigen::Matrix2d> result, Eigen::Ref<const Eigen::Matrix2d> A) {
+    double determinant =    A(0,0)*A(1,1) - A(0,1)*A(1,0);
+
+    double invdet = 1./determinant;
+    result(0,0) =  A(1,1)*invdet;
+    result(1,0) = -A(1,0)*invdet;
+    result(0,1) = -A(0,1)*invdet;
+    result(1,1) =  A(0,0)*invdet;
+
 }
 
 //include flatten operations
