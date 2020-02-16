@@ -36,7 +36,6 @@ namespace Eigen {
     template<typename Scalar>
     using Matrix3x = Eigen::Matrix<Scalar, 3,3>;
 
-
     template<typename Scalar>
     using Matrix43x = Eigen::Matrix<Scalar, 4,3>;
     
@@ -95,7 +94,7 @@ inline void inverse33(Eigen::Ref<Eigen::Matrix3d> result, Eigen::Ref<const Eigen
 }
 
 inline void inverse22(Eigen::Ref<Eigen::Matrix2d> result, Eigen::Ref<const Eigen::Matrix2d> A) {
-    double determinant =    A(0,0)*A(1,1) - A(0,1)*A(1,0);
+    double determinant = A(0,0)*A(1,1) - A(0,1)*A(1,0);
 
     double invdet = 1./determinant;
     result(0,0) =  A(1,1)*invdet;
