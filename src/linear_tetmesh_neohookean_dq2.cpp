@@ -27,5 +27,3 @@ void sim::linear_tetmesh_neohookean_dq2(Eigen::SparseMatrix<DerivedRet> &H, Eige
     sim::assemble(H, 3*V.rows(), 3*V.rows(), E, E, assemble_func, Htmp, dXinv, volume, C, D);
 }
 
-#include <iostream>
-
