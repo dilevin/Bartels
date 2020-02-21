@@ -4,15 +4,15 @@
 
 template<typename HessianType, typename DefoType, typename DerivedV, typename Scalar, typename DerivedParams>
 void sim::%s_%s_%s(Eigen::DenseBase<HessianType> &out, const Eigen::MatrixBase<DerivedV> &q, const Eigen::Ref<const Eigen::RowVectorXi> element,  
-                                    const Eigen::MatrixBase<DefoType> &dXinv, const Scalar &volume, Eigen::MatrixBase<DerivedParams> &params) {
+                                    const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<DerivedParams> &params, const Scalar &volume) {
 
     %s; //qe
     %s; //compute B
 
     %s<Scalar> dF; //type of dF
 
-    %s(dF, %s, volume, params);
+    %s(dF, %s, params);
 
-    out = %s;
+    out = %s*volume;
 
 }

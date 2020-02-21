@@ -3,9 +3,12 @@
 #endif
 
 template<typename HessianType, typename ParameterType>
-void sim::d2psi_linear_elasticity_de2(Eigen::MatrixBase<HessianType> &C, ParameterType &&YM, ParameterType &&mu) {
+void sim::d2psi_linear_elasticity_de2(Eigen::MatrixBase<HessianType> &C, const Eigen::MatrixBase<ParameterType> &params) {
 
     C.setZero();
+
+    typename ParameterType::Scalar YM = params(0);
+    typename ParameterType::Scalar mu = params(1);
 
     C(0,0) = 1.0-mu;
     C(0,1) = mu;

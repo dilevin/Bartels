@@ -1,5 +1,5 @@
-#ifndef SIM_LINEAR_TRI2D_NEOHOOKEAN_HESSIAN_H
-#define SIM_LINEAR_TRI2D_NEOHOOKEAN_HESSIAN_H
+#ifndef SIM_linear_tri2dneohookean_dq2_H
+#define SIM_linear_tri2dneohookean_dq2_H
 
 #include <Eigen/Dense>
 #include <EigenTypes.h>
@@ -8,9 +8,9 @@
 
 namespace sim {
 
-template<typename HessianType, typename DefoType, typename DerivedV, typename  Scalar>
-void linear_tri2d_neohookean_dq2(Eigen::DenseBase<HessianType> &H, const Eigen::MatrixBase<DerivedV> &q, Eigen::Ref<const Eigen::RowVectorXi> element,  
-                                        const Eigen::MatrixBase<DefoType> &dXinv, Scalar C, Scalar D, Scalar volume);
+template<typename HessianType, typename DefoType, typename DerivedV, typename Scalar, typename ParamType>
+void linear_tri2d_neohookean_dq2(Eigen::DenseBase<HessianType> &out, const Eigen::MatrixBase<DerivedV> &q, const Eigen::Ref<const Eigen::RowVectorXi> element,  
+                                    const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<ParamType> &params, const Scalar &volume);
 
 }
 
@@ -18,4 +18,4 @@ void linear_tri2d_neohookean_dq2(Eigen::DenseBase<HessianType> &H, const Eigen::
 #   include <../src/linear_tri2d_neohookean_dq2.cpp>
 #endif
 
-#endif 
+#endif

@@ -25,7 +25,7 @@ void mexFunction(int nlhs, mxArray *plhs[],
     Eigen::MatrixXd V;
     Eigen::MatrixXi E;
     Eigen::VectorXd q;
-    Eigen::MatrixXd dXinv;
+    Eigen::MatrixXd dXinv, params;
     Eigen::VectorXd volumes, YM, mu; 
 
     igl::matlab::parse_rhs_double(prhs+0,V);
@@ -33,10 +33,9 @@ void mexFunction(int nlhs, mxArray *plhs[],
     igl::matlab::parse_rhs_index(prhs+2,q);
     igl::matlab::parse_rhs_double(prhs+3, dXinv);
     igl::matlab::parse_rhs_double(prhs+4, volumes);
-    igl::matlab::parse_rhs_double(prhs+5, YM);
-    igl::matlab::parse_rhs_double(prhs+6, mu);
+    igl::matlab::parse_rhs_double(prhs+5, params);
 
-    sim::linear_tri2dmesh_linear_elasticity_dq2(H, V, E, q, dXinv, volumes,  YM,  mu);
+    sim::linear_tri2dmesh_linear_elasticity_dq2(H, V, E, q, dXinv, volumes,  params);
 
     igl::matlab::prepare_lhs_double(H, plhs);
    

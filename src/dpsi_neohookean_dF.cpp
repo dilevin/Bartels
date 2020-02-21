@@ -3,10 +3,14 @@
 #endif
 
 template<typename GradientType, typename DefoType, typename ParameterType>
-void sim::dpsi_neohookean_dF(Eigen::MatrixBase<GradientType> &dw, const Eigen::MatrixBase<DefoType> &F, ParameterType &&C, ParameterType &&D) {
+void sim::dpsi_neohookean_dF(Eigen::MatrixBase<GradientType> &dw, const Eigen::MatrixBase<DefoType> &F, const Eigen::MatrixBase<ParameterType> &params) {
 
     typename DefoType::Scalar f11, f12, f13, f21, f22, f23, f31, f32, f33;
-        
+    
+    typename DefoType::Scalar C = params(0);
+    typename DefoType::Scalar D = params(1);
+
+
     f11 = F(0,0);
     f12 = F(0,1);
     f13 = F(0,2);

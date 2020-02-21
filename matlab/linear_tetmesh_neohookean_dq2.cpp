@@ -25,18 +25,17 @@ void mexFunction(int nlhs, mxArray *plhs[],
     Eigen::MatrixXd V;
     Eigen::MatrixXi E;
     Eigen::VectorXd q;
-    Eigen::MatrixXd dXinv;
-    Eigen::VectorXd volumes, C, D; 
+    Eigen::MatrixXd dXinv, params;
+    Eigen::VectorXd volumes; 
 
     igl::matlab::parse_rhs_double(prhs+0,V);
     igl::matlab::parse_rhs_index(prhs+1,E);
     igl::matlab::parse_rhs_index(prhs+2,q);
     igl::matlab::parse_rhs_double(prhs+3, dXinv);
     igl::matlab::parse_rhs_double(prhs+4, volumes);
-    igl::matlab::parse_rhs_double(prhs+5, C);
-    igl::matlab::parse_rhs_double(prhs+6, D);
+    igl::matlab::parse_rhs_double(prhs+5, params);
 
-    sim::linear_tetmesh_neohookean_dq2(H, V, E, q, dXinv, volumes,  C,  D);
+    sim::linear_tetmesh_neohookean_dq2(H, V, E, q, dXinv, volumes,  params);
 
     igl::matlab::prepare_lhs_double(H, plhs);
    

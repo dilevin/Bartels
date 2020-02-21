@@ -29,16 +29,15 @@ void mexFunction(int nlhs, mxArray *plhs[],
     Eigen::MatrixXd V;
     Eigen::MatrixXi E;
     Eigen::VectorXd u;
-    Eigen::MatrixXd dXinv;
-    Eigen::VectorXd volumes, YM, mu; 
+    Eigen::MatrixXd dXinv, params;
+    Eigen::VectorXd volumes;
 
     igl::matlab::parse_rhs_double(prhs+0,V);
     igl::matlab::parse_rhs_index(prhs+1,E);
     igl::matlab::parse_rhs_index(prhs+2,u);
     igl::matlab::parse_rhs_double(prhs+3, dXinv);
     igl::matlab::parse_rhs_double(prhs+4, volumes);
-    igl::matlab::parse_rhs_double(prhs+5, YM);
-    igl::matlab::parse_rhs_double(prhs+6, mu);
+    igl::matlab::parse_rhs_double(prhs+5, params);
 
     cauchy_stress.resize(E.rows(), 6);
 
@@ -74,7 +73,7 @@ void mexFunction(int nlhs, mxArray *plhs[],
         ue << u.segment(2*E(ii,0),2), u.segment(2*E(ii,1),2), u.segment(2*E(ii,2),2);
 
         //grab per element positions
-        sim::d2psi_linear_elasticity_de2(dF2, YM(ii), mu(ii));
+        sim::d2psi_linear_elasticity_de2(dF2, params.row(ii));
 
         cauchy_stress.row(ii) = -volumes(ii)*(dF2*B*ue).transpose();
 

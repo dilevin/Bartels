@@ -2,9 +2,9 @@
 # include<../include/linear_tet_neohookean_dq.h>
 #endif
 
-template<typename GradientType, typename DefoType, typename DerivedV, typename  Scalar>
+template<typename GradientType, typename DefoType, typename DerivedV, typename  ParamType, typename Scalar>
 void sim::linear_tet_neohookean_dq(Eigen::DenseBase<GradientType> &g, const Eigen::MatrixBase<DerivedV> &q, Eigen::Ref<const Eigen::RowVectorXi> element,  
-                                    const Eigen::MatrixBase<DefoType> &dXinv, Scalar C, Scalar D, Scalar volume) {
+                                    const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<ParamType> &params, Scalar volume) {
 
     //get dpsi/dF2
     Eigen::Vector9x<typename DerivedV::Scalar> dF; 
@@ -15,7 +15,7 @@ void sim::linear_tet_neohookean_dq(Eigen::DenseBase<GradientType> &g, const Eige
     qe << q.segment(3*element(0),3), q.segment(3*element(1),3), q.segment(3*element(2),3), q.segment(3*element(3),3);
 
     //grab per element positions
-    dpsi_neohookean_dF(dF, unflatten<3,3>((B*qe).eval()), C, D);
+    dpsi_neohookean_dF(dF, unflatten<3,3>((B*qe).eval()), params);
 
     g = B.transpose()*dF*volume;
 

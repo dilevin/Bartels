@@ -14,12 +14,12 @@ void sim::%s(%s &out, Eigen::DenseBase<DerivedV> &V,  Eigen::Ref<const Eigen::Ma
                             const auto &dXinv,
                             const auto &volume, const auto &params) 
                            { 
-                             %s(H, q, e, sim::unflatten<%u,%u>(dXinv), params(0), volume(0));
+                             %s(H, q, e, sim::unflatten<%u,%u>(dXinv), params, volume(0));
                              func(H); //callback stuff
                            };
     
 
     %s Htmp;
-    sim::assemble(H, 3*V.rows(), 3*V.rows(), E, E, assemble_func, Htmp, dXinv, volume, params);
+    sim::assemble(out, 3*V.rows(), 3*V.rows(), E, E, assemble_func, Htmp, dXinv, volume, params);
 }
 

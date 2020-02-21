@@ -2,9 +2,9 @@
 # include<../include/linear_tri2d_linear_elasticity_dq2.h>
 #endif
 
-template<typename HessianType, typename DefoType, typename DerivedV, typename  Scalar>
+template<typename HessianType, typename DefoType, typename DerivedV, typename ParamType, typename  Scalar>
 void sim::linear_tri2d_linear_elasticity_dq2(Eigen::DenseBase<HessianType> &H, const Eigen::MatrixBase<DerivedV> &q, const Eigen::Ref<const Eigen::RowVectorXi> element,  
-                                    const Eigen::MatrixBase<DefoType> &dXinv, Scalar E, Scalar mu, Scalar volume) {
+                                    const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<ParamType> &params, Scalar volume) {
 
 
     Eigen::Matrix3x<typename DerivedV::Scalar> F = Eigen::Matrix3x<typename DerivedV::Scalar>::Zero();
@@ -38,7 +38,7 @@ void sim::linear_tri2d_linear_elasticity_dq2(Eigen::DenseBase<HessianType> &H, c
     qe << q.segment(2*element(0),2), q.segment(2*element(1),2), q.segment(2*element(2),2);
 
     //grab per element positions
-    d2psi_linear_elasticity_de2(dF2, E, mu);
+    d2psi_linear_elasticity_de2(dF2, params);
 
     H = B.transpose()*dF2*B*volume;
 

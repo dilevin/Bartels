@@ -7,7 +7,7 @@
 namespace sim {
 
     template<typename HessianType, typename ParameterType>
-    void d2psi_linear_elasticity_de2(Eigen::MatrixBase<HessianType> &C, ParameterType &&YM, ParameterType &&mu);
+    void d2psi_linear_elasticity_de2(Eigen::MatrixBase<HessianType> &C, const Eigen::MatrixBase<ParameterType> &params);
             
 }
 

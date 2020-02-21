@@ -33,7 +33,7 @@ void write_tet_files(std::string output_dir, std::string template_hpp, std::stri
      std::string cpp_name =  output_dir+pathsep+"src"+pathsep+ele_type_name+"_"+material_name+"_"+dd+".cpp";
 
     FILE *fptr = fopen(hpp_name.c_str(), "w"); 
-    fprintf(fptr, template_hpp.c_str(), (ele_type_name+material_name+"_"+dd).c_str(), (ele_type_name+material_name+"_"+dd).c_str(), dpsi.c_str(), ele_type_name.c_str(), material_name.c_str(), dd.c_str(), (ele_type_name+material_name+"_"+dd+".cpp").c_str());
+    fprintf(fptr, template_hpp.c_str(), (ele_type_name+material_name+"_"+dd).c_str(), (ele_type_name+material_name+"_"+dd).c_str(), dpsi.c_str(), ele_type_name.c_str(), material_name.c_str(), dd.c_str(), (ele_type_name+"_"+material_name+"_"+dd+".cpp").c_str());
     fclose(fptr);
 
     fptr = fopen(cpp_name.c_str(), "w"); 
@@ -68,7 +68,7 @@ void write_mesh_files(std::string output_dir, std::string template_hpp, std::str
     std::string function_name = ele_type_name+"mesh_"+material_name+"_"+dd;
     std::string tet_function_name = ele_type_name+"_"+material_name+"_"+dd;
     
-    std::string hpp_name =  output_dir+pathsep+"include"+function_name+".h";
+    std::string hpp_name =  output_dir+pathsep+"include"+pathsep+function_name+".h";
     std::string cpp_name =  output_dir+pathsep+"src"+pathsep+function_name+".cpp";
 
     //include file

@@ -7,7 +7,7 @@
 namespace sim {
 
     template<typename GradientType, typename DefoType, typename ParameterType>
-    void dpsi_neohookean_dF(Eigen::MatrixBase<GradientType> &dw, const Eigen::MatrixBase<DefoType> &F, ParameterType &&C, ParameterType &&D);
+    void dpsi_neohookean_dF(Eigen::MatrixBase<GradientType> &dw, const Eigen::MatrixBase<DefoType> &F, const Eigen::MatrixBase<ParameterType> &params);
         
 }
 
