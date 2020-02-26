@@ -44,7 +44,7 @@ void write_tet_files(std::string output_dir, std::string template_hpp, std::stri
 void write_gradient_tet_files(std::string output_dir, std::string template_hpp, std::string template_cpp, std::string ele_type_name, std::string material_name, std::string qe, std::string B, std::string F) {
 
     std::string dF_type = "Eigen::Vector9x";
-    std::string dpsi = "d2psi_"+material_name+"_dF";
+    std::string dpsi = "dpsi_"+material_name+"_dF";
     std::string output = "B.transpose()*dF";
     
     write_tet_files(output_dir, template_hpp, template_cpp, ele_type_name, material_name, qe, B, F, dF_type, dpsi, output, "dq");

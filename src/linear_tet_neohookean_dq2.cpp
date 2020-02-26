@@ -8,6 +8,7 @@ void sim::linear_tet_neohookean_dq2(Eigen::DenseBase<HessianType> &H, const Eige
 
     //get dpsi/dF2
     Eigen::Matrix9x<typename DerivedV::Scalar> dF2; 
+
     Eigen::Matrix<typename DefoType::Scalar, 9,12> B = sim::flatten_multiply_right<Eigen::Matrix<typename DefoType::Scalar, 3,4> >(dXinv);
 
     //local positions

@@ -74,7 +74,11 @@ int main(int argc, char **argv) {
     
     Eigen::SparseMatrixd H, H_test;
 
-    sim::linear_tetmesh_neohookean_dq2(H, V, E, q, dXinv, v, Eigen::VectorXd::Constant(E.rows(), C), Eigen::VectorXd::Constant(E.rows(), D));
+    Eigen::MatrixXd params;
+    params.resize(E.rows(), 2);
+    params.col(0) = Eigen::VectorXd::Constant(E.rows(), C);
+    params.col(1) = Eigen::VectorXd::Constant(E.rows(), D);
+    sim::linear_tetmesh_neohookean_dq2(H, V, E, q, dXinv, v, params);
 
     std::cout<<"Loading test data: "<<sim::data_dir()+pathsep+"matrices"+pathsep+"H_neohookean_coarser_bunny.txt"<<"\n";
 

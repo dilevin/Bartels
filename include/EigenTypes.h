@@ -25,6 +25,10 @@ namespace Eigen {
     
     //some templated aliases that I find useful
     template<typename Scalar>
+    using Vector3x = Eigen::Matrix<Scalar, 3, 1>;
+
+
+    template<typename Scalar>
     using VectorXx = Eigen::Matrix<Scalar, Eigen::Dynamic, 1>;
 
     template<typename Scalar>
@@ -69,6 +73,12 @@ namespace Eigen {
     //tensor types (which are just arrays of matrices)
     using Tensor333d = std::array<std::array<Eigen::Vector3d,3>, 3>;
     using Tensor3333d = std::array<std::array<Eigen::Matrix3d,3>, 3>;
+
+    template<typename Scalar>
+    using Tensor333x = std::array<std::array<Eigen::Vector3x<Scalar>,3>, 3>;
+
+    template<typename Scalar>
+    using Tensor3333x = std::array<std::array<Eigen::Matrix3x<Scalar>,3>, 3>;
 
 }
 

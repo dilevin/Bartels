@@ -1,9 +1,9 @@
 #ifdef SIM_STATIC_LIBRARY
-# include<../include/d2psi_linear_elasticity_de2.h>
+# include<../include/d2psi_linear_elasticity_de.h>
 #endif
 
-template<typename HessianType, typename ParameterType>
-void sim::d2psi_linear_elasticity_de2(Eigen::MatrixBase<HessianType> &C, const Eigen::MatrixBase<ParameterType> &params) {
+template<typename GradientType, typename ParameterType>
+void sim::d2psi_linear_elasticity_de(Eigen::MatrixBase<GradientType> &C, const Eigen::MatrixBase<DerivedStrain> &strain, const Eigen::MatrixBase<ParameterType> &params) {
 
     C.setZero();
 
@@ -22,6 +22,6 @@ void sim::d2psi_linear_elasticity_de2(Eigen::MatrixBase<HessianType> &C, const E
     C(3,3) = 0.5*(1.0-2.0*mu);
     C(4,4) = 0.5*(1.0-2.0*mu);
     C(5,5) = 0.5*(1.0-2.0*mu);
-    C *= (YM/((1.0+mu)*(1.0-2.0*mu)));
+    C *= (YM/((1.0+mu)*(1.0-2.0*mu)))*e;
 
 }

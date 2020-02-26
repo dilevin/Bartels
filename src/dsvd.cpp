@@ -1,36 +1,22 @@
+#ifdef SIM_STATIC_LIBRARY
 #include <dsvd.h>
+#endif
 
-void dsvd(Eigen::Tensor3333d &dU, Eigen::Tensor333d  &dS, Eigen::Tensor3333d &dV, Eigen::Ref<const Eigen::Matrix3d> Fin) {
+template<typename Scalar, typename UType, typename SType, typename VType>
+void sim::dsvd(Eigen::Tensor3333x<Scalar> &dU, Eigen::Tensor333x<Scalar>  &dS, Eigen::Tensor3333x<Scalar> &dV, const Eigen::Matrix3x<UType> &U, const Eigen::Vector3x<SType> &S, const Eigen::Matrix3x<VType> &V) {
 
-    Eigen::Matrix3d UVT, tmp, U,V;
-    Eigen::Matrix3d lambda;
-    Eigen::Matrix3d F;
-    Eigen::Vector3d S; 
-    //get the SVD 
-    F = Fin;
-    Eigen::JacobiSVD<Eigen::Matrix3d> svd(F, Eigen::ComputeFullU | Eigen::ComputeFullV);
-    U = svd.matrixU();
-    V = svd.matrixV();
-    S = svd.singularValues();
-    
-    //crappy hack for now
-    double tol = 1e-5;
+    Eigen::Matrix3x<Scalar> UVT, tmp;
+    Eigen::Matrix3x<Scalar> lambda;
+    Eigen::Matrix3x<Scalar> F;
 
-     if(std::fabs(S[0] - S[1]) < tol || std::fabs(S[1] - S[2]) < tol || std::fabs(S[0] - S[2]) < tol) {
-        F += Eigen::Matrix3d::Random()*tol;
-        Eigen::JacobiSVD<Eigen::Matrix3d> svd2(F, Eigen::ComputeFullU | Eigen::ComputeFullV);
-        U = svd2.matrixU();
-        V = svd2.matrixV();
-        S = svd2.singularValues();
-    }
-
-    double w01, w02, w12;
-    double d01, d02, d12;
+    Scalar w01, w02, w12;
+    Scalar d01, d02, d12;
+    Scalar tol = 1e-8;
     
     d01 = S(1)*S(1)-S(0)*S(0);
     d02 = S(2)*S(2)-S(0)*S(0);
     d12 = S(2)*S(2)-S(1)*S(1);
-    
+     
     //corresponds to conservative solution --- if singularity is detected no angular velocity
     d01 = 1.0/(std::abs(d01) < tol ? std::numeric_limits<double>::infinity() : d01);
     d02 = 1.0/(std::abs(d02) < tol ? std::numeric_limits<double>::infinity() : d02);
