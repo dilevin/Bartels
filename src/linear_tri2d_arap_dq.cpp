@@ -1,9 +1,9 @@
 #ifdef SIM_STATIC_LIBRARY
-# include<../include/linear_tri2d_neohookean_dq.h>
+# include<../include/linear_tri2d_arap_dq.h>
 #endif
 
 template<typename HessianType, typename DefoType, typename DerivedV, typename Scalar, typename DerivedParams>
-void sim::linear_tri2d_neohookean_dq(Eigen::DenseBase<HessianType> &out, const Eigen::MatrixBase<DerivedV> &q, const Eigen::Ref<const Eigen::RowVectorXi> element,  
+void sim::linear_tri2d_arap_dq(Eigen::DenseBase<HessianType> &out, const Eigen::MatrixBase<DerivedV> &q, const Eigen::Ref<const Eigen::RowVectorXi> element,  
                                     const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<DerivedParams> &params, const Scalar &volume) {
 
     Eigen::Vector6x<Scalar> qe; qe << q.segment(2*element(0),2), q.segment(2*element(1),2), q.segment(2*element(2),2); //qe
@@ -11,7 +11,7 @@ void sim::linear_tri2d_neohookean_dq(Eigen::DenseBase<HessianType> &out, const E
 
     Eigen::Vector9x<Scalar> dF; //type of dF
 
-    d2psi_neohookean_dF(dF, unflatten<3,3>((B*qe+one).eval()), params);
+    dpsi_stretch_dF(dF, unflatten<3,3>((B*qe+one).eval()), &dpsi_arap_dS, params);
 
     out = B.transpose()*dF*volume;
 

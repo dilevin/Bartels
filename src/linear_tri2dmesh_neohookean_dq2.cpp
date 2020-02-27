@@ -20,6 +20,6 @@ void sim::linear_tri2dmesh_neohookean_dq2(Eigen::SparseMatrix<DerivedRet> &out, 
     
 
     Eigen::Matrix6x<DerivedRet> Htmp;
-    sim::assemble(out, 3*V.rows(), 3*V.rows(), E, E, assemble_func, Htmp, dXinv, volume, params);
+    sim::assemble(out, 2*V.rows(), 2*V.rows(), E, E, assemble_func, Htmp, dXinv, volume, params);
 }
 
