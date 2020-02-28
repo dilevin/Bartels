@@ -27,6 +27,11 @@ namespace sim {
             Func func, Eigen::DenseBase<DerivedTmp> &tmp, 
             const Params & ... params);
 
+    template<typename Func, typename ...Params>
+    auto assemble(Eigen::Ref<const Eigen::MatrixXi> E_from,  
+                  Func func, 
+                  const Params & ... params);
+
 
 
 }

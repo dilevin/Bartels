@@ -25,6 +25,13 @@ inline void relay_params(unsigned int eid, Func &func, Ret && tmp, const Params 
   relay_params_struct{ func, tmp, (get_param(params,eid))...};
 }
 
+
+template<typename Func, typename ...Params>
+inline auto relay_params_return(unsigned int eid, Func &func, const Params & ... params) {
+  //relay_params_struct{ func, tmp, (params.row(eid))...};
+  return func((get_param(params,eid))...);
+}
+
 //assemble over a graph to a vector 
 template<typename Func, typename ...Params, typename DerivedRet,  typename DerivedTmp>
 void sim::assemble(
@@ -112,5 +119,23 @@ void sim::assemble(Eigen::VectorXx<DerivedRet> &assembled,
         }
     }
 
+
+}
+
+template<typename Func, typename ...Params>
+auto sim::assemble(Eigen::Ref<const Eigen::MatrixXi> E_from,  
+                  Func func, 
+                  const Params & ... params) {
+
+    
+    auto energy = relay_params_return(0, func, E_from, params...);
+    
+    //iterate through element hypergraph
+    for(unsigned int ie=1; ie < E_from.rows(); ++ie) {
+        
+        energy += relay_params_return(ie, func, E_from, params...);
+    }
+
+    return energy;
 
 }
