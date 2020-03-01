@@ -4,15 +4,17 @@
 
 #include <igl/svd3x3.h>
 
-template<typename HessianType, typename DefoType, typename D2psiStretchFunc, typename DpsiStretchFunc, typename ParameterType>
-void sim::dpsi_stretch_dF(Eigen::MatrixBase<HessianType> &ddw, const Eigen::MatrixBase<DefoType> &F, DpsiStretchFunc &dpsi,const Eigen::MatrixBase<ParameterType> &params) {
+template<typename HessianType, typename DefoType, typename DpsiStretchFunc, typename ParameterType>
+void sim::dpsi_stretch_dF(Eigen::MatrixBase<HessianType> &ddw, const Eigen::MatrixBase<DefoType> &F, DpsiStretchFunc dpsi, const Eigen::MatrixBase<ParameterType> &params) {
 
     using Scalar = typename HessianType::Scalar;
 
-    Eigen::Matrix3x<float> U,V;
+    Eigen::Vector3x<float> Plam;
+    Eigen::Matrix3x<float> F_float, U,V;
     Eigen::Vector3x<float> S;
 
-    igl::svd3x3(F,U,S,V);
+    F_float = F.template cast<float>();
+    igl::svd3x3(F_float,U,S,V);
     
     //Fix for inverted elements (thanks to Danny Kaufman)
     Scalar det = S.determinant();
@@ -38,7 +40,7 @@ void sim::dpsi_stretch_dF(Eigen::MatrixBase<HessianType> &ddw, const Eigen::Matr
         V(2, 2) *= -1;
     }
     
-    Eigen::Vector3x<float> Plam = dpsi(Plam, params);
-    ddw = flatten(U*(Plam.asDiagonal()*V.transpose()));
+    dpsi(Plam, S, params);
+    ddw = (flatten(U*(Plam.asDiagonal()*V.transpose()))).template cast<Scalar>();
                         
 }

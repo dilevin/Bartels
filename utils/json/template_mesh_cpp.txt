@@ -20,6 +20,6 @@ void sim::%s(%s &out, Eigen::DenseBase<DerivedV> &V,  Eigen::Ref<const Eigen::Ma
     
 
     %s Htmp;
-    sim::assemble(out, 3*V.rows(), 3*V.rows(), E, E, assemble_func, Htmp, dXinv, volume, params);
+    sim::assemble(out, %s, E, E, assemble_func, Htmp, dXinv, volume, params);
 }
 

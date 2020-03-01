@@ -20,6 +20,6 @@ void sim::linear_tetmesh_linear_elasticity_de(Eigen::VectorXx<DerivedRet> &out, 
     
 
     Eigen::Vector12x<DerivedRet> Htmp;
-    sim::assemble(out, 3*V.rows(), 3*V.rows(), E, E, assemble_func, Htmp, dXinv, volume, params);
+    sim::assemble(out, 3*V.rows(), E, E, assemble_func, Htmp, dXinv, volume, params);
 }
 

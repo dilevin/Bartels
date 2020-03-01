@@ -8,8 +8,8 @@
 
 namespace sim {
 
-    template<typename HessianType, typename DefoType, typename D2psiStretchFunc, typename DpsiStretchFunc, typename ParameterType>
-    void dpsi_stretch_dF(Eigen::MatrixBase<HessianType> &ddw, const Eigen::MatrixBase<DefoType> &F, DpsiStretchFunc &dpsi, const Eigen::MatrixBase<ParameterType> &params);
+    template<typename HessianType, typename DefoType, typename DpsiStretchFunc, typename ParameterType>
+    void dpsi_stretch_dF(Eigen::MatrixBase<HessianType> &ddw, const Eigen::MatrixBase<DefoType> &F, DpsiStretchFunc dpsi, const Eigen::MatrixBase<ParameterType> &params);
     
 }
 

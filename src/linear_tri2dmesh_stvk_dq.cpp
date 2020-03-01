@@ -20,6 +20,6 @@ void sim::linear_tri2dmesh_stvk_dq(Eigen::VectorXx<DerivedRet> &out, Eigen::Dens
     
 
     Eigen::Vector6x<DerivedRet> Htmp;
-    sim::assemble(out, 3*V.rows(), 3*V.rows(), E, E, assemble_func, Htmp, dXinv, volume, params);
+    sim::assemble(out, 2*V.rows(), E, E, assemble_func, Htmp, dXinv, volume, params);
 }
 

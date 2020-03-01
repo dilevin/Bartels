@@ -20,6 +20,6 @@ void sim::linear_tetmesh_arap_dq(Eigen::VectorXx<DerivedRet> &out, Eigen::DenseB
     
 
     Eigen::Vector12x<DerivedRet> Htmp;
-    sim::assemble(out, 3*V.rows(), 3*V.rows(), E, E, assemble_func, Htmp, dXinv, volume, params);
+    sim::assemble(out, 3*V.rows(), E, E, assemble_func, Htmp, dXinv, volume, params);
 }
 

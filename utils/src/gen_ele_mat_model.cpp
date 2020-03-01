@@ -102,7 +102,7 @@ void write_hessian_tet_files(std::string output_dir, std::string template_hpp, s
 }
 
 //write out the mesh files 
-void write_mesh_files(std::string output_dir, std::string template_hpp, std::string template_cpp, std::string ele_type_name, std::string material_name, std::string dd, std::string output_type, std::string tmp_storage, unsigned int num_dofs, unsigned int size_dofs) {
+void write_mesh_files(std::string output_dir, std::string template_hpp, std::string template_cpp, std::string ele_type_name, std::string material_name, std::string dd, std::string output_type, std::string tmp_storage, unsigned int num_dofs, unsigned int size_dofs, std::string assemble_size) {
 
     std::string function_name = ele_type_name+"mesh_"+material_name+"_"+dd;
     std::string tet_function_name = ele_type_name+"_"+material_name+"_"+dd;
@@ -117,7 +117,7 @@ void write_mesh_files(std::string output_dir, std::string template_hpp, std::str
 
     //cpp
     fptr = fopen(cpp_name.c_str(), "w"); 
-    fprintf(fptr, template_cpp.c_str(), function_name.c_str(), function_name.c_str(), output_type.c_str(), tet_function_name.c_str(), num_dofs, size_dofs, tmp_storage.c_str());
+    fprintf(fptr, template_cpp.c_str(), function_name.c_str(), function_name.c_str(), output_type.c_str(), tet_function_name.c_str(), num_dofs, size_dofs, tmp_storage.c_str(), assemble_size.c_str());
     fclose(fptr);
     
 
@@ -125,13 +125,15 @@ void write_mesh_files(std::string output_dir, std::string template_hpp, std::str
 
 void write_gradient_tetmesh_files(std::string output_dir, std::string template_hpp, std::string template_cpp, std::string ele_type_name, std::string material_name, unsigned int num_dofs, unsigned int size_dofs) {
 
-    write_mesh_files(output_dir, template_hpp, template_cpp, ele_type_name, material_name, "dq", "Eigen::VectorXx<DerivedRet>", "Eigen::Vector"+std::to_string(num_dofs*size_dofs)+"x<DerivedRet>", num_dofs, size_dofs);
+    std::string assemble_size = std::to_string(size_dofs)+ "*V.rows()";
+    write_mesh_files(output_dir, template_hpp, template_cpp, ele_type_name, material_name, "dq", "Eigen::VectorXx<DerivedRet>", "Eigen::Vector"+std::to_string(num_dofs*size_dofs)+"x<DerivedRet>", num_dofs, size_dofs, assemble_size);
 
 }
 
 void write_hessian_tetmesh_files(std::string output_dir, std::string template_hpp, std::string template_cpp, std::string ele_type_name, std::string material_name, unsigned int num_dofs, unsigned int size_dofs) {
 
-    write_mesh_files(output_dir, template_hpp, template_cpp, ele_type_name, material_name, "dq2", "Eigen::SparseMatrix<DerivedRet>", "Eigen::Matrix"+std::to_string(num_dofs*size_dofs)+"x<DerivedRet>", num_dofs, size_dofs);
+    std::string assemble_size = std::to_string(size_dofs)+ "*V.rows()," + std::to_string(size_dofs)+"*V.rows()";
+    write_mesh_files(output_dir, template_hpp, template_cpp, ele_type_name, material_name, "dq2", "Eigen::SparseMatrix<DerivedRet>", "Eigen::Matrix"+std::to_string(num_dofs*size_dofs)+"x<DerivedRet>", num_dofs, size_dofs, assemble_size);
 
 }
 

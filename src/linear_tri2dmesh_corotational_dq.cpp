@@ -20,6 +20,6 @@ void sim::linear_tri2dmesh_corotational_dq(Eigen::VectorXx<DerivedRet> &out, Eig
     
 
     Eigen::Vector6x<DerivedRet> Htmp;
-    sim::assemble(out, 2*V.rows(), 2*V.rows(), E, E, assemble_func, Htmp, dXinv, volume, params);
+    sim::assemble(out, 2*V.rows(), E, E, assemble_func, Htmp, dXinv, volume, params);
 }
 

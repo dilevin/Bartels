@@ -11,7 +11,7 @@ void sim::linear_tet_corotational_dq(Eigen::DenseBase<HessianType> &out, const E
 
     Eigen::Vector9x<Scalar> dF; //type of dF
 
-    dpsi_stretch_dF(dF, unflatten<3,3>((B*qe).eval()), &dpsi_corotational_dS, params);
+    sim::dpsi_stretch_dF(dF, unflatten<3,3>((B*qe).eval()), [](auto &a, auto &b, auto &c) { sim::dpsi_corotational_dS(a,b,c); }, params);
     
     out = B.transpose()*dF*volume;
 
