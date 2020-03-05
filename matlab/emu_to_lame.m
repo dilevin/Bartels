@@ -9,7 +9,7 @@
 % Outputs:
 %    lambda  #T by 1 list of per tetrahedron first lame parameters
 %    mu      #T by 1 list of per tetrahedron second lame parameters
-
+%
 % Example:
 %   [lambda, mu] =  emu_to_lame(2e6*ones(size(T,1),1), 0.45*ones(size(T,1),1));
 function [lambda, mu] = emu_to_lame(E, p)

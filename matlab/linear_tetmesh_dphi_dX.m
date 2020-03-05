@@ -8,6 +8,7 @@
 % Outputs:
 %    dX  #T by 12 list of gradients of linear tetrahedron shape functions. Each row contains a flattened 3 by 4 gradient matrix 
 %        such that grad(phi) = reshape(dX(i,:)', 3,4)
+%
 % Example:
 %   % mesh (V,T)
 %   dX = linear_tetmesh_dphi_dx(V,T)

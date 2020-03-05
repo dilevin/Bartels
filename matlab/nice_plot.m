@@ -9,7 +9,7 @@ function [f, p] = nice_plot(V,F)
 % Outputs:
 %    f  handle to plot figure
 %    p  handle to patch representing the triangle mesh
-
+%
 % Example:
 %   % mesh (V,F)
 %   [f,p] = nice_plot(V,F);
