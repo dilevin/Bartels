@@ -53,5 +53,6 @@ To enable Bartels in MATLAB open MATLAB and issue the following commands:
 ## Conventions
 I try to obey some naming conventions when I implement new functions in Bartels below I list them and give some examples
 
-..* Finite element methods are prefaced by element type *i.e linear_tet_....* indicates this method applies to a single tetrahedral element with linear shape functions.
-..* There are seperate methods which apply per element functions to an entire computational mesh. These take the form *i.e. linear_tetmesh_...*
+* Finite element methods are prefaced by element type *i.e linear_tet_....* indicates this method applies to a single tetrahedral element with linear shape functions.
+
+* There are seperate methods which apply per element functions to an entire computational mesh. These take the form *i.e. linear_tetmesh_...*
