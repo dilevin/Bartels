@@ -51,8 +51,26 @@ To enable Bartels in MATLAB open MATLAB and issue the following commands:
  **NOTE:** I use [GPToolbox](https://github.com/alecjacobson/gptoolbox) by Alec Jacobson for file I/O (i.e readMESH) and geometry processing. 
  
 ## Conventions
-I try to obey some naming conventions when I implement new functions in Bartels below I list them and give some examples
+I try to obey some naming conventions when I implement new functions in Bartels which makes it, in some sense, self documenting. Below are some of these conventions:
 
 * Finite element methods are prefaced by element type *i.e linear_tet_....* indicates this method applies to a single tetrahedral element with linear shape functions.
 
 * There are seperate methods which apply per element functions to an entire computational mesh. These take the form *i.e. linear_tetmesh_...*
+
+* **q** refers to the degrees of freedom of a mechanical system, no matter what they are. For FEM they are the vertices of the simulation mesh
+
+* **F** refers to the deformation gradient at  point in space
+
+* **psi** refers to a potential energy function
+
+* **phi** referes to shape functions
+
+* lower case d is used to represent differential operations. 
+
+Some examples of putting it all together:
+
+* dpsi_neohookean_dF2 computes the second derivative of the neohookean potential energy, with respect to the deformation gradient.
+
+* linear_tet_dphi_dX computes the derivative of the linear tetrahedron shape functions with respect to the reference space
+
+* linear_tetmesh_dphi_dX computes the above over the entire tetmesh
