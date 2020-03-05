@@ -24,7 +24,7 @@ To compile the included tests do the following:
     cd build
     cmake ..
     make all
-    
+
 ### MATLAB Interface
 Bartels includes MATLAB wrappers for usefull functions. To compile the MATLAB wrappers do the following:
 
@@ -45,7 +45,13 @@ To enable Bartels in MATLAB open MATLAB and issue the following commands:
     >> [V,T,F] = readMESH('/Users/dilevin/Documents/Research/Development/bartels/data/meshes_mesh/coarser_bunny.mesh');
     >> M = linear_tetmesh_mass_matrix(V,T, 0.1*ones(size(T,1),1), vol);
     >> [lambda, mu] = emu_to_lame(6e5, 0.4);
-    >> H = linear_tetmesh_neohookean_dq2(V,T, reshape(V', 3*size(V,1), 1), dX, vol, 0.5*lambda*ones(size(T,1),1), 0.5*mu*ones(size(T,1),1));
+    >> H = linear_tetmesh_neohookean_dq2(V,T, reshape(V', 3*size(V,1), 1), dX, vol, [0.5*lambda*ones(size(T,1),1), 0.5*mu*ones(size(T,1),1)]);
     >> [modes, freq] = eigs(-H, M, 20, 'smallestabs');
     
  **NOTE:** I use [GPToolbox](https://github.com/alecjacobson/gptoolbox) by Alec Jacobson for file I/O (i.e readMESH) and geometry processing. 
+ 
+## Conventions
+I try to obey some naming conventions when I implement new functions in Bartels below I list them and give some examples
+
+..* Finite element methods are prefaced by element type *i.e linear_tet_....* indicates this method applies to a single tetrahedral element with linear shape functions.
+..* There are seperate methods which apply per element functions to an entire computational mesh. These take the form *i.e. linear_tetmesh_...*
