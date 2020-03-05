@@ -67,6 +67,8 @@ I try to obey some naming conventions when I implement new functions in Bartels 
 
 * lower case d is used to represent differential operations. 
 
+* when taking derivatives with respect to matrix quantities (like **F**), the matrix quantitiy is flattened to a column vector. *i.e the 3x3 matrix **F** = [F00 F01 F02; F10 F11 F12; F20 F21 F22] becomes a 9x1 vector [F00 F10 F20 F01 F11 F21 F02 F12 F22]'.
+
 Some examples of putting it all together:
 
 * dpsi_neohookean_dF2 computes the second derivative of the neohookean potential energy, with respect to the deformation gradient.
