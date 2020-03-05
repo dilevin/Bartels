@@ -1,4 +1,18 @@
 function [f, p] = nice_plot(V,F)
+% NICE_PLOT make a nicely rendered plot of a triangle mesh
+%
+% areas = triangle_area(V,F)
+%
+% Inputs:
+%    V  #V by 3 list of mesh vertex positions
+%    F  #T by 3 list of mesh triangle indices into V
+% Outputs:
+%    f  handle to plot figure
+%    p  handle to patch representing the triangle mesh
+
+% Example:
+%   % mesh (V,F)
+%   [f,p] = nice_plot(V,F);
 
     f = figure;
     axes('Units', 'normalized', 'Position', [0 0 1 1]);

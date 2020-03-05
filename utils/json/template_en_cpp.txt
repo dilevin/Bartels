@@ -1,0 +1,14 @@
+#ifdef SIM_STATIC_LIBRARY
+# include<../include/%s_%s_%s.h>
+#endif
+
+template<typename DefoType, typename DerivedV, typename Scalar, typename DerivedParams>
+auto sim::%s_%s_%s(const Eigen::MatrixBase<DerivedV> &q, const Eigen::Ref<const Eigen::RowVectorXi> element,  
+                                    const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<DerivedParams> &params, const Scalar &volume) {
+
+    %s; //qe
+    %s; //compute B
+
+    return %s(%s, params)*volume;
+
+}
