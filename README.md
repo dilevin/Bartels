@@ -61,7 +61,7 @@ I try to obey some naming conventions when I implement new functions in Bartels 
 
 * **F** refers to the deformation gradient at  point in space
 
-* **psi** refers to a potential energy function
+* **psi** refers to a potential energy function for a constitutive model
 
 * **phi** referes to shape functions
 
@@ -76,3 +76,9 @@ Some examples of putting it all together:
 * linear_tet_dphi_dX computes the derivative of the linear tetrahedron shape functions with respect to the reference space
 
 * linear_tetmesh_dphi_dX computes the above over the entire tetmesh
+
+* linear_tetmesh_neohooken_dq2 computes the sparse Hessian of the neohookean energy over an entire tetmesh
+
+* linear_tetmesh_stvk_dq computes the gradient of the stvk energy over an entire tetmesh
+
+* linear_tetmesh_arap_q computes the energy of the As-Rigid-As-Possible energy  over an entire tetmesh
