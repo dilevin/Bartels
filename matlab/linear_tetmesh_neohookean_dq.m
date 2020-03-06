@@ -5,7 +5,7 @@
 % Inputs:
 %    V  #T by 3 list of vertices
 %    T  #T by 4 list of per tetrahedron indices into V
-%    q  3#V by 1 list of deformed mesh vertex positions, arranged as [v1x v1y v1x .... v#Vx v#Vy v#Vz]'
+%    q  3#V by 1 list of deformed mesh vertex positions, arranged as [v1x v1y v1z .... v#Vx v#Vy v#Vz]'
 %    dX  #T by 12 list of per tetrahedron shape function gradients (dphi/dX)
 %    volume  #T by 1 list of per tetrahedron volumes
 %    [C,D] #T by 2 material parameters matrix. 
