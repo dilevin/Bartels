@@ -8,7 +8,6 @@ function a = triangle_area(V,F)
 %    F  #T by 3 list of mesh triangle indices into V
 % Outputs:
 %    areas  #T by 1 list of per triangle areas
-
 % Example:
 %   % mesh (V,F)
 %   areas = triangle_area(V,F)
