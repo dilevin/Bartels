@@ -3,8 +3,8 @@
 % H = linear_tri2dmesh_corotational_dq2(V,T, q, dX, volume, [lambda mu])
 %
 % Inputs:
-%    V  #T by 3 list of vertices
-%    T  #T by 4 list of per tetrahedron indices into V
+%    V  #T by 2 list of vertices
+%    T  #T by 3 list of per tetrahedron indices into V
 %    q  2#V by 1 list of deformed mesh vertex positions, arranged as [v1x v1y v1z .... v#Vx v#Vy v#Vz]'
 %    dX  #T by 12 list of per tetrahedron shape function gradients (dphi/dX)
 %    volume  #T by 1 list of per tetrahedron volumes
