@@ -1,4 +1,7 @@
 #include <linear_tet_dphi_dX.h>
+#include <linear_tri2d_dphi_dX.h>
+#include <linear_tri2dmesh_dphi_dX.h>
+#include <linear_tri2dmesh_corotational_dq.h>
 #include <linear_tetmesh_neohookean_dq2.h>
 #include <assemble.h>
 #include <flatten.h>
@@ -101,4 +104,33 @@ int main(int argc, char **argv) {
 
     std::cout<<"PASSED\n";
 
+    //test 2d gradient on a simple case
+    Eigen::MatrixXd V2d(3,2);
+    Eigen::MatrixXd dX2d;
+    Eigen::MatrixXi E2d(1,3);
+    Eigen::MatrixXd params2d;
+    Eigen::VectorXd f2d;
+    Eigen::VectorXd q2d;
+
+    Eigen::MatrixXd area(1,1);
+    area << 68.002;
+    V2d << 96.921,       44.047,
+           81.5,         37.5,
+           87.452,       31.207;
+
+    E2d << 0, 1, 2; 
+
+    params2d.resize(1,2);
+    params2d(0,0) =  6.2069e+06;
+    params2d(0,1) = 6.8966e+05; 
+
+    Eigen::MatrixXd V2dt = V2d.transpose();
+
+    q2d = Eigen::Map<Eigen::VectorXd>(V2dt.data(), V2d.size(),1);
+
+    sim::linear_tri2dmesh_dphi_dX(dX2d, V2d,  E2d);
+
+    sim::linear_tri2dmesh_corotational_dq(f2d, V2d, E2d, q2d, dX2d, area, params2d); 
+                                        
+    std::cout<<f2d<<"\n";
 }

@@ -15,6 +15,7 @@
 
 //bartels
 #include <linear_tri2dmesh_corotational_dq2.h>
+#include <simple_psd_fix.h>
 
 /* The gateway function */
 void mexFunction(int nlhs, mxArray *plhs[],
@@ -35,7 +36,14 @@ void mexFunction(int nlhs, mxArray *plhs[],
     igl::matlab::parse_rhs_double(prhs+4, volumes);
     igl::matlab::parse_rhs_double(prhs+5, params);
 
-    sim::linear_tri2dmesh_corotational_dq2(H, V, E, q, dXinv, volumes,  params);
+    //check for optional paramter to apply spd fix 
+    if(nrhs > 6) {
+        //spd fix
+        sim::linear_tri2dmesh_corotational_dq2(H, V, E, q, dXinv, volumes,  params, [](auto &a) {sim::simple_psd_fix(a, 1e-3);});
+    } else {
+        sim::linear_tri2dmesh_corotational_dq2(H, V, E, q, dXinv, volumes,  params);
+    }
+    
 
     igl::matlab::prepare_lhs_double(H, plhs);
    

@@ -14,13 +14,13 @@
 #include <igl/list_to_matrix.h>
 
 //bartels
-#include <linear_tri2dmesh_corotational_dq.h>
+#include <linear_tri2dmesh_corotational_q.h>
 
 /* The gateway function */
 void mexFunction(int nlhs, mxArray *plhs[],
                  int nrhs, const mxArray *prhs[]) {
     /* variable declarations here */
-    Eigen::VectorXd g;
+    double energy;
 
     Eigen::MatrixXd V;
     Eigen::MatrixXi E;
@@ -35,9 +35,8 @@ void mexFunction(int nlhs, mxArray *plhs[],
     igl::matlab::parse_rhs_double(prhs+4, volumes);
     igl::matlab::parse_rhs_double(prhs+5, params);
 
-    //check for optional paramter to apply spd fix 
-    sim::linear_tri2dmesh_corotational_dq(g, V, E, q, dXinv, volumes,  params);
+    plhs[0] = mxCreateDoubleMatrix((mwSize)1, (mwSize)1, mxREAL);
 
-    igl::matlab::prepare_lhs_double(g, plhs);
+    mxGetPr(plhs[0])[0] = sim::linear_tri2dmesh_corotational_q(V, E, q, dXinv, volumes,  params);
    
 }

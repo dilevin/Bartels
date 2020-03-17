@@ -14,10 +14,11 @@ void sim::dpsi_stretch_dF(Eigen::MatrixBase<HessianType> &ddw, const Eigen::Matr
     Eigen::Vector3x<float> S;
 
     F_float = F.template cast<float>();
+
     igl::svd3x3(F_float,U,S,V);
     
     //Fix for inverted elements (thanks to Danny Kaufman)
-    Scalar det = S.determinant();
+    Scalar det = S[0]*S[1]*S[2];
     
     if(det <= -1e-10)
     {
