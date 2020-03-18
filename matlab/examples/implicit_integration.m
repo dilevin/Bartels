@@ -61,9 +61,6 @@ function implicit_integration
         vt = fmincon(@energy, 0*vt, [], [], [],[], [],[], [], options);
         qt = qt + dt*vt;
         
-        %[e,g,H] = energy(0*vt);
-        %vt = -H\g;
-        %qt = qt + dt*vt;
         p.Vertices = reshape(P'*qt + b, 3, size(V,1))';
         drawnow;
     end
@@ -83,8 +80,6 @@ function implicit_integration
             
             if nargout > 2
                 H = M + dt*dt*P*linear_tetmesh_neohookean_dq2(V,T, P'*(qt+dt*v)+b, dX, vol, [0.5*mu, 0.5*lambda], 'fixed')*P';
-                %H2 = M + dt*dt*P*linear_tetmesh_neohookean_dq2(V,T, P'*(qt+dt*v)+b, dX, vol, [0.5*mu, 0.5*lambda])*P';
-                %norm(full(H) - full(H2))
             end
         end
     end
