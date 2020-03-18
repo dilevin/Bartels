@@ -1,4 +1,4 @@
-function [f, p] = nice_plot(V,F)
+function [f, p] = nice_plot(V,F, fig)
 % NICE_PLOT make a nicely rendered plot of a triangle mesh
 %
 % areas = triangle_area(V,F)
@@ -14,7 +14,14 @@ function [f, p] = nice_plot(V,F)
 %   % mesh (V,F)
 %   [f,p] = nice_plot(V,F);
 
-    f = figure;
+    if nargin < 3
+        f = figure;
+    else
+        f = fig;
+        clf(f);
+    end
+    
+    
     axes('Units', 'normalized', 'Position', [0 0 1 1]);
     
     p = patch('Faces',F, 'Vertices', V, 'FaceColor',       [0.8 0.8 1.0], ...

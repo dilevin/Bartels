@@ -8,7 +8,7 @@ void sim::simple_psd_fix(Eigen::MatrixBase<DerivedType> &A, Scalar tol) {
     // hard coded for tet, need to change size for hex
     Eigen::SelfAdjointEigenSolver< Eigen::MatrixXx<typename DerivedType::Scalar> > es(A);
         
-    Eigen::MatrixXx<Scalar> diag_eval = es.eigenvalues().real();
+    Eigen::VectorXx<Scalar> diag_eval = es.eigenvalues().real();
     
     for (unsigned int i = 0; i < diag_eval.rows(); ++i) {
         if (diag_eval(i)<tol) {
