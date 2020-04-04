@@ -39,7 +39,7 @@ void mexFunction(int nlhs, mxArray *plhs[],
     //check for optional paramter to apply spd fix 
     if(nrhs > 6) {
         //spd fix
-        sim::linear_tri2dmesh_corotational_dq2(H, V, E, q, dXinv, volumes,  params, [](auto &a) {sim::simple_psd_fix(a, 1e-3);});
+        sim::linear_tri2dmesh_corotational_dq2(H, V, E, q, dXinv, volumes,  params, [](auto &a) {sim::simple_psd_fix(a, 1e-6);});
     } else {
         sim::linear_tri2dmesh_corotational_dq2(H, V, E, q, dXinv, volumes,  params);
     }

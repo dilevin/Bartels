@@ -13,7 +13,6 @@ function implicit_integration
     pin_I = find(abs(V(:,2) - min(V(:,2))) < tol);
     
     P = fixed_point_constraint_matrix(V, sort(pin_I));
-    %P = speye(3*size(V,1));
     vol = volume(V,T);
     M = linear_tetmesh_mass_matrix(V, T, ones(size(T,1),1), vol);
     
