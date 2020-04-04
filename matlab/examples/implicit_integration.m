@@ -38,7 +38,7 @@ function implicit_integration
     [lambda, mu] = emu_to_lame(YM*ones(size(T,1),1), pr*ones(size(T,1),1));
      
     %time step
-    dt = 0.01;
+    dt = 0.005;
     
     options = optimoptions('fmincon');
     options.Algorithm = 'trust-region-reflective';
