@@ -24,16 +24,20 @@ function [f, p] = nice_plot(V,F, fig)
     
     axes('Units', 'normalized', 'Position', [0 0 1 1]);
     
-    p = patch('Faces',F, 'Vertices', V, 'FaceColor',       [0.8 0.8 1.0], ...
+    p = patch('Faces',F, 'Vertices', V, 'FaceColor',       [0.5 0.5 1.0], ...
                'EdgeColor',       'none', 'EdgeColor', 0.1*[0.8 0.8 1.0],        ...
                'FaceLighting',    'gouraud',     ...
                 'AmbientStrength', 0.15);
     
-    material('shiny')
-    camlight('headlight')
     axis equal
     axis vis3d
     axis manual
+    
+    material([0.3 0.6 0.9 2]);
+    %l0 = camlight('right')
+    %l1 = camlight('left')
+    l2 = camlight('headlight')
+    l2.Color = [0.4, 0.4, 0.4];
     
     f.Color = [1,1,1];
     f.CurrentAxes.Visible = 'off';
