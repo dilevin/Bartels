@@ -4,7 +4,7 @@
 #include <Eigen/Dense>
 #include <EigenTypes.h>
 
-#include <d2psi_neohookean_dF.h>
+#include <dpsi_neohookean_dF.h>
 
 namespace sim {
 

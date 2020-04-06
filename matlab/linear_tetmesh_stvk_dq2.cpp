@@ -15,6 +15,7 @@
 
 //bartels
 #include <linear_tetmesh_stvk_dq2.h>
+#include <simple_psd_fix.h>
 
 /* The gateway function */
 void mexFunction(int nlhs, mxArray *plhs[],

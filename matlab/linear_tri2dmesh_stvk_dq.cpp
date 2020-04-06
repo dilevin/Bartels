@@ -14,14 +14,13 @@
 #include <igl/list_to_matrix.h>
 
 //bartels
-#include <linear_tri2dmesh_neohookean_dq2.h>
-#include <simple_psd_fix.h>
+#include <linear_tri2dmesh_stvk_dq.h>
 
 /* The gateway function */
 void mexFunction(int nlhs, mxArray *plhs[],
                  int nrhs, const mxArray *prhs[]) {
     /* variable declarations here */
-    Eigen::SparseMatrix<double> H;
+    Eigen::VectorXd g;
 
     Eigen::MatrixXd V;
     Eigen::MatrixXi E;
@@ -36,16 +35,8 @@ void mexFunction(int nlhs, mxArray *plhs[],
     igl::matlab::parse_rhs_double(prhs+4, volumes);
     igl::matlab::parse_rhs_double(prhs+5, params);
 
-    
-    if(nrhs > 6) {
-        //spd fix
-        sim::linear_tri2dmesh_neohookean_dq2(H, V, E, q, dXinv, volumes,  params, [](auto &a) {sim::simple_psd_fix(a, 1e-6);});
-    } else {
-        sim::linear_tri2dmesh_neohookean_dq2(H, V, E, q, dXinv, volumes,  params);
-    }
+    sim::linear_tri2dmesh_stvk_dq(g, V, E, q, dXinv, volumes,  params);
 
-    
-
-    igl::matlab::prepare_lhs_double(H, plhs);
+    igl::matlab::prepare_lhs_double(g, plhs);
    
 }

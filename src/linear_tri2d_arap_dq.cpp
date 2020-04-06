@@ -11,8 +11,8 @@ void sim::linear_tri2d_arap_dq(Eigen::DenseBase<HessianType> &out, const Eigen::
 
     Eigen::Vector9x<Scalar> dF; //type of dF
 
-    dpsi_stretch_dF(dF, unflatten<3,3>((B*qe+one).eval()), dpsi_stretch_dF(dF, unflatten<3,3>((B*qe+one).eval()), [](auto &a, auto &b, auto &c) { sim::dpsi_arap_dS(a,b,c); }, params);, params);
-
+    dpsi_stretch_dF(dF, unflatten<3,3>((B*qe+one).eval()), [](auto &a, auto &b, auto &c) { sim::dpsi_arap_dS(a,b,c); }, params);
+    
     out = B.transpose()*dF*volume;
 
 }
