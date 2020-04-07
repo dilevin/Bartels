@@ -9,6 +9,6 @@ auto sim::linear_tet_arap_q(const Eigen::MatrixBase<DerivedV> &q, const Eigen::R
     Eigen::Vector12x<Scalar> qe; qe << q.segment(3*element(0),3), q.segment(3*element(1),3), q.segment(3*element(2),3), q.segment(3*element(3),3); //qe
     Eigen::Matrix<typename DefoType::Scalar, 9,12> B = sim::flatten_multiply_right<Eigen::Matrix<typename DefoType::Scalar, 3,4> >(dXinv); //compute B
 
-    return psi_stretch_F(unflatten<3,3>((B*qe).eval()), [](auto &a, auto &b) { return sim::psi_arap_S(a,b); }, params);
+    return volume*psi_stretch_F(unflatten<3,3>((B*qe).eval()), [](auto &a, auto &b) { return sim::psi_arap_S(a,b); }, params);
 
 }

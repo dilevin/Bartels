@@ -20,7 +20,7 @@
 void mexFunction(int nlhs, mxArray *plhs[],
                  int nrhs, const mxArray *prhs[]) {
     /* variable declarations here */
-    Eigen::SparseMatrix<double> H;
+    Eigen::VectorXx<double> g;
 
     Eigen::MatrixXd V;
     Eigen::MatrixXi E;
@@ -35,8 +35,8 @@ void mexFunction(int nlhs, mxArray *plhs[],
     igl::matlab::parse_rhs_double(prhs+4, volumes);
     igl::matlab::parse_rhs_double(prhs+5, params);
 
-    sim::linear_tetmesh_arap_dq(H, V, E, q, dXinv, volumes,  params);
+    sim::linear_tetmesh_arap_dq(g, V, E, q, dXinv, volumes,  params);
 
-    igl::matlab::prepare_lhs_double(H, plhs);
+    igl::matlab::prepare_lhs_double(g, plhs);
    
 }

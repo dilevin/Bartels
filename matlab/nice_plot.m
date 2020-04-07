@@ -44,4 +44,25 @@ function [f, p] = nice_plot(V,F, fig)
     f.CurrentAxes.XTick = [];
     f.CurrentAxes.YTick = [];
     f.CurrentAxes.ZTick = [];
+    
+    h = rotate3d(f);
+    set(h,'Enable','on');
+    
+     % add a callback which will be executed after each rotation
+     set(h,'ActionPostCallback',{@move_light_source, l2});
+    
+     % This function will move the light after each rotation
+     function move_light_source(src, evt, l2)
+        camlight(l2, 'headlight');
+     end
+
+%     set(f,'windowbuttonmotionfcn',@oncontrolsdrag)
+%         
+%     
+%      % Callback for mouse drag on control points
+%     function oncontrolsdrag(src,ev)
+%         disp('here');
+%        l2 = camlight('headlight');
+%     end
+
 end
