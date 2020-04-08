@@ -13,5 +13,5 @@
 % Example:
 %   % mesh (V,T)
 %   vol = volume(V,T); %using gptoolbox volume command
-%   rho =  0.1*ones(size(T,1),1);
+%   rho =  1000.0*ones(size(T,1),1);
 %   M = linear_tetmesh_mass_matrix(V,T, rho, vol);

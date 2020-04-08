@@ -51,7 +51,7 @@ function test_tet_materials
     options.Algorithm = 'trust-region-reflective';
     options.Display = 'none';
     options.SpecifyObjectiveGradient = true;
-    options.MaxIterations = 5;
+    options.MaxIterations = 2;
     options.HessianFcn = 'objective';
 
     disp('Press SPACEBAR to CONTINUE');
@@ -77,12 +77,12 @@ function test_tet_materials
 % %      
     
     %ARAP
-    energy_func = @(a,b, c, d, e) linear_tetmesh_arap_q(a,b,c,d,e,[0.5*lambda, mu]);
-    gradient_func = @(a,b, c, d, e) linear_tetmesh_arap_dq(a,b,c,d,e,[0.5*lambda, mu]);
-    hessian_func = @(a,b, c, d, e) linear_tetmesh_arap_dq2(a,b,c,d,e,[0.5*lambda, mu], 'fixed');
+%     energy_func = @(a,b, c, d, e) linear_tetmesh_arap_q(a,b,c,d,e,[0.5*lambda, mu]);
+%     gradient_func = @(a,b, c, d, e) linear_tetmesh_arap_dq(a,b,c,d,e,[0.5*lambda, mu]);
+%     hessian_func = @(a,b, c, d, e) linear_tetmesh_arap_dq2(a,b,c,d,e,[0.5*lambda, mu], 'fixed');
     
     opt_func = @(vel) sim_function(vel, energy_func, gradient_func, hessian_func);
-    for ti = 1:1000
+    for ti = 1:200
         h.String = num2str(ti);
 
         vt = fmincon(opt_func, 0*vt, [], [], [],[], [],[], [], options);

@@ -64,9 +64,18 @@ void sim::assemble(
         //std::cout<<"B1 \n";
         block_size_to = tmp.rows()/E_to.cols();
         block_size_from = tmp.cols()/E_from.cols(); 
-        
 
-        for(unsigned int iblock_to=0; iblock_to <E_to.cols(); ++iblock_to) {
+        for(unsigned int jj=0; jj<tmp.cols(); ++jj) {
+          for(unsigned int ii=0; ii< tmp.rows(); ++ii) {
+            triplet_list.push_back(Eigen::Triplet<Scalar>(block_size_to*E_to(ie, ii/block_size_to) + ii%block_size_to, 
+                                                       block_size_from*E_from(ie, jj/block_size_from) + jj%block_size_from,
+                                                       tmp(ii,jj)));
+          }
+        }
+        //for i = 1:tmp.rows
+        //for j  1:tmp.cols
+        //  tmp(i,j) goes to block_size_to*E_to(i/block_size_to) + mod(i, block_size_to);
+        /*for(unsigned int iblock_to=0; iblock_to <E_to.cols(); ++iblock_to) {
           for(unsigned int iblock_from=0; iblock_from<E_from.cols(); ++iblock_from) {
             
             for(unsigned int iblk_r=0; iblk_r < block_size_to; ++iblk_r) {
@@ -78,7 +87,7 @@ void sim::assemble(
               }
             } 
           }
-        }
+        }*/
           
     }
 
