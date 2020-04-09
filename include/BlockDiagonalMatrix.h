@@ -126,6 +126,10 @@ namespace Eigen {
             return Map<MatrixXx<Scalar>>(m_data.valuePtr()+block_index*m_block_rows*m_block_cols, m_block_rows, m_block_cols);
         } 
     
+        SparseMatrix<Scalar, RowMajor> & toSparse() {
+            return dynamic_cast<SparseMatrix<Scalar, RowMajor> &>(*this);
+        }
+
         protected:
 
         Index m_block_rows;
