@@ -64,7 +64,7 @@ function test_tet_materials
 %     energy_func = @(a,b, c, d, e) linear_tetmesh_neohookean_q(a,b,c,d,e,[0.5*mu, 0.5*lambda]);
 %     gradient_func = @(a,b, c, d, e) linear_tetmesh_neohookean_dq(a,b,c,d,e,[0.5*mu, 0.5*lambda]);
 %     hessian_func = @(a,b, c, d, e) linear_tetmesh_neohookean_dq2(a,b,c,d,e,[0.5*mu, 0.5*lambda], 'fixed');
-%     
+% %     
     % StVK
 %      energy_func = @(a,b, c, d, e) linear_tetmesh_stvk_q(a,b,c,d,e,[lambda, mu]);
 %      gradient_func = @(a,b, c, d, e) linear_tetmesh_stvk_dq(a,b,c,d,e,[lambda, mu]);
@@ -77,9 +77,9 @@ function test_tet_materials
 % %      
     
     %ARAP
-%     energy_func = @(a,b, c, d, e) linear_tetmesh_arap_q(a,b,c,d,e,[0.5*lambda, mu]);
-%     gradient_func = @(a,b, c, d, e) linear_tetmesh_arap_dq(a,b,c,d,e,[0.5*lambda, mu]);
-%     hessian_func = @(a,b, c, d, e) linear_tetmesh_arap_dq2(a,b,c,d,e,[0.5*lambda, mu], 'fixed');
+    energy_func = @(a,b, c, d, e) linear_tetmesh_arap_q(a,b,c,d,e,[0.5*lambda, mu]);
+    gradient_func = @(a,b, c, d, e) linear_tetmesh_arap_dq(a,b,c,d,e,[0.5*lambda, mu]);
+    hessian_func = @(a,b, c, d, e) linear_tetmesh_arap_dq2(a,b,c,d,e,[0.5*lambda, mu], 'fixed');
     
     opt_func = @(vel) sim_function(vel, energy_func, gradient_func, hessian_func);
     for ti = 1:200
