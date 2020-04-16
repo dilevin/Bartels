@@ -1,5 +1,5 @@
 #ifdef SIM_STATIC_LIBRARY
-# include<../include/linear_tri2d_dphi_dX.cpp>
+# include<../include/linear_tri2d_dphi_dX.h>
 #endif
 
 template<typename DerivedP, typename DerivedV, typename DerivedR>
