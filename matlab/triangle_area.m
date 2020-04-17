@@ -18,8 +18,8 @@ function a = triangle_area(V,F)
     if size(V,2) == 2
         a = 0.5*(dx1(:,1).*dx2(:,2) - dx1(:,2).*dx2(:,1)); 
     else
-        a = 0.5*cross(dx1,dx2,2);
-        a = sqrt(sum(a.*a,2));
+        a = cross(dx1,dx2,2);
+        a = 0.5*sqrt(sum(a.*a,2));
     end
 
 end

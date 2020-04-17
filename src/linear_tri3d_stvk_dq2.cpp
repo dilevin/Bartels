@@ -22,7 +22,7 @@ void sim::linear_tri3d_stvk_dq2(Eigen::DenseBase<HessianType> &out, const Eigen:
     //normal vector to fix up deformation gradient
     Eigen::Vector3x<typename NormalType::Scalar> na = n.transpose();
     Eigen::Matrix<typename NormalType::Scalar, 1,3> Na = N;
-    Eigen::Vector9x<typename DefoType::Scalar> n_vec = sim::flatten(na*Na);
+    Eigen::Vector9x<typename DefoType::Scalar> n_vec = sim::flatten_multiply_right<Eigen::Matrix<typename DefoType::Scalar, 3,1> >(Na)*na; //sim::flatten(na*Na);
 
     Eigen::Matrix<typename DefoType::Scalar, 9,9> B = sim::flatten_multiply_right<Eigen::Matrix<typename DefoType::Scalar, 3,3> >(dXinv);
     
