@@ -29,7 +29,7 @@ void sim::linear_tri3d_stvk_dq2(Eigen::DenseBase<HessianType> &out, const Eigen:
     //normal component goes here
     B += sim::flatten_multiply_right<Eigen::Matrix<typename DefoType::Scalar, 3,1> >(Na)*sim::unflatten<3,9>(dndq);
 
-    //for now ignore second derivative for deformation gradient.
+    //for now ignore second derivative for deformation gradient which is zero if the normal is constant across the triangle
 
     Eigen::Matrix9x<Scalar> dF; //type of dF
 
