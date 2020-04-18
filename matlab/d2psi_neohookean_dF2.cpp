@@ -9,13 +9,15 @@
 
 #include <igl/matlab/MexStream.h>
 #include <igl/matlab/parse_rhs.h>
-#include <igl/matlab/prepare_lhs.h>
+#include "utils/prepare_lhs_extra.h"
 #include <igl/matlab/validate_arg.h>
 #include <igl/list_to_matrix.h>
 
 //bartels
 #include <BlockDiagonalMatrix.h>
 #include <d2psi_neohookean_dF2.h>
+
+#include <omp.h>
 
 /* The gateway function */
 void mexFunction(int nlhs, mxArray *plhs[],
@@ -30,16 +32,21 @@ void mexFunction(int nlhs, mxArray *plhs[],
     igl::matlab::parse_rhs_double(prhs+1, F);
     igl::matlab::parse_rhs_double(prhs+2, params);
     
-    //resize(num_blocks, block rows)
     H.resize(E.rows(), 9); 
-    Eigen::Matrix9d Hele;
-
-    for(unsigned int ii=0; ii<E.rows(); ++ii) {
-        sim::d2psi_neohookean_dF2(Hele, sim::unflatten<3,3>(F.row(ii)), params.row(ii)); 
-        H.diagonalBlock(ii) = Hele;
+    
+    #pragma omp parallel shared(H)
+    {
+        
+        Eigen::Matrix9d Hele;
+    
+        #pragma omp for
+        for(unsigned int ii=0; ii<E.rows(); ++ii) {
+            sim::d2psi_neohookean_dF2(Hele, sim::unflatten<3,3>(F.row(ii)), params.row(ii)); 
+            H.diagonalBlock(ii) = Hele;
+        }
+        
     }
 
-    Eigen::SparseMatrix<double> H_sparse = H;
-    igl::matlab::prepare_lhs_double(H_sparse, plhs);
+    igl::matlab::prepare_lhs_double(H, plhs);
    
 }

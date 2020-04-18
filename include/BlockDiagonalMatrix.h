@@ -119,7 +119,7 @@ namespace Eigen {
         }
 
         //need dense block operation 
-        Map<MatrixXx<Scalar>> diagonalBlock(Index block_index) {
+        inline Map<MatrixXx<Scalar>> diagonalBlock(Index block_index) {
 
             assert(block_index < m_num_blocks);
 
