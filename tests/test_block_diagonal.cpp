@@ -6,7 +6,7 @@ int main(int argc, char **argv) {
 
     std::cout<<"Test Block Diagonal Matrix \n";
 
-    Eigen::BlockDiagonal<double> block_diag, bd2;
+    Eigen::BlockDiagonal<double, Eigen::Dynamic> block_diag, bd2;
     block_diag.resize(2,4);
     bd2.resize(2,4);
     

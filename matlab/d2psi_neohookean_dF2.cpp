@@ -17,13 +17,15 @@
 #include <BlockDiagonalMatrix.h>
 #include <d2psi_neohookean_dF2.h>
 
+#ifdef BARTELS_USE_OPENMP
 #include <omp.h>
+#endif
 
 /* The gateway function */
 void mexFunction(int nlhs, mxArray *plhs[],
                  int nrhs, const mxArray *prhs[]) {
     /* variable declarations here */
-    Eigen::BlockDiagonal<double> H;
+    Eigen::BlockDiagonal<double, Eigen::Dynamic> H;
 
     Eigen::MatrixXi E;
     Eigen::MatrixXd F, params;
@@ -34,12 +36,12 @@ void mexFunction(int nlhs, mxArray *plhs[],
     
     H.resize(E.rows(), 9); 
     
-    #pragma omp parallel shared(H)
+    #pragma omp parallel
     {
         
         Eigen::Matrix9d Hele;
     
-        #pragma omp for
+        #pragma omp for schedule(static)
         for(unsigned int ii=0; ii<E.rows(); ++ii) {
             sim::d2psi_neohookean_dF2(Hele, sim::unflatten<3,3>(F.row(ii)), params.row(ii)); 
             H.diagonalBlock(ii) = Hele;

@@ -52,7 +52,7 @@ namespace Eigen {
     //right now row major storage
     //inner indices are cols
     //outer indices are rows
-    template<typename Scalar>
+    template<typename Scalar, int BlockRows>
     class BlockDiagonal : public Eigen::SparseMatrix<Scalar, RowMajor>
     {
         using Index = typename SparseMatrix<Scalar, RowMajor>::Index;
@@ -64,10 +64,27 @@ namespace Eigen {
 
         BlockDiagonal() 
         { 
-            m_block_rows = 0;
-            m_block_cols = 0;
+            if(BlockRows != Eigen::Dynamic) 
+                return;
+
+            m_num_blocks = 0;
+            m_block_rows = 0; 
+            m_block_cols = 0; 
+
+            
         }
         
+        BlockDiagonal(unsigned int numBlocks) {
+
+            if(BlockRows == Eigen::Dynamic) 
+                return;
+
+            m_num_blocks = numBlocks;
+            m_block_rows = BlockRows;
+            m_block_cols = BlockRows;
+
+            resize(m_num_blocks, m_block_rows);
+        }
 
         //useful methods for block diagonal matrices
         void resize(Index num_blocks, Index block_rows) {
@@ -119,16 +136,18 @@ namespace Eigen {
         }
 
         //need dense block operation 
-        inline Map<MatrixXx<Scalar>> diagonalBlock(Index block_index) {
+        inline Map<Matrix<Scalar, BlockRows, BlockRows, Eigen::RowMajor>> diagonalBlock(Index block_index) {
 
             assert(block_index < m_num_blocks);
 
-            return Map<MatrixXx<Scalar>>(m_data.valuePtr()+block_index*m_block_rows*m_block_cols, m_block_rows, m_block_cols);
+            return Map<Matrix<Scalar, BlockRows, BlockRows, Eigen::RowMajor>>(m_data.valuePtr()+block_index*m_block_rows*m_block_cols, m_block_rows, m_block_cols);
         } 
     
-        SparseMatrix<Scalar, RowMajor> & toSparse() {
-            return dynamic_cast<SparseMatrix<Scalar, RowMajor> &>(*this);
-        }
+        inline const Index numBlocks() { return m_num_blocks; }
+
+        inline const Index blockRows() { return m_block_rows; }
+
+        inline const Index blockCols() { return m_block_cols; }
 
         protected:
 
