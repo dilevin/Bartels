@@ -3,7 +3,9 @@
 A lightweight collection of routines for physics simulation.
 
 ### External Dependencies  ###
-None so far
+Intel MKL (OPTIONAL)
+Pardiso (OPTIONAL)
+OpenMP (OPTIONAL)
 
 ### Included Submodules (Installed Automatically) ###
 1. Libigl https://github.com/libigl/libigl
@@ -84,3 +86,47 @@ Some examples of putting it all together:
 * linear_tetmesh_stvk_dq computes the gradient of the stvk energy over an entire tetmesh
 
 * linear_tetmesh_arap_q computes the energy of the As-Rigid-As-Possible energy  over an entire tetmesh
+
+## Installation Instructions for Optional Dependencies
+
+### OpenMP
+
+Bartels can leverage the OpenMP library for parallelization (though honestly, most functions aren't parallelized yet). On *non-OSX* computers with an OpenMP compantible compiler, you simply need to call cmake with the **bartels_USE_OPENMP** option set to on. So, from the build directory:
+
+>
+>   cmake .. -Dbartels_USE_OPENMP=ON
+
+#### OpenMP on OSX
+
+The osx native compiler doesn't support OpenMP by default. Fortunately this support can be added using the [Homebrew package manager](https://brew.sh).
+
+1. Install Homebrew from [https://brew.sh](https://brew.sh)
+2. Run 'brew install libomp'
+3. From the build directory run `cmake .. -Dbartels_USE_OPENMP=ON`
+
+### Pardiso
+
+Bartels now comes with an Eigen wrapper for the open source version of the [Pardiso linear systems solver](https://pardiso-project.org).
+
+To use Pardiso visit the [webpage]((https://pardiso-project.org) and request a license. Once you recieve your license email, download the pardiso library.
+
+1. mkdir ${BARTELS_SOURCE_DIRECTORY}/extern/pardiso
+2. Copy **libPardiso** to ${BARTELS_SOURCE_DIRECTORY}/extern/pardiso
+3. Create Pardiso.lic in ${BARTELS_SOURCE_DIRECTORY}/extern/pardiso
+4. Paste your license key into Pardiso.lic
+5. From ${BARTELS_SOURCE_DIRECTORY}/build run `cmake .. -Dbartels_USE_OPENMP=ON -Dbartels_USE_PARDISO=ON'
+
+**IMPORTANT:** Pardiso requires OpenMP
+
+### Intel MKL`
+
+Bartels relies on the [Eigen](https://eigen.tuxfamily.org) library for linear algebra operations. Eigen itself can be accelerated by linking to the [Intel Math Kernel Library (MKL)](https://software.intel.com/en-us/performance-libraries). **It's available free for academic use**. Bartels can be compiled to use MKL to speed up basic linear algebra operations.
+
+1. Download and install the [Intel Math Kernel Library (MKL)](https://software.intel.com/en-us/performance-libraries)
+2. Set the **MKLROOT** Environment Variable to the fullpath of the mkl installation directory (on my machine this is *usr/local/opt/intel/compilers_and_libraries/mac/mkl*).
+3. From ${BARTELS_SOURCE_DIRECTORY}/build run `cmake .. -Dbartels_USE_MKL=ON'
+
+**IMPORTANT:** OpenMP, Pardiso and MKL can all be used together as well by specifying all options as ON.
+
+**IMPORTANT 2:** MKL is not compatible with MATLAB, if you are building the MATLAB interface, **DO NOT** turn on MKL.
+
