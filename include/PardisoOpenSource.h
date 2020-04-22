@@ -18,6 +18,7 @@
 namespace Eigen {
 
     template<typename _MatrixType> class PardisoLU;
+    template<typename _MatrixType> class PardisoLDLT;
 
     namespace internal {
 
@@ -33,6 +34,15 @@ namespace Eigen {
             typedef typename _MatrixType::RealScalar RealScalar;
             typedef typename _MatrixType::Index Index;
 
+        };
+
+        template<typename _MatrixType>
+        struct pardiso_traits< PardisoLDLT<_MatrixType> >
+        {
+            typedef _MatrixType MatrixType;
+            typedef typename _MatrixType::Scalar Scalar;
+            typedef typename _MatrixType::RealScalar RealScalar;
+            typedef typename _MatrixType::Index Index;    
         };
     }
 
@@ -512,33 +522,67 @@ namespace Eigen {
     };
 
 
+    template<typename MatrixType>
+    class PardisoLDLT : public PardisoImpl< PardisoLDLT<MatrixType> >
+    {
+    protected:
+        typedef PardisoImpl< PardisoLDLT<MatrixType> > Base;
+        typedef typename Base::Scalar Scalar;
+        typedef typename Base::Index Index;
+        typedef typename Base::RealScalar RealScalar;
+        using Base::pardisoInit;
+        friend class PardisoImpl< PardisoLDLT<MatrixType> >;
+
+    public:
+
+        using Base::compute;
+        using Base::solve;
+        
+        PardisoLDLT(unsigned int num_processors=1)
+        : Base(num_processors)
+        {
+            pardisoInit(Base::ScalarIsComplex ? 3 : 1);
+        }
+
+        PardisoLDLT(const MatrixType& matrix, unsigned int num_processors=1)
+        : Base(num_processors)
+        {
+            pardisoInit(Base::ScalarIsComplex ? 3 : 1);
+            compute(matrix);
+        }
+
+        
+    private:
+        PardisoLDLT(PardisoLDLT& ) {}
+    };
+
     namespace internal {
   
-template<typename _Derived, typename Rhs>
-struct solve_retval<PardisoImpl<_Derived>, Rhs>
-  : solve_retval_base<PardisoImpl<_Derived>, Rhs>
-{
-  typedef PardisoImpl<_Derived> Dec;
-  EIGEN_MAKE_SOLVE_HELPERS(Dec,Rhs)
+    template<typename _Derived, typename Rhs>
+    struct solve_retval<PardisoImpl<_Derived>, Rhs>
+    : solve_retval_base<PardisoImpl<_Derived>, Rhs>
+    {
+        typedef PardisoImpl<_Derived> Dec;
+        EIGEN_MAKE_SOLVE_HELPERS(Dec,Rhs)
 
-  template<typename Dest> void evalTo(Dest& dst) const
-  {
-    dec()._solve(rhs(),dst);
-  }
-};
+        template<typename Dest> void evalTo(Dest& dst) const
+        {
+            dec()._solve(rhs(),dst);
+        }
+    };
 
-template<typename Derived, typename Rhs>
-struct sparse_solve_retval<PardisoImpl<Derived>, Rhs>
-  : sparse_solve_retval_base<PardisoImpl<Derived>, Rhs>
-{
-  typedef PardisoImpl<Derived> Dec;
-  EIGEN_MAKE_SPARSE_SOLVE_HELPERS(Dec,Rhs)
+    template<typename Derived, typename Rhs>
+    struct sparse_solve_retval<PardisoImpl<Derived>, Rhs>
+    : sparse_solve_retval_base<PardisoImpl<Derived>, Rhs>
+    {
+        typedef PardisoImpl<Derived> Dec;
+        EIGEN_MAKE_SPARSE_SOLVE_HELPERS(Dec,Rhs)
 
-  template<typename Dest> void evalTo(Dest& dst) const
-  {
-    this->defaultEvalTo(dst);
-  }
-};
+        template<typename Dest> void evalTo(Dest& dst) const
+        {
+            this->defaultEvalTo(dst);
+        }
+    };
 
 } // end namespace internal
 

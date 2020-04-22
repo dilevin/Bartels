@@ -57,10 +57,8 @@ if(bartels_MATLAB_USE_OPENMP)
 	#matlabs OpenMP
 	if(bartels_USE_MKL)
 		get_target_property(LINKED_LIBS bartels INTERFACE_LINK_LIBRARIES)
-	message("Libraries linked to e3: ${LINKED_LIBS}")
 		LIST(FILTER LINKED_LIBS EXCLUDE REGEX libiomp5.dylib)
 		set_target_properties(bartels PROPERTIES INTERFACE_LINK_LIBRARIES "${LINKED_LIBS}")
-	message("Libraries linked to e3: ${LINKED_LIBS}")
 	endif()
 
 endif()
