@@ -114,7 +114,7 @@ To use Pardiso visit the [webpage]((https://pardiso-project.org) and request a l
 2. Copy **libPardiso** to ${BARTELS_SOURCE_DIRECTORY}/extern/pardiso
 3. Create Pardiso.lic in ${BARTELS_SOURCE_DIRECTORY}/extern/pardiso
 4. Paste your license key into Pardiso.lic
-5. From ${BARTELS_SOURCE_DIRECTORY}/build run `cmake .. -Dbartels_USE_OPENMP=ON -Dbartels_USE_PARDISO=ON'
+5. From ${BARTELS_SOURCE_DIRECTORY}/build run `cmake .. -Dbartels_USE_OPENMP=ON -Dbartels_USE_PARDISO=ON`
 
 **IMPORTANT:** Pardiso requires OpenMP
 
@@ -124,7 +124,7 @@ Bartels relies on the [Eigen](https://eigen.tuxfamily.org) library for linear al
 
 1. Download and install the [Intel Math Kernel Library (MKL)](https://software.intel.com/en-us/performance-libraries)
 2. Set the **MKLROOT** Environment Variable to the fullpath of the mkl installation directory (on my machine this is *usr/local/opt/intel/compilers_and_libraries/mac/mkl*).
-3. From ${BARTELS_SOURCE_DIRECTORY}/build run `cmake .. -Dbartels_USE_MKL=ON'
+3. From ${BARTELS_SOURCE_DIRECTORY}/build run `cmake .. -Dbartels_USE_MKL=ON`
 
 **IMPORTANT:** OpenMP, Pardiso and MKL can all be used together as well by specifying all options as ON.
 
