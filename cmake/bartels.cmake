@@ -12,6 +12,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${bartels_SOURCE_DIR}/cmake)
 
 option(bartels_USE_OPENMP OFF)
 option(bartels_USE_MKL OFF)
+option(bartels_USE_PARDISO OFF)
 
 find_package(LIBIGL REQUIRED)
 
@@ -90,5 +91,20 @@ if(OpenMP_CXX_FOUND)
 endif()
 
 if(bartels_USE_MKL)
+    message(${BLAS_LIBRARIES})
     target_link_libraries(bartels INTERFACE ${BLAS_LIBRARIES})
+endif()
+
+if(bartels_USE_PARDISO)
+    
+SET(ENV{PARDISO_LIC_PATH} "${bartels_ROOT}/extern/pardiso")
+    add_library(pardiso_os STATIC ${bartels_ROOT}/extern/pardiso/pardiso_os.cpp)
+    target_include_directories(pardiso_os PRIVATE ${bartels_ROOT}/extern/pardiso/)
+    target_compile_definitions(pardiso_os PRIVATE -DBARTELS_PARDISO_FILENAME=${bartels_ROOT}/extern/pardiso/libpardiso600-MACOS-X86-64.dylib)
+
+    include_directories(${bartels_ROOT}/extern/pardiso/)
+
+    target_link_libraries(bartels INTERFACE pardiso_os)
+    target_compile_definitions(bartels INTERFACE -DBARTELS_USE_PARDISO)
+    
 endif()

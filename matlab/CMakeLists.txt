@@ -78,6 +78,7 @@ foreach( file ${BARTELS_MATLAB_SRCS})
 		target_compile_options(${name} PUBLIC ${OpenMP_CXX_FLAGS})
 		target_link_options(${name} PUBLIC ${OpenMP_CXX_FLAGS})
 	endif()
+	
 
 endforeach( file BARTELS_MATLAB_SRCS )
 
