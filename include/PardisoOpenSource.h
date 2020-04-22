@@ -447,6 +447,7 @@ namespace Eigen {
         
         if(error != 0) {
             std::cout<<"Symbolic Factorization Failed: "<<error<<"\n";
+            return derived();
         }
         
         manageErrorCode(error);
@@ -472,7 +473,7 @@ namespace Eigen {
         
         if (error != 0) {
             printf("\nERROR during numerical factorization: %d", error);
-            return 0;
+            return derived();
         }
 
         manageErrorCode(error);
