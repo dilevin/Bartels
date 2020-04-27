@@ -1,5 +1,5 @@
 # Bartels
-![https://github.com/dilevin/Bartels/](https://github.com/dilevin/Bartels/workflows/BuildBartels/badge.svg?branch=master)
+[![](https://github.com/dilevin/Bartels/workflows/BuildBartels/badge.svg?branch=master)](https://github.com/dilevin/Bartels/Actions)
 
 A lightweight collection of routines for physics simulation .
 
