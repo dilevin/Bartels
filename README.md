@@ -126,7 +126,7 @@ To use Pardiso visit the [webpage]((https://pardiso-project.org) and request a l
 Bartels relies on the [Eigen](https://eigen.tuxfamily.org) library for linear algebra operations. Eigen itself can be accelerated by linking to the [Intel Math Kernel Library (MKL)](https://software.intel.com/en-us/performance-libraries). **It's available free for academic use**. Bartels can be compiled to use MKL to speed up basic linear algebra operations.
 
 1. Download and install the [Intel Math Kernel Library (MKL)](https://software.intel.com/en-us/performance-libraries)
-2. Set the **MKLROOT** Environment Variable to the fullpath of the mkl installation directory (on my machine this is *usr/local/opt/intel/compilers_and_libraries/mac/mkl*).
+2. Set the **MKLROOT** Environment Variable to the fullpath of the mkl installation directory (on my machine this is */usr/local/opt/intel/compilers_and_libraries_2020.1.216/mac/mkl*).
 3. From ${BARTELS_SOURCE_DIRECTORY}/build run `cmake .. -Dbartels_USE_MKL=ON`
 
 **IMPORTANT:** OpenMP, Pardiso and MKL can all be used together as well by specifying all options as ON.
