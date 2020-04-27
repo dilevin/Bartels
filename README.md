@@ -1,6 +1,6 @@
 # Bartels
 
-A lightweight collection of routines for physics simulation.
+A lightweight collection of routines for physics simulation .
 
 ### External Dependencies  ###
 None so far
