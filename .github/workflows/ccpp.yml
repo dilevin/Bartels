@@ -96,7 +96,7 @@ jobs:
       - uses: seanmiddleditch/gha-setup-ninja@master
 
       - name: Checkout submodules
-          run: git submodule update --init --recursive
+        run: git submodule update --init --recursive
 
         # https://github.com/actions/cache/issues/101
       - name: Set env
