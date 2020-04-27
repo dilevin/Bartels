@@ -34,7 +34,10 @@ jobs:
         uses: actions/checkout@v1
         with:
           fetch-depth: 10
-
+          
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
+      
       - name: Dependencies (macOS)
         if: runner.os == 'macOS'
         run: brew install boost gmp mpfr ccache cmake
