@@ -2,8 +2,8 @@
 # include<../include/linear_tri2dmesh_B.h>
 #endif
 
-template<typename DerivedRet, typename DerivedV>
-void sim::linear_tri2dmesh_B(Eigen::SparseMatrix<DerivedRet> &B, Eigen::DenseBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E) {
+template<typename DerivedRet, int Options, typename StorageIndex, typename DerivedV>
+void sim::linear_tri2dmesh_B(Eigen::SparseMatrix<DerivedRet, Options, StorageIndex> &B, Eigen::DenseBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E) {
     
     Eigen::MatrixXd dX;
     linear_tri2dmesh_dphi_dX(dX, V,  E);

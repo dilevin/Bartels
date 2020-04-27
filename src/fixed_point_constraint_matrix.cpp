@@ -4,8 +4,8 @@
 
 #include <assert.h>
 
-template<typename RetType, typename DerivedV>
-void sim::fixed_point_constraint_matrix(Eigen::SparseMatrix<RetType> &P, Eigen::DenseBase<DerivedV> &V, Eigen::Ref<const Eigen::VectorXi> fixed_indices) {
+template<typename RetType, int Options, typename StorageIndex, typename DerivedV>
+void sim::fixed_point_constraint_matrix(Eigen::SparseMatrix<RetType, Options, StorageIndex> &P, Eigen::DenseBase<DerivedV> &V, Eigen::Ref<const Eigen::VectorXi> fixed_indices) {
 
     using Scalar =  RetType;
 

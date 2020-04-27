@@ -6,8 +6,8 @@
 #include <EigenTypes.h>
 
 namespace sim {
-    template<typename RetType, typename DerivedV>
-    void fixed_point_constraint_matrix(Eigen::SparseMatrix<RetType> &P, Eigen::DenseBase<DerivedV> &V, Eigen::Ref<const Eigen::VectorXi> fixed_indices);
+    template<typename RetType, int Options, typename StorageIndex, typename DerivedV>
+    void fixed_point_constraint_matrix(Eigen::SparseMatrix<RetType, Options, StorageIndex> &P, Eigen::DenseBase<DerivedV> &V, Eigen::Ref<const Eigen::VectorXi> fixed_indices);
 }
 
 #ifndef SIM_STATIC_LIBRARY

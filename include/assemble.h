@@ -10,8 +10,8 @@
 namespace sim {
 
     //assemble over graph to a sparse matrix
-    template<typename Func, typename ...Params, typename DerivedRet,  typename DerivedTmp>
-    void assemble(Eigen::SparseMatrix<DerivedRet> &assembled, 
+    template<typename Func, typename ...Params, typename DerivedRet,  int Options, typename StorageIndex, typename DerivedTmp>
+    void assemble(Eigen::SparseMatrix<DerivedRet, Options, StorageIndex> &assembled, 
                 unsigned int rows, unsigned int cols, 
                 Eigen::Ref<const Eigen::MatrixXi> E_from,  
                 Eigen::Ref<const Eigen::MatrixXi> E_to,  

@@ -4,8 +4,8 @@
 
 #include <iostream>
 
-template<typename DerivedRet, typename  DerivedV, typename DerivedVol>
-void sim::linear_tri2dmesh_mass_matrix(Eigen::SparseMatrix<DerivedRet> &M, const Eigen::DenseBase<DerivedV> &V, Eigen::Ref<const Eigen::MatrixXi> E, 
+template<typename DerivedRet, int Options, typename StorageIndex, typename  DerivedV, typename DerivedVol>
+void sim::linear_tri2dmesh_mass_matrix(Eigen::SparseMatrix<DerivedRet, Options, StorageIndex> &M, const Eigen::DenseBase<DerivedV> &V, Eigen::Ref<const Eigen::MatrixXi> E, 
                                      const Eigen::MatrixBase<DerivedVol>  &density,  const Eigen::MatrixBase<DerivedVol>  &volume) {
 
     using Scalar = typename DerivedV::Scalar;
