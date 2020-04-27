@@ -34,7 +34,10 @@ jobs:
         uses: actions/checkout@v1
         with:
           fetch-depth: 10
-
+          
+      - name: Checkout submodules
+        run: git submodule update --init --recursive
+      
       - name: Dependencies (macOS)
         if: runner.os == 'macOS'
         run: brew install boost gmp mpfr ccache cmake
@@ -60,6 +63,3 @@ jobs:
             -Dbartels_USE_STATIC_LIBRARY=${{ matrix.static }} \
       - name: Build
         run: cd build; make -j2; ccache --show-stats
-
-      - name: Tests
-        run: cd build; ctest --verbose
