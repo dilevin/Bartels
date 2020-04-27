@@ -4,13 +4,14 @@
 #include <Eigen/Dense>
 #include <EigenTypes.h>
 
+#include <fstream>
 #include <iostream>
 
 namespace sim {
 
     //read in a tetgen file
     template<typename VertexType>
-    void readTetgen(Eigen::MatrixBase<VertexType> &V, Eigen::Ref<Eigen::MatrixXi> F, const std::string &nodeFile, const &std::string eleFile);
+    void read_tetgen(Eigen::MatrixBase<VertexType> &V, Eigen::Ref<Eigen::MatrixXi> F, const std::string &nodeFile, const std::string &eleFile);
 
 }
 

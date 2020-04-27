@@ -1,5 +1,5 @@
 #ifdef SIM_STATIC_LIBRARY
-# include<../include/assemble.h>
+#include<../include/assemble.h>
 #endif
 
 template <typename DerivedV>
@@ -33,9 +33,9 @@ inline auto relay_params_return(unsigned int eid, Func &func, const Params & ...
 }
 
 //assemble over a graph to a vector 
-template<typename Func, typename ...Params, typename DerivedRet,  typename DerivedTmp>
+template<typename Func, typename ...Params, typename DerivedRet,  int Options, typename StorageIndex, typename DerivedTmp>
 void sim::assemble(
-                Eigen::SparseMatrix<DerivedRet> &assembled, 
+                Eigen::SparseMatrix<DerivedRet, Options, StorageIndex> &assembled, 
                 unsigned int rows, unsigned int cols, 
                 Eigen::Ref<const Eigen::MatrixXi> E_from,  
                 Eigen::Ref<const Eigen::MatrixXi> E_to,  

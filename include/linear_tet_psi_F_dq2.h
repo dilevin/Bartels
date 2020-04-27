@@ -1,6 +1,6 @@
 
 
-template<typename HessianType, typename DefoType, typename DerivedV, typename D2PsiFunc, typename Scalar, typename ...Params>
+/*template<typename HessianType, typename DefoType, typename DerivedV, typename D2PsiFunc, typename Scalar, typename ...Params>
 void sim::linear_tet_psi_F_dq2(Eigen::DenseBase<HessianType> &H, const Eigen::MatrixBase<DerivedV> &q, const Eigen::Ref<const Eigen::RowVectorXi> element,  
                                     const Eigen::MatrixBase<DefoType> &dXinv, D2PsiFunc &d2psi, const Scalar &volume, const Params ... &params) {
 
@@ -17,4 +17,4 @@ void sim::linear_tet_psi_F_dq2(Eigen::DenseBase<HessianType> &H, const Eigen::Ma
 
     H = B.transpose()*dF2*B*volume;
 
-}
+}*/
