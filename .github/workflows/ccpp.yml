@@ -1,0 +1,65 @@
+name: CMake Build Matrix
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  CTEST_OUTPUT_ON_FAILURE: ON
+  CTEST_PARALLEL_LEVEL: 2
+
+jobs: 
+
+  # Linux / macOS
+  Unix:
+    name: ${{ matrix.name }} (${{ matrix.config }}, ${{ matrix.static }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest]
+        config: [Release]
+        static: [ON]
+        include:
+          - os: macos-latest
+            name: macOS
+          - os: ubuntu-18.04
+            name: Linux
+    env:
+      OMP_NUM_THREADS: 1  
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 10
+
+      - name: Dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: brew install boost gmp mpfr ccache cmake
+
+      - name: Cache Build
+        id: cache-build
+        uses: actions/cache@v1
+        with:
+          path: ~/.ccache
+          key: ${{ runner.os }}-${{ matrix.config }}-${{ matrix.static }}-cache
+
+      - name: Prepare ccache
+        run: |
+          ccache --max-size=1.0G
+          ccache -V && ccache --show-stats && ccache --zero-stats
+      - name: Configure
+        run: |
+          mkdir -p build
+          cd build
+          cmake .. \
+            -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+            -DCMAKE_BUILD_TYPE=${{ matrix.config }} \
+            -Dbartels_USE_STATIC_LIBRARY=${{ matrix.static }} \
+      - name: Build
+        run: cd build; make -j2; ccache --show-stats
+
+      - name: Tests
+        run: cd build; ctest --verbose
