@@ -1,4 +1,4 @@
-name: CMake Build Matrix
+name: BuildBartels
 
 on:
   push:
