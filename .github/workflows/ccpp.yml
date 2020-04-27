@@ -63,6 +63,3 @@ jobs:
             -Dbartels_USE_STATIC_LIBRARY=${{ matrix.static }} \
       - name: Build
         run: cd build; make -j2; ccache --show-stats
-
-      - name: Tests
-        run: cd build; ctest --verbose
