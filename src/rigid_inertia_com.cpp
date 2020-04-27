@@ -9,54 +9,54 @@ template<typename ReturnType, typename DerivedV>
 void sim::rigid_inertia_com(Eigen::Matrix3x<ReturnType> &I, Eigen::Vector3x<ReturnType> & center, ReturnType &mass, 
                            const Eigen::MatrixBase<DerivedV> &V, Eigen::Ref<const Eigen::MatrixXi> F, const ReturnType &density) {
 
-    constexpr double oneDiv6{ 1.0 / 6.0 };
-    constexpr double oneDiv24{ 1.0 / 24.0 };
-    constexpr double oneDiv60{ 1.0 / 60.0 };
-    constexpr double oneDiv120{ 1.0 / 120.0 };
+    constexpr ReturnType oneDiv6{ 1.0 / 6.0 };
+    constexpr ReturnType oneDiv24{ 1.0 / 24.0 };
+    constexpr ReturnType oneDiv60{ 1.0 / 60.0 };
+    constexpr ReturnType oneDiv120{ 1.0 / 120.0 };
     
     // order:  1, x, y, z, x^2, y^2, z^2, xy, yz, zx
-    Eigen::VectorXd integral = Eigen::VectorXd::Zero(10);
+    Eigen::VectorXx<ReturnType> integral = Eigen::VectorXx<ReturnType>::Zero(10);
     
     for( int i = 0; i < F.rows(); ++i )
     {
         // Copy the vertices of triangle i
-        const Eigen::Vector3d v0{ V.row( F( i, 0 ) ) };
-        const Eigen::Vector3d v1{ V.row( F( i, 1 ) ) };
-        const Eigen::Vector3d v2{ V.row( F( i, 2 ) ) };
+        const Eigen::Vector3x<ReturnType> v0{ V.row( F( i, 0 ) ) };
+        const Eigen::Vector3x<ReturnType> v1{ V.row( F( i, 1 ) ) };
+        const Eigen::Vector3x<ReturnType> v2{ V.row( F( i, 2 ) ) };
         
         // Compute a normal for the current triangle
-        const Eigen::Vector3d N{ ( v1 - v0 ).cross( v2 - v0 ) };
+        const Eigen::Vector3x<ReturnType> N{ ( v1 - v0 ).cross( v2 - v0 ) };
         
         // Compute the integral terms
-        double tmp0{ v0.x() + v1.x() };
-        double tmp1{ v0.x() * v0.x() };
-        double tmp2{ tmp1 + v1.x() * tmp0 };
-        const double f1x{ tmp0 + v2.x() };
-        const double f2x{ tmp2 + v2.x() * f1x };
-        const double f3x{ v0.x() * tmp1 + v1.x() * tmp2 + v2.x() * f2x };
-        const double g0x{ f2x + v0.x() * ( f1x + v0.x() ) };
-        const double g1x{ f2x + v1.x() * ( f1x + v1.x() ) };
-        const double g2x{ f2x + v2.x() * ( f1x + v2.x() ) };
+        ReturnType tmp0{ v0.x() + v1.x() };
+        ReturnType tmp1{ v0.x() * v0.x() };
+        ReturnType tmp2{ tmp1 + v1.x() * tmp0 };
+        const ReturnType f1x{ tmp0 + v2.x() };
+        const ReturnType f2x{ tmp2 + v2.x() * f1x };
+        const ReturnType f3x{ v0.x() * tmp1 + v1.x() * tmp2 + v2.x() * f2x };
+        const ReturnType g0x{ f2x + v0.x() * ( f1x + v0.x() ) };
+        const ReturnType g1x{ f2x + v1.x() * ( f1x + v1.x() ) };
+        const ReturnType g2x{ f2x + v2.x() * ( f1x + v2.x() ) };
         
         tmp0 = v0.y() + v1.y();
         tmp1 = v0.y() * v0.y();
         tmp2 = tmp1 + v1.y() * tmp0;
-        const double f1y{ tmp0 + v2.y() };
-        const double f2y{ tmp2 + v2.y() * f1y };
-        const double f3y{ v0.y() * tmp1 + v1.y() * tmp2 + v2.y() * f2y };
-        const double g0y{ f2y + v0.y() * ( f1y + v0.y() ) };
-        const double g1y{ f2y + v1.y() * ( f1y + v1.y() ) };
-        const double g2y{ f2y + v2.y() * ( f1y + v2.y() ) };
+        const ReturnType f1y{ tmp0 + v2.y() };
+        const ReturnType f2y{ tmp2 + v2.y() * f1y };
+        const ReturnType f3y{ v0.y() * tmp1 + v1.y() * tmp2 + v2.y() * f2y };
+        const ReturnType g0y{ f2y + v0.y() * ( f1y + v0.y() ) };
+        const ReturnType g1y{ f2y + v1.y() * ( f1y + v1.y() ) };
+        const ReturnType g2y{ f2y + v2.y() * ( f1y + v2.y() ) };
         
         tmp0 = v0.z() + v1.z();
         tmp1 = v0.z()*v0.z();
         tmp2 = tmp1 + v1.z()*tmp0;
-        const double f1z{ tmp0 + v2.z() };
-        const double f2z{ tmp2 + v2.z() * f1z };
-        const double f3z{ v0.z() * tmp1 + v1.z() * tmp2 + v2.z() * f2z };
-        const double g0z{ f2z + v0.z() * ( f1z + v0.z() ) };
-        const double g1z{ f2z + v1.z() * ( f1z + v1.z() ) };
-        const double g2z{ f2z + v2.z() * ( f1z + v2.z() ) };
+        const ReturnType f1z{ tmp0 + v2.z() };
+        const ReturnType f2z{ tmp2 + v2.z() * f1z };
+        const ReturnType f3z{ v0.z() * tmp1 + v1.z() * tmp2 + v2.z() * f2z };
+        const ReturnType g0z{ f2z + v0.z() * ( f1z + v0.z() ) };
+        const ReturnType g1z{ f2z + v1.z() * ( f1z + v1.z() ) };
+        const ReturnType g2z{ f2z + v2.z() * ( f1z + v2.z() ) };
         
         // Update integrals
         integral(0) += N.x() * f1x;
@@ -86,10 +86,10 @@ void sim::rigid_inertia_com(Eigen::Matrix3x<ReturnType> &I, Eigen::Vector3x<Retu
     mass = integral(0);
     
     // Center of mass
-    center = Eigen::Vector3d{ integral(1), integral(2), integral(3) } / mass;
+    center = Eigen::Vector3x<ReturnType>{ integral(1), integral(2), integral(3) } / mass;
     
     // Inertia relative to world origin
-    Eigen::Matrix3d R;
+    Eigen::Matrix3x<ReturnType> R;
 
     R(0,0) = integral(5) + integral(6);
     R(0,1) = -integral(7);

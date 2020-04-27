@@ -6,6 +6,7 @@
 
 namespace sim {
 
+    //Thanks to Danny M. Kaufman of Adobe Research and Breannan Smith of Facebook Reality Labs for this code
     template<typename ReturnType, typename DerivedV>
     void rigid_inertia_com(Eigen::Matrix3x<ReturnType> &I, Eigen::Vector3x<ReturnType> & center, ReturnType &mass, 
                            const Eigen::MatrixBase<DerivedV> &V, Eigen::Ref<const Eigen::MatrixXi> F, const ReturnType &density);
