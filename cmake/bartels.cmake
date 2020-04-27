@@ -33,7 +33,7 @@ if(bartels_USE_MKL)
     else()
         set(BLA_VENDOR Intel10_64lp_seq)
     endif()
-
+    
     find_package(BLAS REQUIRED)
 
     # #setup the include directories and link libraries
@@ -61,17 +61,20 @@ else()
     add_library(bartels INTERFACE)
 endif()
 
+include_directories(${bartels_INCLUDE_DIR})
 
 #prepreprocessor definition for static library 
 if(bartels_USE_STATIC_LIBRARY)
     target_include_directories(bartels PUBLIC ${bartels_INCLUDE_DIR})
-    target_compile_definitions(bartels INTERFACE -DSIM_STATIC_LIBRARY)
+    target_compile_definitions(bartels PUBLIC -DSIM_DATA_DIRECTORY=${bartels_ROOT}/data)
+    target_link_libraries(bartels PUBLIC igl::core)
+
+    target_compile_definitions(bartels PUBLIC -DSIM_STATIC_LIBRARY)
 else()
     target_include_directories(bartels INTERFACE ${bartels_INCLUDE_DIR})
+    target_compile_definitions(bartels INTERFACE -DSIM_DATA_DIRECTORY=${bartels_ROOT}/data)
+    target_link_libraries(bartels INTERFACE igl::core)
 endif()
-
-target_compile_definitions(bartels INTERFACE -DSIM_DATA_DIRECTORY=${bartels_ROOT}/data)
-target_link_libraries(bartels INTERFACE igl::core)
 
 if(OpenMP_CXX_FOUND)
 
@@ -84,19 +87,35 @@ if(OpenMP_CXX_FOUND)
         )
 
         include_directories(${BREW_OMP_PREFIX}/include)
-        target_link_libraries(bartels INTERFACE OpenMP::OpenMP_CXX)
+
+        if(bartels_USE_STATIC_LIBRARY)
+            target_link_libraries(bartels PUBLIC OpenMP::OpenMP_CXX)
+            target_compile_definitions(bartels PUBLIC -DBARTELS_USE_OPENMP)
+        else()
+            target_link_libraries(bartels INTERFACE OpenMP::OpenMP_CXX)
+            target_compile_definitions(bartels INTERFACE -DBARTELS_USE_OPENMP)
+        endif()
+
     elseif()
         include_directories(${OpenMP_CXX_INCLUDE_DIRS})
-        target_link_libraries(bartels INTERFACE OpenMP::OpenMP_CXX)
-    endif()
 
-    target_compile_definitions(bartels INTERFACE -DBARTELS_USE_OPENMP)
+        if(bartels_USE_STATIC_LIBRARY)
+            target_link_libraries(bartels PUBLIC OpenMP::OpenMP_CXX)
+            target_compile_definitions(bartels PUBLIC -DBARTELS_USE_OPENMP)
+        else()
+            target_link_libraries(bartels INTERFACE OpenMP::OpenMP_CXX)
+            target_compile_definitions(bartels INTERFACE -DBARTELS_USE_OPENMP)
+        endif()
+    endif()
     
 endif()
 
 if(bartels_USE_MKL)
-    message(${BLAS_LIBRARIES})
-    target_link_libraries(bartels INTERFACE ${BLAS_LIBRARIES})
+    if(bartels_USE_STATIC_LIBRARY)
+        target_link_libraries(bartels PUBLIC ${BLAS_LIBRARIES})
+    else()
+        target_link_libraries(bartels INTERFACE ${BLAS_LIBRARIES})
+    endif()
 endif()
 
 if(bartels_USE_PARDISO)
@@ -108,7 +127,12 @@ SET(ENV{PARDISO_LIC_PATH} "${bartels_ROOT}/extern/pardiso")
 
     include_directories(${bartels_ROOT}/extern/pardiso/)
 
-    target_link_libraries(bartels INTERFACE pardiso_os)
-    target_compile_definitions(bartels INTERFACE -DBARTELS_USE_PARDISO)
+    if(bartels_USE_STATIC_LIBRARY)
+        target_link_libraries(bartels PUBLIC pardiso_os)
+        target_compile_definitions(bartels PUBLIC -DBARTELS_USE_PARDISO)
+    else()
+        target_link_libraries(bartels INTERFACE pardiso_os)
+        target_compile_definitions(bartels INTERFACE -DBARTELS_USE_PARDISO)
+    endif()
     
 endif()

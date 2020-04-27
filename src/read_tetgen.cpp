@@ -103,7 +103,7 @@ namespace sim {
 }
 //Lions share of code borrowed from Desai Chen for SIMIT
 template<typename VertexType>
-void sim::readTetgen(Eigen::MatrixBase<VertexType> &V, Eigen::Ref<MatrixXi> F, const std::string nodeFile, const std::string eleFile) {
+void sim::read_tetgen(Eigen::MatrixBase<VertexType> &V, Eigen::Ref<Eigen::MatrixXi> F, const std::string &nodeFile, const std::string &eleFile) {
     
     std::cout<<"Reading tetrahedral mesh from "<<nodeFile<<" and "<<eleFile<<"\n";
     

@@ -1,5 +1,5 @@
 #ifdef SIM_STATIC_LIBRARY
-# include<../include/assemble.h>
+#include<../include/assemble.h>
 #endif
 
 template <typename DerivedV>

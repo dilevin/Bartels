@@ -1,12 +1,12 @@
-#ifndef SIM_D2PSI_LINEAR_ELASTICITY_DE_H
-#define SIM_D2PSI_LINEAR_ELASTICITY_DE_H
+#ifndef SIM_DPSI_LINEAR_ELASTICITY_DE_H
+#define SIM_DPSI_LINEAR_ELASTICITY_DE_H
 
 #include <Eigen/Dense>
 #include <EigenTypes.h>
 
 namespace sim {
 
-    template<typename HessianType, typename ParameterType>
+    template<typename HessianType, typename DerivedStrain, typename ParameterType>
     void dpsi_linear_elasticity_de(Eigen::MatrixBase<HessianType> &C,  const Eigen::MatrixBase<DerivedStrain> &strain, const Eigen::MatrixBase<ParameterType> &params);
             
 }

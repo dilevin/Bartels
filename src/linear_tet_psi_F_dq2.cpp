@@ -1,5 +1,5 @@
-#ifdef SIM_STATIC_LIBRARY
-# include<../include/linear_tet_elasticity_dq2.h>
+/*#ifdef SIM_STATIC_LIBRARY
+#include<../include/linear_tet_psi_F.h>
 #endif
 
 template<typename HessianType, typename DefoType, typename DerivedV, typename D2PsiFunc, typename Scalar, typename ...Params>
@@ -19,4 +19,4 @@ void sim::linear_tet_psi_F_dq2(Eigen::DenseBase<HessianType> &H, const Eigen::Ma
 
     H = B.transpose()*dF2*B*volume;
 
-}
+}*/
