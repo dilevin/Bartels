@@ -98,6 +98,8 @@ Bartels can leverage the OpenMP library for parallelization (though honestly, mo
 
 #### OpenMP on OSX
 
+**IMPORTANT:** Requires CMake 3.17 or above 
+
 The osx native compiler doesn't support OpenMP by default. Fortunately this support can be added using the [Homebrew package manager](https://brew.sh).
 
 1. Install Homebrew from [https://brew.sh](https://brew.sh)
