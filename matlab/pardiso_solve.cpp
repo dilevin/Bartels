@@ -35,7 +35,7 @@ void mexFunction(int nlhs, mxArray *plhs[],
     #ifdef BARTELS_USE_PARDISO
         igl::Timer timer;
         //Eigen::PardisoLU<Eigen::SparseMatrix<double, Eigen::ColMajor>> test(4);
-        Eigen::PardisoLDLT<Eigen::SparseMatrix<double, Eigen::ColMajor>> test(4);
+        Eigen::PardisoLDLT<Eigen::SparseMatrix<double, Eigen::ColMajor>> test(8);
         timer.start();
         test.compute(A);
         x = test.solve(b);
