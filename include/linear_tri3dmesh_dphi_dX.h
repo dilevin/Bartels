@@ -11,7 +11,7 @@
 namespace sim {
 
 template<typename DerivedRet, typename DerivedV>
-void linear_tri3dmesh_dphi_dX(Eigen::MatrixXx<DerivedRet> &dX, const Eigen::DenseBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E); 
+void linear_tri3dmesh_dphi_dX(Eigen::MatrixXx<DerivedRet> &dX, const Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E); 
 
 }
 

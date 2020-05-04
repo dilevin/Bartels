@@ -3,7 +3,7 @@
 #endif
 
 template<typename DerivedRet, typename DerivedV, typename DerivedVol, typename DerivedT>
-void sim::linear_tetmesh_const_ext_force(Eigen::VectorXx<DerivedRet>  &f, Eigen::DenseBase<DerivedV> &V,  Eigen::Ref<Eigen::MatrixXi> E, 
+void sim::linear_tetmesh_const_ext_force(Eigen::VectorXx<DerivedRet>  &f, Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<Eigen::MatrixXi> E, 
                                          Eigen::MatrixBase<DerivedVol>  &volume, const Eigen::MatrixBase<DerivedT> &&traction) {
 
     auto assemble_func = [&traction](auto &f,  auto &e, auto &volume) 

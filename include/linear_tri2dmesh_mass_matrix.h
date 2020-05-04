@@ -10,7 +10,7 @@
 namespace sim {
 
 template<typename DerivedRet, int Options, typename StorageIndex, typename  DerivedV, typename DerivedVol>
-void linear_tri2dmesh_mass_matrix(Eigen::SparseMatrix<DerivedRet, Options, StorageIndex> &M, const Eigen::DenseBase<DerivedV> &V, Eigen::Ref<const Eigen::MatrixXi> E, 
+void linear_tri2dmesh_mass_matrix(Eigen::SparseMatrix<DerivedRet, Options, StorageIndex> &M, const Eigen::MatrixBase<DerivedV> &V, Eigen::Ref<const Eigen::MatrixXi> E, 
                                 const Eigen::MatrixBase<DerivedVol>  &density, const Eigen::MatrixBase<DerivedVol>  &volume);
 
 }

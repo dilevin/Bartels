@@ -11,7 +11,7 @@
 namespace sim {
 
 template<typename DerivedRet, typename DerivedV, typename DerivedVol, typename DerivedT>
-void linear_tetmesh_const_ext_force(Eigen::VectorXx<DerivedRet> &f, Eigen::DenseBase<DerivedV> &V,  Eigen::Ref<Eigen::MatrixXi> E, 
+void linear_tetmesh_const_ext_force(Eigen::VectorXx<DerivedRet> &f, Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<Eigen::MatrixXi> E, 
                                          Eigen::MatrixBase<DerivedVol>  &volume, const Eigen::MatrixBase<DerivedT> &&traction); 
 
 

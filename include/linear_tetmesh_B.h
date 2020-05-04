@@ -11,7 +11,7 @@
 namespace sim {
     
     template<typename DerivedRet, int Options, typename StorageIndex, typename DerivedV>
-    void linear_tetmesh_B(Eigen::SparseMatrix<DerivedRet, Options, StorageIndex> &B, Eigen::DenseBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E);
+    void linear_tetmesh_B(Eigen::SparseMatrix<DerivedRet, Options, StorageIndex> &B, Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E);
 }
 
 #ifndef SIM_STATIC_LIBRARY

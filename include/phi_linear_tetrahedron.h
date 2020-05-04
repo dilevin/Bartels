@@ -7,7 +7,7 @@
 template<typename DataType>
 template<typename DataType, typename DerivedV>
 void phi_linear_tetrahedron(Eigen::Vector4x<DataType> &phi, 
-                            const Eigen::DenseBase<DerivedV> &V, 
+                            const Eigen::MatrixBase<DerivedV> &V, 
                             const Eigen::DenseBase<Eigen::RowVectorXx<DataType> >  &e, 
                             const Eigen::DenseBase<Eigen::Vector3x<DataType> > &x);
 

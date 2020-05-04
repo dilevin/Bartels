@@ -16,7 +16,7 @@ template<typename DerivedRet, int Options, typename StorageIndex,
          typename DNormalType,
          typename DerivedVol, 
          typename DerivedParam, class ElementMatrixCallback = decltype(default_callback)>
-void linear_tri3dmesh_stvk_dq2(Eigen::SparseMatrix<DerivedRet, Options, StorageIndex> &H, Eigen::DenseBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E,
+void linear_tri3dmesh_stvk_dq2(Eigen::SparseMatrix<DerivedRet, Options, StorageIndex> &H, Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E,
                                         const Eigen::MatrixBase<DerivedQ> &q, 
                                         const Eigen::MatrixBase<DefoType> &dXinv, 
                                         const Eigen::MatrixBase<NormalType> &N,
