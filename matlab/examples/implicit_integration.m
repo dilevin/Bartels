@@ -21,7 +21,7 @@ function implicit_integration
     gravity = P*M*repmat(gravity, size(V,1),1);
     
     M = P*M*P'; %mass matrix with boundary oncdionts
-    dX =  linear_tetmesh_dphi_dX(V,T);
+    dphidX =  linear_tetmesh_dphi_dphidX(V,T);
     
     [f,p] = nice_plot(V,F);
     
@@ -69,16 +69,16 @@ function implicit_integration
     function [e, g, H] = energy(v)
         
         e = 0.5*v'*M*v - v'*M*vt + ...
-            linear_tetmesh_neohookean_q(V,T, P'*(qt+dt*v)+b, dX, vol, [0.5*mu, 0.5*lambda]) - ...
+            linear_tetmesh_neohookean_q(V,T, P'*(qt+dt*v)+b, dphidX, vol, [0.5*mu, 0.5*lambda]) - ...
             dt*v'*gravity; 
         
         if nargout > 1
             g = M*(v - vt) + ...
-                dt*P*linear_tetmesh_neohookean_dq(V,T, P'*(qt+dt*v)+b, dX, vol, [0.5*mu, 0.5*lambda]) + ...
+                dt*P*linear_tetmesh_neohookean_dq(V,T, P'*(qt+dt*v)+b, dphidX, vol, [0.5*mu, 0.5*lambda]) + ...
                 - dt*gravity;
             
             if nargout > 2
-                H = M + dt*dt*P*linear_tetmesh_neohookean_dq2(V,T, P'*(qt+dt*v)+b, dX, vol, [0.5*mu, 0.5*lambda], 'fixed')*P';
+                H = M + dt*dt*P*linear_tetmesh_neohookean_dq2(V,T, P'*(qt+dt*v)+b, dphidX, vol, [0.5*mu, 0.5*lambda], 'fixed')*P';
             end
         end
     end

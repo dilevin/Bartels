@@ -11,7 +11,7 @@ function test_tri2d_materials
     areas = triangle_area(V,T)*10;
 
     %triangle gradients 
-    dX = linear_tri2dmesh_dphi_dX(V,T);
+    dphidX = linear_tri2dmesh_dphi_dX(V,T);
 
     %Mass Matrix
     rho =  1000.0*ones(size(T,1),1);
@@ -98,16 +98,16 @@ function test_tri2d_materials
     function [e, g, H] = sim_function(v, e_func, g_func, h_func)
 
         e = 0.5*v'*M*v - v'*M*vt + ...
-            e_func(V,T, P'*(qt+dt*v)+b, dX, areas) - ...
+            e_func(V,T, P'*(qt+dt*v)+b, dphidX, areas) - ...
             dt*v'*gravity; 
 
         if nargout > 1
             g = M*(v - vt) + ...
-                dt*P*g_func(V,T, P'*(qt+dt*v)+b, dX, areas) + ...
+                dt*P*g_func(V,T, P'*(qt+dt*v)+b, dphidX, areas) + ...
                 - dt*gravity;
 
             if nargout > 2
-                H = M + dt*dt*P*h_func(V,T, P'*(qt+dt*v)+b, dX, areas)*P';
+                H = M + dt*dt*P*h_func(V,T, P'*(qt+dt*v)+b, dphidX, areas)*P';
             end
         end
     end 
