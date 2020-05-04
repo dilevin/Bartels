@@ -10,9 +10,6 @@
 
 namespace sim {
 
-//some c++ trickery to allow for default call backs 
-auto default_callback = [](auto &element_matrix){};
-
 template<typename DerivedRet, int Options, typename StorageIndex, typename DerivedV, typename DerivedQ, typename DefoType, typename DerivedVol, 
          typename DerivedParam, class ElementMatrixCallback = decltype(default_callback)>
 void linear_tetmesh_stvk_dq2(Eigen::SparseMatrix<DerivedRet, Options, StorageIndex> &H, Eigen::DenseBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E,

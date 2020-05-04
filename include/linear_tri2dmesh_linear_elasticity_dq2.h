@@ -10,9 +10,6 @@
 
 namespace sim {
 
-//some c++ trickery to allow for default call backs 
-auto default_callback = [](auto &element_matrix){};
-
 template<typename DerivedRet, int Options, typename StorageIndex, typename DerivedV, typename DerivedQ, typename DefoType, typename DerivedVol, 
          typename DerivedParam, 
          class ElementMatrixCallback = decltype(default_callback)>
