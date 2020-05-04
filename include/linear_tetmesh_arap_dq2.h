@@ -14,7 +14,7 @@ template<typename DerivedRet, int Options, typename StorageIndex, typename Deriv
          typename DerivedParam, class ElementMatrixCallback = decltype(default_callback)>
 void linear_tetmesh_arap_dq2(Eigen::SparseMatrix<DerivedRet, Options, StorageIndex> &H, Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E,
                                         const Eigen::MatrixBase<DerivedQ> &q, 
-                                        const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<DerivedVol>  &volume, 
+                                        const Eigen::MatrixBase<DefoType> &dphidX, const Eigen::MatrixBase<DerivedVol>  &volume, 
                                         const Eigen::MatrixBase<DerivedParam> &params,
                                         const ElementMatrixCallback func = default_callback);
 

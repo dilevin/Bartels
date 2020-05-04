@@ -12,7 +12,7 @@ template<typename HessianType, typename DefoType, typename DerivedV,
          typename NormalType, typename DNormalType,
          typename Scalar, typename DerivedParams>
 void linear_tri3d_stvk_dq2(Eigen::DenseBase<HessianType> &out, const Eigen::MatrixBase<DerivedV> &q, const Eigen::Ref<const Eigen::RowVectorXi> element,  
-                                    const Eigen::MatrixBase<DefoType> &dXinv, 
+                                    const Eigen::MatrixBase<DefoType> &dphidX, 
                                     const Eigen::MatrixBase<NormalType> &N, 
                                     const Eigen::MatrixBase<NormalType> &n,
                                     const Eigen::MatrixBase<DNormalType> &dndq,

@@ -18,7 +18,7 @@
 
 int main(int argc, char **argv) {
 
-    Eigen::MatrixXd V, dXinv,X;
+    Eigen::MatrixXd V, dphidX,X;
     Eigen::MatrixXi E;
     Eigen::MatrixXi F; 
     Eigen::VectorXd v; //volumes
@@ -32,12 +32,12 @@ int main(int argc, char **argv) {
 
     auto dx = [](auto &a, auto &b, auto c, auto &d) { sim::linear_tet_dphi_dX(a, b, c, d); };
                     
-    sim::eval_at_point(dXinv, V, E, dx, Eigen::Matrix43d(), X);*/
+    sim::eval_at_point(dphidX, V, E, dx, Eigen::Matrix43d(), X);*/
 
-    //test some random dXinvs by building random B's and multiplying by q's
-    sim::linear_tetmesh_dphi_dX(dXinv, V, E);
+    //test some random dphidXs by building random B's and multiplying by q's
+    sim::linear_tetmesh_dphi_dX(dphidX, V, E);
 
-    std::cout<<dXinv.rows()<<" "<<dXinv.cols()<<"\n";
+    std::cout<<dphidX.rows()<<" "<<dphidX.cols()<<"\n";
 
     //simulation state
     Eigen::MatrixXd Vt = V.transpose();
@@ -57,7 +57,7 @@ int main(int argc, char **argv) {
     //test deformation gradient calculation 
     for(unsigned int ii=0; ii<E.rows(); ++ii) {
         q_ele << q.segment<3>(3*E(ii,0)), q.segment<3>(3*E(ii,1)), q.segment<3>(3*E(ii,2)), q.segment<3>(3*E(ii,3));
-        error = (sim::flatten_multiply_right<Eigen::Matrix<double, 3,4>>(sim::unflatten<4,3>(dXinv.row(ii)))*q_ele - test_I).norm();
+        error = (sim::flatten_multiply_right<Eigen::Matrix<double, 3,4>>(sim::unflatten<4,3>(dphidX.row(ii)))*q_ele - test_I).norm();
 
         if(fabs(error) > 1e-8) {
             std::cout<<"FAILED\n";
@@ -81,7 +81,7 @@ int main(int argc, char **argv) {
     params.resize(E.rows(), 2);
     params.col(0) = Eigen::VectorXd::Constant(E.rows(), C);
     params.col(1) = Eigen::VectorXd::Constant(E.rows(), D);
-    sim::linear_tetmesh_neohookean_dq2(H, V, E, q, dXinv, v, params);
+    sim::linear_tetmesh_neohookean_dq2(H, V, E, q, dphidX, v, params);
 
     std::cout<<"Loading test data: "<<sim::data_dir()+pathsep+"matrices"+pathsep+"H_neohookean_coarser_bunny.txt"<<"\n";
 

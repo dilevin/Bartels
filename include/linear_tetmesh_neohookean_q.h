@@ -14,7 +14,7 @@ template<typename DerivedV, typename DerivedQ, typename DefoType, typename Deriv
          typename DerivedParam>
 auto linear_tetmesh_neohookean_q(Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E,
                                         const Eigen::MatrixBase<DerivedQ> &q, 
-                                        const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<DerivedVol>  &volume, 
+                                        const Eigen::MatrixBase<DefoType> &dphidX, const Eigen::MatrixBase<DerivedVol>  &volume, 
                                         const Eigen::MatrixBase<DerivedParam> &params);
 
 

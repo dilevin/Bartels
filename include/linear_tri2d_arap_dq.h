@@ -12,7 +12,7 @@ namespace sim {
 
 template<typename HessianType, typename DefoType, typename DerivedV, typename Scalar, typename ParamType>
 void linear_tri2d_arap_dq(Eigen::DenseBase<HessianType> &out, const Eigen::MatrixBase<DerivedV> &q, const Eigen::Ref<const Eigen::RowVectorXi> element,  
-                                    const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<ParamType> &params, const Scalar &volume);
+                                    const Eigen::MatrixBase<DefoType> &dphidX, const Eigen::MatrixBase<ParamType> &params, const Scalar &volume);
 
 }
 

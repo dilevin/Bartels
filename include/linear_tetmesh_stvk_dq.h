@@ -17,7 +17,7 @@ template<typename DerivedRet, typename DerivedV, typename DerivedQ, typename Def
          typename DerivedParam, class ElementMatrixCallback = decltype(default_callback)>
 void linear_tetmesh_stvk_dq(Eigen::VectorXx<DerivedRet> &H, Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E,
                                         const Eigen::MatrixBase<DerivedQ> &q, 
-                                        const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<DerivedVol>  &volume, 
+                                        const Eigen::MatrixBase<DefoType> &dphidX, const Eigen::MatrixBase<DerivedVol>  &volume, 
                                         const Eigen::MatrixBase<DerivedParam> &params,
                                         const ElementMatrixCallback func = default_callback);
 

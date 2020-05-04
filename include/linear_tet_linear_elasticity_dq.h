@@ -10,7 +10,7 @@ namespace sim {
 
 template<typename HessianType, typename DefoType, typename DerivedV, typename Scalar, typename DerivedParams>
 void linear_tet_linear_elasticity_dq(Eigen::DenseBase<HessianType> &out, const Eigen::MatrixBase<DerivedV> &q, const Eigen::Ref<const Eigen::RowVectorXi> element,  
-                                    const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<DerivedParams> &params, const Scalar &volume);
+                                    const Eigen::MatrixBase<DefoType> &dphidX, const Eigen::MatrixBase<DerivedParams> &params, const Scalar &volume);
 }
 
 #ifndef SIM_STATIC_LIBRARY

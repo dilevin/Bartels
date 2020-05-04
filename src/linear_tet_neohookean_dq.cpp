@@ -4,11 +4,11 @@
 
 template<typename GradientType, typename DefoType, typename DerivedV, typename  ParamType, typename Scalar>
 void sim::linear_tet_neohookean_dq(Eigen::DenseBase<GradientType> &g, const Eigen::MatrixBase<DerivedV> &q, Eigen::Ref<const Eigen::RowVectorXi> element,  
-                                    const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<ParamType> &params, Scalar volume) {
+                                    const Eigen::MatrixBase<DefoType> &dphidX, const Eigen::MatrixBase<ParamType> &params, Scalar volume) {
 
     //get dpsi/dF2
     Eigen::Vector9x<typename DerivedV::Scalar> dF; 
-    Eigen::Matrix<typename DefoType::Scalar, 9,12> B = sim::flatten_multiply_right<Eigen::Matrix<typename DefoType::Scalar, 3,4> >(dXinv);
+    Eigen::Matrix<typename DefoType::Scalar, 9,12> B = sim::flatten_multiply_right<Eigen::Matrix<typename DefoType::Scalar, 3,4> >(dphidX);
 
     //local positions
     Eigen::Vector12x<Scalar> qe;

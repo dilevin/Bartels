@@ -4,7 +4,7 @@
 
 template<typename HessianType, typename DefoType, typename DerivedV, typename Scalar, typename DerivedParams>
 void sim::linear_tet_linear_elasticity_dq(Eigen::DenseBase<HessianType> &out, const Eigen::MatrixBase<DerivedV> &q, const Eigen::Ref<const Eigen::RowVectorXi> element,  
-                                    const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<DerivedParams> &params, const Scalar &volume) {
+                                    const Eigen::MatrixBase<DefoType> &dphidX, const Eigen::MatrixBase<DerivedParams> &params, const Scalar &volume) {
 
     Eigen::Vector12x<Scalar> qe; qe << q.segment(3*element(0),3), q.segment(3*element(1),3), q.segment(3*element(2),3), q.segment(3*element(3),3); //qe
     
@@ -18,7 +18,7 @@ void sim::linear_tet_linear_elasticity_dq(Eigen::DenseBase<HessianType> &out, co
        0, 0, 1, 0, 0, 0, 1, 0, 0,
        0, 1, 0, 1, 0, 0, 0, 0, 0;
 
-    Eigen::Matrix<typename DefoType::Scalar, 9,12> B = P2*sim::flatten_multiply_right<Eigen::Matrix<typename DefoType::Scalar, 3,4> >(dXinv); //compute B
+    Eigen::Matrix<typename DefoType::Scalar, 9,12> B = P2*sim::flatten_multiply_right<Eigen::Matrix<typename DefoType::Scalar, 3,4> >(dphidX); //compute B
 
     Eigen::Matrix6x<typename DefoType::Scalar> e = 0.5*(unflatten<3,3>((B*qe)) + unflatten<3,3>((B*qe).transpose()));
     Eigen::Vector6x<typename DefoType::Scalar> e_vec;

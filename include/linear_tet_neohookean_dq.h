@@ -10,7 +10,7 @@ namespace sim {
 
 template<typename GradientType, typename DefoType, typename DerivedV, typename  ParamType, typename Scalar>
 void linear_tet_neohookean_dq(Eigen::DenseBase<GradientType> &g, const Eigen::MatrixBase<DerivedV> &q, Eigen::Ref<const Eigen::RowVectorXi> element,  
-                                    const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<ParamType> &params, Scalar volume);
+                                    const Eigen::MatrixBase<DefoType> &dphidX, const Eigen::MatrixBase<ParamType> &params, Scalar volume);
 
 }
 

@@ -82,7 +82,7 @@ function test_tet_materials
 %     hessian_func = @(a,b, c, d, e) linear_tetmesh_arap_dq2(a,b,c,d,e,[0.5*lambda, mu], 'fixed');
     
     opt_func = @(vel) sim_function(vel, energy_func, gradient_func, hessian_func);
-    for ti = 1:200
+    for ti = 1:500
         h.String = num2str(ti);
 
         vt = fmincon(opt_func, 0*vt, [], [], [],[], [],[], [], options);

@@ -6,20 +6,20 @@ template<typename DerivedRet, typename DerivedV, typename DerivedQ, typename Def
          typename DerivedParam, typename ElementMatrixCallback>
 void sim::%s(%s &out, Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E,
                                         const Eigen::MatrixBase<DerivedQ> &q, 
-                                        const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<DerivedVol>  &volume, 
+                                        const Eigen::MatrixBase<DefoType> &dphidX, const Eigen::MatrixBase<DerivedVol>  &volume, 
                                         const Eigen::MatrixBase<DerivedParam> &params,
                                         const ElementMatrixCallback func) {
 
     auto assemble_func = [&q, &func](auto &H,  auto &e, 
-                            const auto &dXinv,
+                            const auto &dphidX,
                             const auto &volume, const auto &params) 
                            { 
-                             %s(H, q, e, sim::unflatten<%u,%u>(dXinv), params, volume(0));
+                             %s(H, q, e, sim::unflatten<%u,%u>(dphidX), params, volume(0));
                              func(H); //callback stuff
                            };
     
 
     %s Htmp;
-    sim::assemble(out, %s, E, E, assemble_func, Htmp, dXinv, volume, params);
+    sim::assemble(out, %s, E, E, assemble_func, Htmp, dphidX, volume, params);
 }
 

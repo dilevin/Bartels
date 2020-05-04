@@ -29,13 +29,13 @@ void mexFunction(int nlhs, mxArray *plhs[],
     Eigen::MatrixXd V;
     Eigen::MatrixXi E;
     Eigen::VectorXd u;
-    Eigen::MatrixXd dXinv, params;
+    Eigen::MatrixXd dphidX, params;
     Eigen::VectorXd volumes;
 
     igl::matlab::parse_rhs_double(prhs+0,V);
     igl::matlab::parse_rhs_index(prhs+1,E);
     igl::matlab::parse_rhs_index(prhs+2,u);
-    igl::matlab::parse_rhs_double(prhs+3, dXinv);
+    igl::matlab::parse_rhs_double(prhs+3, dphidX);
     igl::matlab::parse_rhs_double(prhs+4, volumes);
     igl::matlab::parse_rhs_double(prhs+5, params);
 
@@ -66,7 +66,7 @@ void mexFunction(int nlhs, mxArray *plhs[],
 
     for(unsigned int ii=0; ii<E.rows(); ++ii) {
 
-        F.block(0,0,3,2) = sim::unflatten<3,2>(dXinv.row(ii)); 
+        F.block(0,0,3,2) = sim::unflatten<3,2>(dphidX.row(ii)); 
 
         Eigen::Matrix<double, 6,6> B = P2*sim::flatten_multiply_right<Eigen::Matrix3d>(F)*P;
 

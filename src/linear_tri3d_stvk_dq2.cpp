@@ -9,7 +9,7 @@ template<typename HessianType, typename DefoType, typename DerivedV,
          typename Scalar, 
          typename DerivedParams>
 void sim::linear_tri3d_stvk_dq2(Eigen::DenseBase<HessianType> &out, const Eigen::MatrixBase<DerivedV> &q, const Eigen::Ref<const Eigen::RowVectorXi> element,  
-                                    const Eigen::MatrixBase<DefoType> &dXinv, 
+                                    const Eigen::MatrixBase<DefoType> &dphidX, 
                                     const Eigen::MatrixBase<NormalType> &N,
                                     const Eigen::MatrixBase<NormalType> &n,
                                     const Eigen::MatrixBase<DNormalType> &dndq,
@@ -24,7 +24,7 @@ void sim::linear_tri3d_stvk_dq2(Eigen::DenseBase<HessianType> &out, const Eigen:
     Eigen::Matrix<typename NormalType::Scalar, 1,3> Na = N;
     Eigen::Vector9x<typename DefoType::Scalar> n_vec = sim::flatten_multiply_right<Eigen::Matrix<typename DefoType::Scalar, 3,1> >(Na)*na; //sim::flatten(na*Na);
 
-    Eigen::Matrix<typename DefoType::Scalar, 9,9> B = sim::flatten_multiply_right<Eigen::Matrix<typename DefoType::Scalar, 3,3> >(dXinv);
+    Eigen::Matrix<typename DefoType::Scalar, 9,9> B = sim::flatten_multiply_right<Eigen::Matrix<typename DefoType::Scalar, 3,3> >(dphidX);
     
     //normal component goes here
     B += sim::flatten_multiply_right<Eigen::Matrix<typename DefoType::Scalar, 3,1> >(Na)*sim::unflatten<3,9>(dndq);

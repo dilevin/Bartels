@@ -26,13 +26,13 @@ void mexFunction(int nlhs, mxArray *plhs[],
     Eigen::MatrixXd V;
     Eigen::MatrixXi E;
     Eigen::VectorXd q;
-    Eigen::MatrixXd dXinv, N,n, dndq, params;
+    Eigen::MatrixXd dphidX, N,n, dndq, params;
     Eigen::VectorXd volumes; 
 
     igl::matlab::parse_rhs_double(prhs+0,V);
     igl::matlab::parse_rhs_index(prhs+1,E);
     igl::matlab::parse_rhs_index(prhs+2,q);
-    igl::matlab::parse_rhs_double(prhs+3, dXinv);
+    igl::matlab::parse_rhs_double(prhs+3, dphidX);
     igl::matlab::parse_rhs_double(prhs+4, N);
     igl::matlab::parse_rhs_double(prhs+5, n);
     igl::matlab::parse_rhs_double(prhs+6, dndq);
@@ -41,9 +41,9 @@ void mexFunction(int nlhs, mxArray *plhs[],
 
     if(nrhs > 9) {
         //spd fix
-        sim::linear_tri3dmesh_stvk_dq2(H, V, E, q, dXinv, N, n, dndq, volumes,  params, [](auto &a) {sim::simple_psd_fix(a, 1e-3);});
+        sim::linear_tri3dmesh_stvk_dq2(H, V, E, q, dphidX, N, n, dndq, volumes,  params, [](auto &a) {sim::simple_psd_fix(a, 1e-3);});
     } else {
-        sim::linear_tri3dmesh_stvk_dq2(H, V, E, q, dXinv, N, n, dndq, volumes,  params);
+        sim::linear_tri3dmesh_stvk_dq2(H, V, E, q, dphidX, N, n, dndq, volumes,  params);
     }
 
     igl::matlab::prepare_lhs_double(H, plhs);

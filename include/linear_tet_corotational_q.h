@@ -11,7 +11,7 @@ namespace sim {
 
 template<typename DefoType, typename DerivedV, typename Scalar, typename ParamType>
 auto linear_tet_corotational_q(const Eigen::MatrixBase<DerivedV> &q, const Eigen::Ref<const Eigen::RowVectorXi> element,  
-              const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<ParamType> &params, const Scalar &volume);
+              const Eigen::MatrixBase<DefoType> &dphidX, const Eigen::MatrixBase<ParamType> &params, const Scalar &volume);
 
 }
 

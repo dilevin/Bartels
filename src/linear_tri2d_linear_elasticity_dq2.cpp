@@ -4,7 +4,7 @@
 
 template<typename HessianType, typename DefoType, typename DerivedV, typename ParamType, typename  Scalar>
 void sim::linear_tri2d_linear_elasticity_dq2(Eigen::DenseBase<HessianType> &H, const Eigen::MatrixBase<DerivedV> &q, const Eigen::Ref<const Eigen::RowVectorXi> element,  
-                                    const Eigen::MatrixBase<DefoType> &dXinv, const Eigen::MatrixBase<ParamType> &params, Scalar volume) {
+                                    const Eigen::MatrixBase<DefoType> &dphidX, const Eigen::MatrixBase<ParamType> &params, Scalar volume) {
 
 
     Eigen::Matrix3x<typename DerivedV::Scalar> F = Eigen::Matrix3x<typename DerivedV::Scalar>::Zero();
@@ -29,7 +29,7 @@ void sim::linear_tri2d_linear_elasticity_dq2(Eigen::DenseBase<HessianType> &H, c
        0, 0, 1, 0, 0, 0, 1, 0, 0,
        0, 1, 0, 1, 0, 0, 0, 0, 0;
 
-    F.block(0,0,3,2) = dXinv; 
+    F.block(0,0,3,2) = dphidX; 
 
     Eigen::Matrix<typename DefoType::Scalar, 6,6> B = P2*sim::flatten_multiply_right<Eigen::Matrix<typename DefoType::Scalar, 3,3> >(F)*P;
 
