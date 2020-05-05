@@ -136,11 +136,11 @@ namespace Eigen {
         }
 
         //need dense block operation 
-        inline Map<Matrix<Scalar, BlockRows, BlockRows, Eigen::RowMajor>> diagonalBlock(Index block_index) {
+        inline Eigen::Map<Matrix<Scalar, BlockRows, BlockRows, Eigen::RowMajor>> diagonalBlock(Index block_index) {
 
             assert(block_index < m_num_blocks);
 
-            return Map<Matrix<Scalar, BlockRows, BlockRows, Eigen::RowMajor>>(m_data.valuePtr()+block_index*m_block_rows*m_block_cols, m_block_rows, m_block_cols);
+            return Eigen::Map<Matrix<Scalar, BlockRows, BlockRows, Eigen::RowMajor>>(m_data.valuePtr()+block_index*m_block_rows*m_block_cols, m_block_rows, m_block_cols);
         } 
     
         inline const Index numBlocks() { return m_num_blocks; }

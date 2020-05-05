@@ -8,7 +8,7 @@
 
 //Why oh why doesn't C++ have an std::path_seperator ? 
 #ifdef _WIN32
-    const std::string pathsep("\");
+    const std::string pathsep("\\");
 #else
     const std::string pathsep("/");
 #endif
