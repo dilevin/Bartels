@@ -4,9 +4,12 @@
 
 #include <assert.h>
 
-template<typename DerivedRet, typename DerivedV, typename Scalar, int Rows, int Cols, typename Func2, typename DerivedX>
+template<typename DerivedRet, typename DerivedV, 
+         int Rows, int Cols, int Options, int MaxRows, int MaxCols,
+         typename Func2, typename DerivedX>
 void sim::eval_at_point(Eigen::MatrixXx<DerivedRet> &results, const Eigen::MatrixBase<DerivedV> &V, Eigen::Ref<const Eigen::MatrixXi> E, 
-                        Func2 func, Eigen::Matrix<Scalar, Rows, Cols> tmp, const Eigen::MatrixBase<DerivedX> &X) {
+                        Func2 func, Eigen::Matrix<DerivedRet, Rows, Cols, Options, MaxRows, MaxCols> tmp, 
+                        const Eigen::MatrixBase<DerivedX> &X) {
 
     assert(E.rows() == X.rows());
 
