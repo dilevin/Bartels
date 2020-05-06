@@ -11,7 +11,7 @@
 namespace sim {
 
 template<typename DerivedV, typename DerivedQ, typename DefoType, typename DerivedVol, typename DerivedParam>
-auto linear_tri2dmesh_corotational_q(Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E,
+auto linear_tri2dmesh_corotational_q(const Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E,
                                         const Eigen::MatrixBase<DerivedQ> &q, 
                                         const Eigen::MatrixBase<DefoType> &dphidX, const Eigen::MatrixBase<DerivedVol>  &volume, 
                                         const Eigen::MatrixBase<DerivedParam> &params);

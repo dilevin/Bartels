@@ -7,7 +7,7 @@
 //compute inertia matrix and volume by integrating on surfaces
 template<typename ReturnType, typename DerivedV>
 void sim::rigid_inertia_com(Eigen::Matrix3x<ReturnType> &I, Eigen::Vector3x<ReturnType> & center, ReturnType &mass, 
-                           const Eigen::MatrixBase<DerivedV> &V, Eigen::Ref<const Eigen::MatrixXi> F, const ReturnType &density) {
+                           const  Eigen::MatrixBase<DerivedV> &V, Eigen::Ref<const Eigen::MatrixXi> F, const ReturnType &density) {
 
     constexpr ReturnType oneDiv6{ 1.0 / 6.0 };
     constexpr ReturnType oneDiv24{ 1.0 / 24.0 };

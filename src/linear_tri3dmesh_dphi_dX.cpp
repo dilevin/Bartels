@@ -3,7 +3,7 @@
 #endif
 
 template<typename DerivedRet, typename DerivedV>
-void sim::linear_tri3dmesh_dphi_dX(Eigen::MatrixXx<DerivedRet> &dX, const Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E) {
+void sim::linear_tri3dmesh_dphi_dX(Eigen::MatrixXx<DerivedRet> &dX, const  Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E) {
 
     Eigen::MatrixXx<DerivedRet> X; //I never access this for constant strain elements
 

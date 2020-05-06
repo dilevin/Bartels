@@ -7,7 +7,7 @@
 
 namespace sim {
     template<typename RetType, int Options, typename StorageIndex, typename DerivedV>
-    void fixed_point_constraint_matrix(Eigen::SparseMatrix<RetType, Options, StorageIndex> &P, Eigen::MatrixBase<DerivedV> &V, Eigen::Ref<const Eigen::VectorXi> fixed_indices);
+    void fixed_point_constraint_matrix(Eigen::SparseMatrix<RetType, Options, StorageIndex> &P, const Eigen::MatrixBase<DerivedV> &V, Eigen::Ref<const Eigen::VectorXi> fixed_indices);
 }
 
 #ifndef SIM_STATIC_LIBRARY

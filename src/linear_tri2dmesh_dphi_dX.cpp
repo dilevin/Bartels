@@ -3,7 +3,7 @@
 #endif
 
 template<typename DerivedRet, typename DerivedV>
-void sim::linear_tri2dmesh_dphi_dX(Eigen::MatrixXx<DerivedRet> &dX, const Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E) {
+void sim::linear_tri2dmesh_dphi_dX(Eigen::MatrixXx<DerivedRet> &dX, const  Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E) {
 
     //dX.resize(E.rows(), 12); //store dphi_dX flattend out 
 

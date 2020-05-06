@@ -4,7 +4,7 @@
 
 template<typename DerivedRet, typename DerivedV, typename DerivedQ, typename DefoType, typename DerivedVol, 
          typename DerivedParam, typename ElementMatrixCallback>
-void sim::linear_tri2dmesh_neohookean_dq(Eigen::VectorXx<DerivedRet> &out, Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E,
+void sim::linear_tri2dmesh_neohookean_dq(Eigen::VectorXx<DerivedRet> &out, const Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E,
                                         const Eigen::MatrixBase<DerivedQ> &q, 
                                         const Eigen::MatrixBase<DefoType> &dphidX, const Eigen::MatrixBase<DerivedVol>  &volume, 
                                         const Eigen::MatrixBase<DerivedParam> &params,

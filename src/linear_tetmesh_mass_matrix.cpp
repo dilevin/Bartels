@@ -5,7 +5,7 @@
 #include <iostream>
 
 template<typename DerivedRet, int Options, typename StorageIndex, typename  DerivedV, typename DerivedVol>
-void sim::linear_tetmesh_mass_matrix(Eigen::SparseMatrix<DerivedRet, Options, StorageIndex> &M, const Eigen::MatrixBase<DerivedV> &V, Eigen::Ref<const Eigen::MatrixXi> E, 
+void sim::linear_tetmesh_mass_matrix(Eigen::SparseMatrix<DerivedRet, Options, StorageIndex> &M, const  Eigen::MatrixBase<DerivedV> &V, Eigen::Ref<const Eigen::MatrixXi> E, 
                                      const Eigen::MatrixBase<DerivedVol>  &density,  const Eigen::MatrixBase<DerivedVol>  &volume) {
 
     using Scalar = typename DerivedV::Scalar;

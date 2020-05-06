@@ -3,7 +3,7 @@
 #endif
 
 template<typename DerivedP, typename DerivedV, typename DerivedR>
-void sim::linear_tet_dphi_dX(Eigen::DenseBase<DerivedP> &dphi, const Eigen::MatrixBase<DerivedV> &V, 
+void sim::linear_tet_dphi_dX(Eigen::DenseBase<DerivedP> &dphi, const  Eigen::MatrixBase<DerivedV> &V, 
                             Eigen::Ref<const Eigen::RowVectorXi> element, 
                             Eigen::MatrixBase<DerivedR> const & X) {
 

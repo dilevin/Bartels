@@ -3,7 +3,7 @@
 #endif
 
 template <typename DerivedV>
-inline const auto get_param(const Eigen::MatrixBase<DerivedV> &V, unsigned int i) {
+inline const auto get_param(const  Eigen::MatrixBase<DerivedV> &V, unsigned int i) {
     return V.row(i);
 }
 
