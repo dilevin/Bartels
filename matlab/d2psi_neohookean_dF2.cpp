@@ -16,6 +16,7 @@
 //bartels
 #include <BlockDiagonalMatrix.h>
 #include <d2psi_neohookean_dF2.h>
+#include "check_arguments.h"
 
 #ifdef BARTELS_USE_OPENMP
 #include <omp.h>
@@ -24,6 +25,9 @@
 /* The gateway function */
 void mexFunction(int nlhs, mxArray *plhs[],
                  int nrhs, const mxArray *prhs[]) {
+                     
+    auto MAT_DYNAMIC =  sim::Argument::DYNAMIC;
+
     /* variable declarations here */
     Eigen::BlockDiagonal<double, Eigen::Dynamic> H;
 
@@ -31,6 +35,14 @@ void mexFunction(int nlhs, mxArray *plhs[],
     Eigen::MatrixXd F, params;
 
     igl::matlab::parse_rhs_index(prhs+0,E);
+
+    /* Validate Arguments Here */
+    //first check I got sent some elements
+    sim::validate_arguments({sim::Argument("double", {{sim::Dim(MAT_DYNAMIC)}, {sim::Dim(MAT_DYNAMIC)}}, false),
+                             sim::Argument("double", {{sim::Dim(0,0)}, {sim::Dim(9)}}, false),
+                             sim::Argument("double", {{sim::Dim(0,0)}, {sim::Dim(2)}}, false)}, 
+                             nrhs, prhs);
+
     igl::matlab::parse_rhs_double(prhs+1, F);
     igl::matlab::parse_rhs_double(prhs+2, params);
     
