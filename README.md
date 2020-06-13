@@ -17,7 +17,7 @@ OpenMP (OPTIONAL)
 >     git clone --recursive https://github.com/dilevin/Bartels.git
 
 ## Compilation
-Bartels is a header only library but includes somethings that need to be compiled or use.
+Bartels is a header only library but includes some things that need to be compiled for use.
 
 ### Tests
 To compile the included tests do the following:
@@ -29,7 +29,7 @@ To compile the included tests do the following:
     make all
 
 ### MATLAB Interface
-Bartels includes MATLAB wrappers for usefull functions. To compile the MATLAB wrappers do the following:
+Bartels includes MATLAB wrappers for useful functions. To compile the MATLAB wrappers do the following:
 
     cd ${BARTELS_SOURCE_DIRECTORY}/matlab
     mkdir build
