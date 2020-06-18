@@ -56,7 +56,7 @@ void mexFunction(int nlhs, mxArray *plhs[],
         #pragma omp for schedule(static)
         for(unsigned int ii=0; ii<E.rows(); ++ii) {
             sim::dpsi_neohookean_dF(gele, sim::unflatten<3,3>(F.row(ii)), params.row(ii)); 
-            g.segment(9*ii, 9);
+            g.segment(9*ii, 9) = gele;
         }
         
     }
