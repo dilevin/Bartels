@@ -10,3 +10,6 @@
 % Example:
 %   % mesh (V,T)
 %   q = igl2bart(V);
+function q = igl2bart(V)
+    q= reshape(V', numel(V),1);
+end
