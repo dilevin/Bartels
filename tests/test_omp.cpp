@@ -14,8 +14,8 @@ int main(int argc, char **argv) {
     unsigned int num_threads = 8;
     omp_set_num_threads(num_threads);
     unsigned int modes = 101;
-    unsigned int num_elements = 7008;
-    unsigned int block_size = 12;
+    unsigned int num_elements = 26984;
+    unsigned int block_size = 9;
     unsigned int num_meta_blocks = 1 ;
     unsigned int meta_block_size = block_size*num_meta_blocks;;
     unsigned int num_elements_per_thread = num_elements/num_threads;
@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
     }
     timer.stop();
 
-    std::cout<<"Standard: "<<timer.getElapsedTimeInSec()<<"\n";
+    std::cout<<"Standard: "<<timer.getElapsedTimeInSec()/20.0<<"\n";
 
     
 
@@ -116,7 +116,7 @@ int main(int argc, char **argv) {
 
     timer.stop();
     
-    std::cout<<"Simple Parallel: "<<timer.getElapsedTimeInSec()<<"\n";
+    std::cout<<"Simple Parallel: "<<timer.getElapsedTimeInSec()/20.0<<"\n";
 
    //#pragma omp declare reduction (+: Eigen::MatrixXd: omp_out=omp_in)\
     //initializer(omp_priv=Eigen::MatrixXd::Zero(omp_orig.rows(), omp_orig.cols()))

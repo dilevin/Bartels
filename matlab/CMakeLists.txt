@@ -74,6 +74,8 @@ foreach( file ${BARTELS_MATLAB_SRCS})
 	if(bartels_MATLAB_USE_OPENMP)
 		target_compile_options(${name} PUBLIC ${OpenMP_CXX_FLAGS})
 		target_link_options(${name} PUBLIC ${OpenMP_CXX_FLAGS})
+
+		set(bartels_USE_OPENMP ON CACHE BOOL "Override option" FORCE)
 	endif()
 	
 

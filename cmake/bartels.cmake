@@ -14,9 +14,9 @@ option(bartels_USE_OPENMP OFF)
 option(bartels_USE_MKL OFF)
 option(bartels_USE_PARDISO OFF)
 
-if(bartels_USE_PARDISO) 
-    set(bartels_USE_OPENMP OFF CACHE BOOL "Override option" FORCE)
-endif()
+# if(bartels_USE_PARDISO) 
+#     set(bartels_USE_OPENMP OFF CACHE BOOL "Override option" FORCE)
+# endif()
 
 find_package(LIBIGL REQUIRED)
 
