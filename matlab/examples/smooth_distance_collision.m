@@ -1,5 +1,5 @@
 
-function test_constraint
+function smooth_distance_collision
 
     %move two shapes towards each other and stop when constraints violate
     %thresholds 
@@ -9,19 +9,19 @@ function test_constraint
    
     %get data
     alpha = 50;
-    [V,F] = readOBJ('/Users/dilevin/Documents/Research/Development/bartels/data/meshes_obj/star.obj');
+    [V,F] = readOBJ([data_dir() '/meshes_obj/star.obj']);
     Vobj{1} = V;
     Fobj{1} = F;
     Eobj{1} = boundary_faces(F);
     numVerts = numVerts + size(V,1);
     
-    [V,F] = readOBJ('/Users/dilevin/Documents/Research/Development/bartels/data/meshes_obj/lemur.obj');
+    [V,F] = readOBJ([data_dir() '/meshes_obj/lemur.obj']);
     Vobj{2} = V;
     Fobj{2} = F;
     Eobj{2} = boundary_faces(F);
     numVerts = numVerts + size(V,1);
     
-    [V,F] = readOBJ('/Users/dilevin/Documents/Research/Development/bartels/data/meshes_obj/hillside.obj');
+    [V,F] = readOBJ([data_dir() '/meshes_obj/hillside.obj']);
     Vobj{3} = 2*V + [4 0 0];
     Fobj{3} = F;
     Eobj{3} = boundary_faces(F);
@@ -49,6 +49,7 @@ function test_constraint
     hold off
     axis equal
 
+    disp('Press ANY key');
     waitforbuttonpress
     
     function [e,g] = cost_func(x)
