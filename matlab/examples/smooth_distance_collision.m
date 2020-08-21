@@ -21,8 +21,8 @@ function smooth_distance_collision
     Eobj{2} = boundary_faces(F);
     numVerts = numVerts + size(V,1);
     
-    [V,F] = readOBJ([data_dir() '/meshes_obj/hillside.obj']);
-    Vobj{3} = 2*V + [4 0 0];
+    [V,F] = readOBJ([data_dir() '/meshes_obj/hillside_surface.obj']);
+    Vobj{3} = 2*V + [4 -1 0];
     Fobj{3} = F;
     Eobj{3} = boundary_faces(F);
     numVerts = numVerts + size(V,1);
