@@ -1,6 +1,7 @@
 
 % SMOOTH_MIN_DISTANCE Compute a smooth approximation of the minimum signed distance between the vertices of all objects in a scene and, 
-%                     optionally, the gradient of the approximation with respect to each vertex.  
+%                     optionally, the gradient of the approximation with respect to each vertex. 
+%                     NOTE: This is highly unoptimized and has ~n^2 complexity in the number of boundary vertices.
 %
 % [c,g] = smooth_min_distance(V,E, alpha);
 %
