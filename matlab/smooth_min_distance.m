@@ -22,7 +22,7 @@
 %   mesh (V{1},T{1});
 %   mesh (V{2},T{2});
 %   mesh (V{3},T{3});
-%   [c,g] = smooth_min_distance(V, T, 10);
+%   [c,g] = smooth_min_distance(V, T, 50);
 function [c, g] = smooth_min_distance(V,E, alpha)
 
     num_obj = numel(V);
