@@ -38,7 +38,7 @@ function [c, g] = smooth_min_distance(V,E, alpha)
         
         for jj=[1:(ii-1) (ii+1):num_obj]
             % checking ii against jj
-            w = winding_number(V{jj}(:,1:2),E{jj}, V{ii}(:,1:2));
+            w = winding_number(V{jj}(:,1:size(E{jj},2)),E{jj}, V{ii}(:,1:size(E{jj},2)));
             sgn = (-w+e)./e; %use winding number to sign the distance 
             dx = (V{ii}(:,1) - V{jj}(:,1)');
             dy = (V{ii}(:,2) - V{jj}(:,2)');

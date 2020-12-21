@@ -32,7 +32,7 @@ function smooth_distance_collision
     N = kroneye(N, 3);
     
     t0 = 0;
-    dt = 0.01;
+    dt = 0.005;
     tf = 4;
 
     q0 = [0 0 0 3 -0.7 0]';
