@@ -1,4 +1,3 @@
-#ifdef BARTELS_USE_PARDISO
 #include <iostream>
 #include <EigenTypes.h>
 #include <BlockDiagonalMatrix.h>
@@ -6,6 +5,8 @@
 #include <PardisoOpenSource.h>
 
 int main(int argc, char **argv) {
+
+    #ifdef BARTELS_USE_PARDISO
 
     std::cout<<"Test Pardiso\n";
 
@@ -35,7 +36,9 @@ int main(int argc, char **argv) {
     }
 
     std::cout<<"Error: "<<(x-b).norm()<<"\n";
+    #endif
+
+    return 0;
 
 
 }
-#endif

@@ -27,6 +27,20 @@ namespace sim {
 
     };
 
+    //specialization to handle dynamic matrices 
+    template<typename Scalar, int Options, int MaxRowsAtCompileTime, int MaxColsAtCompileTime>
+    struct flatten_helper<Eigen::Matrix<Scalar, Eigen::Dynamic, Eigen::Dynamic, Options, MaxRowsAtCompileTime, MaxColsAtCompileTime>> {
+
+        //flatten to a column vector
+        typedef Eigen::Matrix<Scalar,
+                       Eigen::Dynamic,
+                       1,
+                       Eigen::ColMajor,
+                       Eigen::Dynamic,
+                       1> MatrixType;
+
+    };
+
     //try to do this eigen style so I avoid copying so much data
     template<int RowTo, int ColTo, class ArgType>
     struct unflatten_helper {
@@ -49,13 +63,21 @@ namespace sim {
         public:
             flatten_functor(const ArgType &arg) : m_to_flatten(arg) { }
 
-            const typename ArgType::Scalar operator()(size_t row, size_t col = 0) const {
+            const typename ArgType::Scalar operator()(size_t row) const {
 
                 size_t col_from =  std::floor(row/m_to_flatten.rows());
                 size_t row_from =  row%m_to_flatten.rows(); 
 
                 return m_to_flatten(row_from, col_from);
             }
+
+            /*const typename ArgType::Scalar operator()(size_t row, size_t col) const {
+
+                size_t col_from =  std::floor(row/m_to_flatten.rows());
+                size_t row_from =  row%m_to_flatten.rows(); 
+
+                return m_to_flatten(row_from, col_from);
+            }*/
     };
 
     template<int RowTo, int ColTo, class ArgType>
