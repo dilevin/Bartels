@@ -8,7 +8,7 @@
 namespace sim {
     
     template<typename DerivedV, typename Scalar>
-    void find_min_vertices(std::vector<unsigned int> &indices, const Eigen::DenseBase<DerivedV> &V, Scalar tol = 1e-3);
+    void find_min_vertices(std::vector<int> &indices, const Eigen::DenseBase<DerivedV> &V, Scalar tol = 1e-3);
 
 }
 

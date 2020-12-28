@@ -3,7 +3,7 @@
 #endif
 
 template<typename DerivedV, typename Scalar>
-void sim::find_max_vertices(std::vector<unsigned int> &indices, const Eigen::DenseBase<DerivedV> &V, Scalar tol) {
+void sim::find_max_vertices(std::vector<int> &indices, const Eigen::DenseBase<DerivedV> &V, Scalar tol) {
 
     Scalar max_vertex = V(0,1); 
     
