@@ -2,7 +2,7 @@
 #include<../include/assemble.h>
 #endif
 
-template <typename DerivedV>
+/*template <typename DerivedV>
 inline const auto get_param(const  Eigen::MatrixBase<DerivedV> &V, unsigned int i) {
     return V.row(i);
 }
@@ -30,7 +30,7 @@ template<typename Func, typename ...Params>
 inline auto relay_params_return(unsigned int eid, Func &func, const Params & ... params) {
   //relay_params_struct{ func, tmp, (params.row(eid))...};
   return func((get_param(params,eid))...);
-}
+}*/
 
 //assemble over a graph to a vector 
 template<typename Func, typename ...Params, typename DerivedRet,  int Options, typename StorageIndex, typename DerivedTmp>

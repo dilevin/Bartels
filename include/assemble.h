@@ -4,7 +4,7 @@
 #include <Eigen/Dense>
 #include <Eigen/Sparse>
 #include <EigenTypes.h>
-
+#include <relay_params.h>
 #include <flatten_multiply.h>
 
 namespace sim {

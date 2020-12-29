@@ -116,7 +116,12 @@ namespace sim {
     unflatten(const Eigen::MatrixBase<ArgType> &arg) {
         using MatrixType = typename unflatten_helper<RowTo, ColTo, ArgType>::MatrixType;
 
+        //send RowTo and ColTo to the functor as parameters then you can just have a specialized method for
+        //dynamic matrices that takes those as parameters
         return MatrixType::NullaryExpr(RowTo, ColTo, unflatten_functor<RowTo, ColTo, ArgType>(arg.derived()));
     }
+
+    //need different unflatten function for dynamic matrices since I can't depend on having the RowTo and ColTo 
+    //template parameters
 }
 #endif
