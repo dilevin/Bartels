@@ -19,7 +19,7 @@ void sim::finite_differences_centered(Eigen::Matrix<Scalar, RowsAtCompileTime, 1
 
     Eigen::Matrix<Scalar, RowsAtCompileTime, 1> tmp_x = x;
    
-    #pragma omp parallel for private(tmp_x)
+    //#pragma omp parallel for private(tmp_x)
     for(unsigned int ii=0; ii<x.rows(); ++ii) {
         
         tmp_x(ii) = x(ii) + tol;
@@ -55,7 +55,7 @@ void sim::finite_differences_hessian_centered(Eigen::Matrix<Scalar, RowsAtCompil
     Eigen::Matrix<Scalar, RowsAtCompileTime, 1> tmp_x = x;
     
     //collapse (2) collapses my nested loops
-    #pragma omp parallel for collpase(2) private(tmp_x) 
+    //#pragma omp parallel for collpase(2) private(tmp_x) 
     {
         for(unsigned int ii=0; ii<x.rows(); ++ii) 
             for(unsigned int jj=0;jj<x.rows(); ++jj) {
