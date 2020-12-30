@@ -101,7 +101,7 @@ namespace sim {
 }
 
 #ifndef SIM_STATIC_LIBRARY
-#   include <../src/linesearch_backtracking_bisection.cpp>
+#   include <../src/optimization_gradient_based.cpp>
 #endif
 
 #endif
