@@ -79,10 +79,29 @@ void sim::finite_differences_hessian_centered(Eigen::Matrix<Scalar, RowsAtCompil
                 H(ii,jj) += f(tmp_x);
                 H(ii,jj) /= (4.0*tol*tol);
 
-                tmp_x(jj) = x(jj);
                 tmp_x(ii) = x(ii);
+                tmp_x(jj) = x(jj);
 
             }
+
+            //fill in the diagonal with better estimate
+            tmp_x(ii) = x(ii) + 2.0*tol;
+            H(ii,ii) = -f(tmp_x);
+
+            tmp_x(ii) = x(ii) + tol;
+            H(ii,ii) += 16.0*f(tmp_x);
+
+            tmp_x(ii) = x(ii);
+            H(ii,ii) -= 30.0*f(tmp_x);
+
+            tmp_x(ii) = x(ii) - tol;
+            H(ii,ii) += 16.0*f(tmp_x);
+
+            tmp_x(ii) = x(ii) - 2.0*tol;
+            H(ii,ii) -= f(tmp_x);
+
+            H(ii,ii) /= (12.0*tol*tol);
+            
     }
 
 
