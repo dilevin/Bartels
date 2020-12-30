@@ -17,8 +17,8 @@ void sim::finite_differences_centered(Eigen::Matrix<Scalar, RowsAtCompileTime, 1
         grad.resize(x.rows(), 1);
     }
 
-    Eigen::Matrix<Scalar, RowsAtCompileTime, 1> tmp_x;
-
+    Eigen::Matrix<Scalar, RowsAtCompileTime, 1> tmp_x = x;
+   
     #pragma omp parallel for private(tmp_x)
     for(unsigned int ii=0; ii<x.rows(); ++ii) {
         
@@ -29,6 +29,8 @@ void sim::finite_differences_centered(Eigen::Matrix<Scalar, RowsAtCompileTime, 1
         tmp_x(ii) = x(ii) - tol; 
 
         grad(ii) = (f(tmp_x) - fp1)/(2.0*tol);
+
+        tmp_x(ii) = x(ii);
     }
 
 }
@@ -76,6 +78,9 @@ void sim::finite_differences_hessian_centered(Eigen::Matrix<Scalar, RowsAtCompil
                 tmp_x(jj) = x(jj) - tol;
                 H(ii,jj) += f(tmp_x);
                 H(ii,jj) /= (4.0*tol);
+
+                tmp_x(jj) = x(jj);
+                tmp_x(ii) = x(ii);
 
             }
     }
