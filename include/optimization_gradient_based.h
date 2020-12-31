@@ -42,7 +42,7 @@ namespace sim {
                                                  Hessian &H, 
                                                  SparseLinearSolver &solver,
                                                  Eigen::MatrixBase<DerivedG> &tmp_g,
-                                                 Eigen::MatrixBase<DerivedH> &tmp_H,
+                                                 Eigen::SparseMatrixBase<DerivedH> &tmp_H,
                                                  Eigen::MatrixBase<DerivedG> &tmp_d,
                                                  Scalar gradient_tol = 1e-3,
                                                  unsigned int max_iterations = 100,
