@@ -4,8 +4,8 @@
 
 //centered differences
 //scalar function to vector
-template<class Function, typename Scalar, int RowsAtCompileTime>
-void sim::finite_differences_centered(Eigen::Matrix<Scalar, RowsAtCompileTime, 1> &grad, Function &f, const Eigen::Matrix<Scalar, RowsAtCompileTime, 1>  &x, Scalar tol)
+template<class Function, typename DerivedG, typename DerivedX, typename Scalar>
+void sim::finite_differences_centered(Eigen::DenseBase<DerivedG> &grad, Function &f, const Eigen::DenseBase<DerivedX>  &x, Scalar tol)
 {
     if(x.rows() == 0) {
         std::cout<<"ERROR: Provided empty parameters to finite_differences_centered";
@@ -17,7 +17,7 @@ void sim::finite_differences_centered(Eigen::Matrix<Scalar, RowsAtCompileTime, 1
         grad.resize(x.rows(), 1);
     }
 
-    Eigen::Matrix<Scalar, RowsAtCompileTime, 1> tmp_x = x;
+    DerivedX tmp_x = x;
    
     //#pragma omp parallel for private(tmp_x)
     for(unsigned int ii=0; ii<x.rows(); ++ii) {
@@ -36,8 +36,8 @@ void sim::finite_differences_centered(Eigen::Matrix<Scalar, RowsAtCompileTime, 1
 }
 
 //vector function to matrix 
-template<class Function, typename Scalar, int RowsAtCompileTime, int ColsAtCompileTime>
-void sim::finite_differences_hessian_centered(Eigen::Matrix<Scalar, RowsAtCompileTime, ColsAtCompileTime> &H, Function &f, const Eigen::Matrix<Scalar, RowsAtCompileTime, 1> &x, Scalar tol)
+template<class Function, typename DerivedH, typename DerivedX, typename Scalar>
+void sim::finite_differences_hessian_centered(Eigen::DenseBase<DerivedH> &H, Function &f, const Eigen::DenseBase<DerivedX> &x, Scalar tol)
 {
 
     if(x.rows() == 0) {
@@ -52,7 +52,7 @@ void sim::finite_differences_hessian_centered(Eigen::Matrix<Scalar, RowsAtCompil
 
     H.setZero();
 
-    Eigen::Matrix<Scalar, RowsAtCompileTime, 1> tmp_x = x;
+    DerivedX tmp_x = x;
     
     //collapse (2) collapses my nested loops
     //#pragma omp parallel for collpase(2) private(tmp_x) 

@@ -8,11 +8,11 @@
 
 namespace sim {
 
-    template<class Function, typename Scalar, int RowsAtCompileTime>
-    void finite_differences_centered(Eigen::Matrix<Scalar, RowsAtCompileTime, 1> &grad, Function &f, const Eigen::Matrix<Scalar, RowsAtCompileTime, 1>  &x, Scalar tol=1e-6);
+    template<class Function, typename DerivedG, typename DerivedX, typename Scalar>
+    void finite_differences_centered(Eigen::DenseBase<DerivedG> &grad, Function &f, const Eigen::DenseBase<DerivedX>  &x, Scalar tol=1e-6);
     
-    template<class Function, typename Scalar, int RowsAtCompileTime, int ColsAtCompileTime>
-    void finite_differences_hessian_centered(Eigen::Matrix<Scalar, RowsAtCompileTime, ColsAtCompileTime> &H, Function &f, const Eigen::Matrix<Scalar, RowsAtCompileTime, 1> &x, Scalar tol=1e-6);
+    template<class Function, typename DerivedH, typename DerivedX, typename Scalar>
+    void finite_differences_hessian_centered(Eigen::DenseBase<DerivedH> &H, Function &f, const Eigen::DenseBase<DerivedX> &x, Scalar tol=1e-6);
 
 }
 
