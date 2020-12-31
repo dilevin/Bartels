@@ -3,8 +3,8 @@
 #endif
 
 template<typename DerivedG, typename Scalar, int StorageOptions, typename StorageIndex, class SparseLinearSolver>
-bool sim::search_direction_newton_sparse(Eigen::MatrixBase<DerivedG> &d, 
-                                         const Eigen::MatrixBase<DerivedG> &g, 
+bool sim::search_direction_newton_sparse(Eigen::DenseBase<DerivedG> &d, 
+                                         const Eigen::DenseBase<DerivedG> &g, 
                                          const Eigen::SparseMatrix<Scalar, StorageOptions, StorageIndex> &H,
                                          SparseLinearSolver &solver) {
 
