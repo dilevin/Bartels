@@ -26,7 +26,7 @@ void sim::finite_differences_centered(Eigen::Matrix<Scalar, GRowsAtCompileTime, 
         grad.resize(x.rows(), 1);
     }
 
-    DerivedX tmp_x = x;
+    Eigen::Matrix<Scalar, GRowsAtCompileTime, 1, GOptions> tmp_x = x;
    
     //#pragma omp parallel for private(tmp_x)
     for(unsigned int ii=0; ii<x.rows(); ++ii) {
@@ -67,7 +67,7 @@ void sim::finite_differences_hessian_centered(Eigen::Matrix<Scalar, HRowsAtCompi
 
     H.setZero();
 
-    DerivedX tmp_x = x;
+    Eigen::Matrix<Scalar, HRowsAtCompileTime, 1, HOptions> tmp_x = x;
     
     //collapse (2) collapses my nested loops
     //#pragma omp parallel for collpase(2) private(tmp_x) 
@@ -78,7 +78,7 @@ void sim::finite_differences_hessian_centered(Eigen::Matrix<Scalar, HRowsAtCompi
                 //i+1, j+1
                 tmp_x(ii) = x(ii) + tol;
                 tmp_x(jj) = x(jj) + tol;
-                H(ii,jj) += f(tmp_x);
+                H(ii,jj)  = f(tmp_x);
 
                 //i+1, j-1
                 tmp_x(jj) = x(jj) - tol; 
@@ -116,6 +116,7 @@ void sim::finite_differences_hessian_centered(Eigen::Matrix<Scalar, HRowsAtCompi
             H(ii,ii) -= f(tmp_x);
 
             H(ii,ii) /= (12.0*tol*tol);
+            tmp_x(ii) = x(ii);
         }
 
     }
