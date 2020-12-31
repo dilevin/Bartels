@@ -37,7 +37,7 @@ void sim::finite_differences_centered(Eigen::Matrix<Scalar, GRowsAtCompileTime, 
 
         tmp_x(ii) = x(ii) - tol; 
 
-        grad(ii) = (f(tmp_x) - fp1)/(2.0*tol);
+        grad(ii) = (fp1 - f(tmp_x))/(2.0*tol);
 
         tmp_x(ii) = x(ii);
     }
