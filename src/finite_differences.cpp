@@ -4,8 +4,17 @@
 
 //centered differences
 //scalar function to vector
-template<class Function, typename DerivedG, typename DerivedX, typename Scalar>
-void sim::finite_differences_centered(Eigen::MatrixBase<DerivedG> &grad, Function &f, const Eigen::MatrixBase<DerivedX>  &x, Scalar tol)
+template<class Function, typename Scalar,
+         int GRowsAtCompileTime,
+         int GColsAtCompileTime,
+         int GOptions ,
+         int GMaxRowsAtCompileTime,
+         int GMaxColsAtCompileTime,
+         typename DerivedX>
+void sim::finite_differences_centered(Eigen::Matrix<Scalar, GRowsAtCompileTime, GColsAtCompileTime, GOptions, GMaxRowsAtCompileTime, GMaxColsAtCompileTime> &grad,
+                                      Function &f,
+                                      const Eigen::MatrixBase<DerivedX>  &x,
+                                      Scalar tol)
 {
     if(x.rows() == 0) {
         std::cout<<"ERROR: Provided empty parameters to finite_differences_centered";
@@ -36,8 +45,14 @@ void sim::finite_differences_centered(Eigen::MatrixBase<DerivedG> &grad, Functio
 }
 
 //vector function to matrix 
-template<class Function, typename DerivedH, typename DerivedX, typename Scalar>
-void sim::finite_differences_hessian_centered(Eigen::MatrixBase<DerivedH> &H, Function &f, const Eigen::MatrixBase<DerivedX> &x, Scalar tol)
+template<class Function, typename Scalar,
+         int HRowsAtCompileTime,
+         int HColsAtCompileTime,
+         int HOptions ,
+         int HMaxRowsAtCompileTime,
+         int HMaxColsAtCompileTime,
+         typename DerivedX>
+void sim::finite_differences_hessian_centered(Eigen::Matrix<Scalar, HRowsAtCompileTime, HColsAtCompileTime, HOptions, HMaxRowsAtCompileTime, HMaxColsAtCompileTime> &H, Function &f, const Eigen::MatrixBase<DerivedX> &x, Scalar tol)
 {
 
     if(x.rows() == 0) {

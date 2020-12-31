@@ -8,11 +8,23 @@
 
 namespace sim {
 
-    template<class Function, typename DerivedG, typename DerivedX, typename Scalar=double>
-    void finite_differences_centered(Eigen::MatrixBase<DerivedG> &grad, Function &f, const Eigen::MatrixBase<DerivedX>  &x, Scalar tol=1e-6);
+template<class Function, typename Scalar,
+         int GRowsAtCompileTime,
+         int GColsAtCompileTime,
+         int GOptions = 0,
+         int GMaxRowsAtCompileTime = GRowsAtCompileTime,
+         int GMaxColsAtCompileTime = GColsAtCompileTime,
+         typename DerivedX>
+    void finite_differences_centered(Eigen::Matrix<Scalar, GRowsAtCompileTime, GColsAtCompileTime, GOptions, GMaxRowsAtCompileTime, GMaxColsAtCompileTime> &grad, Function &f, const Eigen::MatrixBase<DerivedX>  &x, Scalar tol=1e-6);
     
-    template<class Function, typename DerivedH, typename DerivedX, typename Scalar=double>
-    void finite_differences_hessian_centered(Eigen::MatrixBase<DerivedH> &H, Function &f, const Eigen::MatrixBase<DerivedX> &x, Scalar tol=1e-6);
+template<class Function, typename Scalar,
+         int HRowsAtCompileTime,
+         int HColsAtCompileTime,
+         int HOptions = 0,
+         int HMaxRowsAtCompileTime = HRowsAtCompileTime,
+         int HMaxColsAtCompileTime = HColsAtCompileTime,
+         typename DerivedX>
+    void finite_differences_hessian_centered(Eigen::Matrix<Scalar, HRowsAtCompileTime, HColsAtCompileTime, HOptions, HMaxRowsAtCompileTime, HMaxColsAtCompileTime> &H, Function &f, const Eigen::MatrixBase<DerivedX> &x, Scalar tol=1e-6);
 
 }
 

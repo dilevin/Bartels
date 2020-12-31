@@ -56,6 +56,11 @@ namespace sim {
     {
         unsigned int iteration_count = 0;
 
+        if(x.rows() == 0) {
+            std::cout<<"Empty point sent to newtons search, quitting.\n";
+            exit(1);
+        }
+        
         if(tmp_g.rows() != x.rows()) {
             tmp_g.resize(x.rows(),1);
         }   
