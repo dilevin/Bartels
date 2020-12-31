@@ -9,10 +9,10 @@
 namespace sim {
 
     template<class Function, typename DerivedG, typename DerivedX, typename Scalar=double>
-    void finite_differences_centered(Eigen::DenseBase<DerivedG> &grad, Function &f, const Eigen::DenseBase<DerivedX>  &x, Scalar tol=1e-6);
+    void finite_differences_centered(Eigen::MatrixBase<DerivedG> &grad, Function &f, const Eigen::MatrixBase<DerivedX>  &x, Scalar tol=1e-6);
     
     template<class Function, typename DerivedH, typename DerivedX, typename Scalar=double>
-    void finite_differences_hessian_centered(Eigen::DenseBase<DerivedH> &H, Function &f, const Eigen::DenseBase<DerivedX> &x, Scalar tol=1e-6);
+    void finite_differences_hessian_centered(Eigen::MatrixBase<DerivedH> &H, Function &f, const Eigen::MatrixBase<DerivedX> &x, Scalar tol=1e-6);
 
 }
 

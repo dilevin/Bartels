@@ -5,7 +5,7 @@
 //centered differences
 //scalar function to vector
 template<class Function, typename DerivedG, typename DerivedX, typename Scalar>
-void sim::finite_differences_centered(Eigen::DenseBase<DerivedG> &grad, Function &f, const Eigen::DenseBase<DerivedX>  &x, Scalar tol)
+void sim::finite_differences_centered(Eigen::MatrixBase<DerivedG> &grad, Function &f, const Eigen::MatrixBase<DerivedX>  &x, Scalar tol)
 {
     if(x.rows() == 0) {
         std::cout<<"ERROR: Provided empty parameters to finite_differences_centered";
@@ -37,7 +37,7 @@ void sim::finite_differences_centered(Eigen::DenseBase<DerivedG> &grad, Function
 
 //vector function to matrix 
 template<class Function, typename DerivedH, typename DerivedX, typename Scalar>
-void sim::finite_differences_hessian_centered(Eigen::DenseBase<DerivedH> &H, Function &f, const Eigen::DenseBase<DerivedX> &x, Scalar tol)
+void sim::finite_differences_hessian_centered(Eigen::MatrixBase<DerivedH> &H, Function &f, const Eigen::MatrixBase<DerivedX> &x, Scalar tol)
 {
 
     if(x.rows() == 0) {
