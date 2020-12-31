@@ -31,9 +31,9 @@ namespace sim {
     //opt_call - opt_call(auto &x, auto &g, auto &H, SolverExitStatus &searchstatus) optimization callback function, default does nothing
     //ls_call -  ls_call(auto &x) line search callback function (default does nothing)
     template <typename DerivedX, class Energy, class Gradient, class Hessian, 
-              typename DerivedG, 
+              typename DerivedG,
               typename Scalar, int SparseOptions, typename StorageIndex,
-              class SparseLinearSolver=Eigen::SparseLU<Eigen::MatrixBase<DerivedH> > ,
+              class SparseLinearSolver=Eigen::SparseLU<Eigen::SparseMatrix<Scalar, SparseOptions, StorageIndex> > ,
               class OptimizationCallback = decltype(default_optimization_callback),
               class LineSearchCallback = decltype(default_linesearch_callback) >
     inline SolverExitStatus newtons_method_bisection(Eigen::MatrixBase<DerivedX> &x,
