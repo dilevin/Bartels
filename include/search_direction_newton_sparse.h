@@ -5,10 +5,10 @@
 
 namespace sim {
 
-    template<typename DerivedG, typename DerivedH, class SparseLinearSolver=Eigen::SparseLU<Eigen::MatrixBase<DerivedH> > >
+    template<typename DerivedG, typename Scalar, int StorageOptions, typename StorageIndex, class SparseLinearSolver=Eigen::SparseLU<Eigen::SparseMatrix<Scalar, StorageOptions, StorageIndex> > >
     bool search_direction_newton_sparse(Eigen::MatrixBase<DerivedG> &d, 
                                 const Eigen::MatrixBase<DerivedG> &g, 
-                                const Eigen::MatrixBase<DerivedH> &H, 
+                                const Eigen::SparseMatrix<Scalar, StorageOptions, StorageIndex> &H, 
                                 SparseLinearSolver &solver);
 
 }
