@@ -30,20 +30,24 @@ namespace sim {
     //p -  
     //opt_call - opt_call(auto &x, auto &g, auto &H, SolverExitStatus &searchstatus) optimization callback function, default does nothing
     //ls_call -  ls_call(auto &x) line search callback function (default does nothing)
-    template <typename DerivedX, class Energy, class Gradient, class Hessian, 
-              typename DerivedG,
-              typename Scalar, int SparseOptions, typename StorageIndex,
-              class SparseLinearSolver=Eigen::SparseLU<Eigen::SparseMatrix<Scalar, SparseOptions, StorageIndex> > ,
-              class OptimizationCallback = decltype(default_optimization_callback),
-              class LineSearchCallback = decltype(default_linesearch_callback) >
+    template <  typename DerivedX, class Energy, class Gradient, class Hessian,
+                int GRowsAtCompileTime,
+                int GColsAtCompileTime,
+                int GOptions = 0,
+                int GMaxRowsAtCompileTime=GRowsAtCompileTime,
+                int GMaxColsAtCompileTime=GColsAtCompileTime,
+                typename Scalar, int SparseOptions, typename StorageIndex,
+                class SparseLinearSolver=Eigen::SparseLU<Eigen::SparseMatrix<Scalar, SparseOptions, StorageIndex> > ,
+                class OptimizationCallback = decltype(default_optimization_callback),
+                class LineSearchCallback = decltype(default_linesearch_callback) >
     inline SolverExitStatus newtons_method_bisection(Eigen::MatrixBase<DerivedX> &x,
                                                  Energy &f, 
                                                  Gradient &g, 
                                                  Hessian &H, 
                                                  SparseLinearSolver &solver,
-                                                 Eigen::MatrixBase<DerivedG> &tmp_g,
+                                                 Eigen::Matrix<Scalar, GRowsAtCompileTime, GColsAtCompileTime, GOptions, GMaxRowsAtCompileTime, GMaxColsAtCompileTime> &tmp_g,
                                                  Eigen::SparseMatrix<Scalar, SparseOptions, StorageIndex> &tmp_H,
-                                                 Eigen::MatrixBase<DerivedG> &tmp_d,
+                                                 Eigen::Matrix<Scalar, GRowsAtCompileTime, GColsAtCompileTime, GOptions, GMaxRowsAtCompileTime, GMaxColsAtCompileTime> &tmp_d,
                                                  Scalar gradient_tol = 1e-3,
                                                  unsigned int max_iterations = 100,
                                                  unsigned int max_iterations_ls = 100,
