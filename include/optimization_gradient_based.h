@@ -32,7 +32,7 @@ namespace sim {
     //ls_call -  ls_call(auto &x) line search callback function (default does nothing)
     template <typename DerivedX, class Energy, class Gradient, class Hessian, 
               typename DerivedG, typename DerivedH,
-              typename Scalar, 
+              typename Scalar, int SparseOptions, typename StorageIndex,
               class SparseLinearSolver=Eigen::SparseLU<Eigen::MatrixBase<DerivedH> > ,
               class OptimizationCallback = decltype(default_optimization_callback),
               class LineSearchCallback = decltype(default_linesearch_callback) >
@@ -42,7 +42,7 @@ namespace sim {
                                                  Hessian &H, 
                                                  SparseLinearSolver &solver,
                                                  Eigen::MatrixBase<DerivedG> &tmp_g,
-                                                 Eigen::SparseMatrixBase<DerivedH> &tmp_H,
+                                                 Eigen::SparseMatrix<Scalar, SparseOptions, StorageIndex> &tmp_H,
                                                  Eigen::MatrixBase<DerivedG> &tmp_d,
                                                  Scalar gradient_tol = 1e-3,
                                                  unsigned int max_iterations = 100,
