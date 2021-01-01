@@ -69,7 +69,7 @@ namespace sim {
             tmp_g.resize(x.rows(),1);
         }   
 
-        //compute hessian
+        
         if((tmp_H.rows() != x.rows()) || (tmp_H.cols() != x.rows()) ) {
             tmp_H.resize(x.rows(), x.rows()); 
         }
@@ -83,6 +83,9 @@ namespace sim {
             if(tmp_g.transpose()*tmp_g < gradient_tol*gradient_tol) 
                 return SolverExitStatus::CONVERGED;
 
+            //compute hessian
+            H(tmp_H, x);
+            
             //compute search direction
             if(!search_direction_newton_sparse(tmp_d, tmp_g, tmp_H, solver))
             {
