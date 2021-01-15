@@ -36,3 +36,6 @@ target_compile_options(test_omp PUBLIC -DNDEBUG  -mavx2 -march=native -Ofast)
 add_executable(test_pardiso test_pardiso.cpp)
 target_link_libraries(test_pardiso PUBLIC bartels)
 
+add_executable(test_random_tests test_random_tests.cpp)
+target_link_libraries(test_random_tests PUBLIC bartels)
+

@@ -80,6 +80,22 @@ namespace Eigen {
     template<typename Scalar>
     using Tensor3333x = std::array<std::array<Eigen::Matrix3x<Scalar>,3>, 3>;
 
+    //SINFAE helpers to disambiguate functions
+    template<typename T = void>
+    struct enable_if_not_eigen { 
+        typedef T type;
+    };
+
+    template<>
+    struct enable_if_not_eigen<Eigen::DenseBase<double> > { };
+
+    template<>
+    struct enable_if_not_eigen<Eigen::MatrixXd> { };
+
+    template<>
+    struct enable_if_not_eigen<Eigen::MatrixXf> { };
+
+
 }
 
 inline double stablePow(double a, double b) {        
