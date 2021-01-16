@@ -22,7 +22,7 @@ auto sim::linear_tetmesh_generic_elastic_q(const Eigen::MatrixBase<DerivedV> &V,
                             const auto &dphidX,
                             const auto &volume, const auto &...params) 
                            { 
-                             return mat_func(q, e, F, sim::unflatten<4,3>(dphidX), params..., volume(0));
+                             return mat_func(q, e, sim::unflatten<3,3>(F), sim::unflatten<4,3>(dphidX), params..., volume(0));
                            };
     
 

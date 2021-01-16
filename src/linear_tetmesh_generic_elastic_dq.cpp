@@ -26,7 +26,7 @@ void sim::linear_tetmesh_generic_elastic_dq(Eigen::VectorXx<DerivedRet> &g, cons
                             const auto &dphidX,
                             const auto &volume, const auto & ... params) 
                            { 
-                             mat_func(g, q, e, F, sim::unflatten<4,3>(dphidX), params ..., volume(0));
+                             mat_func(g, q, e, sim::unflatten<3,3>(F), sim::unflatten<4,3>(dphidX), params ..., volume(0));
                              func(g); //callback stuff
                            };
     

@@ -7,7 +7,7 @@
 namespace sim {
 
     template<typename DefoType, typename DerivedV, typename ParameterType>
-    typename DefoType::Scalar psi_muscle_fiber_F(const Eigen::MatrixBase<DefoType> &F, const Eigen::DenseBase<DerivedV> &direction, const Eigen::MatrixBase<ParameterType> &params);
+    typename DefoType::Scalar psi_muscle_fiber_F(const Eigen::MatrixBase<DefoType> &F, const Eigen::MatrixBase<DerivedV> &direction, const Eigen::MatrixBase<ParameterType> &params);
 }
 
 #ifndef SIM_STATIC_LIBRARY

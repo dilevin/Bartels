@@ -28,7 +28,7 @@ void sim::linear_tetmesh_generic_elastic_dq2(Eigen::SparseMatrix<DerivedRet, Opt
                             const auto &dphidX,
                             const auto &volume, const auto &...params) 
                            { 
-                             mat_func(H, q, e, F, sim::unflatten<4,3>(dphidX), params..., volume(0));
+                             mat_func(H, q, e, sim::unflatten<3,3>(F), sim::unflatten<4,3>(dphidX), params..., volume(0));
                              func(H); //callback stuff
                            };
     
