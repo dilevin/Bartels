@@ -21,7 +21,7 @@ function implicit_integration
     gravity = P*M*repmat(gravity, size(V,1),1);
     
     M = P*M*P'; %mass matrix with boundary oncdionts
-    dphidX =  linear_tetmesh_dphi_dphidX(V,T);
+    dphidX =  linear_tetmesh_dphi_dX(V,T);
     
     [f,p] = nice_plot(V,F);
     
