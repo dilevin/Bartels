@@ -57,7 +57,8 @@ function implicit_integration
         
         h.String = num2str(ti);
         
-        vt = fmincon(@energy, 0*vt, [], [], [],[], [],[], [], options);
+        deltav = fmincon(@energy, 0*vt, [], [], [],[], [],[], [], options);
+        vt = vt + deltav;
         qt = qt + dt*vt;
         
         p.Vertices = reshape(P'*qt + b, 3, size(V,1))';
@@ -66,14 +67,14 @@ function implicit_integration
     
     
     %objective needs to return energy, gradient and hessian values
-    function [e, g, H] = energy(v)
-        
-        e = 0.5*v'*M*v - v'*M*vt + ...
+    function [e, g, H] = energy(deltav) 
+        v = vt + deltav;
+        e = 0.5*deltav'*M*deltav + ...
             linear_tetmesh_neohookean_q(V,T, P'*(qt+dt*v)+b, dphidX, vol, [0.5*mu, 0.5*lambda]) - ...
             dt*v'*gravity; 
         
         if nargout > 1
-            g = M*(v - vt) + ...
+            g = M*deltav + ...
                 dt*P*linear_tetmesh_neohookean_dq(V,T, P'*(qt+dt*v)+b, dphidX, vol, [0.5*mu, 0.5*lambda]) + ...
                 - dt*gravity;
             
