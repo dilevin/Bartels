@@ -1,3 +1,6 @@
 [submodule "extern/libigl"]
 	path = extern/libigl
 	url = https://github.com/libigl/libigl.git
+[submodule "extern/numpyeigen"]
+	path = extern/numpyeigen
+	url = https://github.com/fwilliams/numpyeigen.git
