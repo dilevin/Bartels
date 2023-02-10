@@ -1,0 +1,20 @@
+MeshVersionFormatted 1
+Dimension 3
+Vertices
+5
+0 0 0 0
+0.1 0.1 0 0
+0.1 0 -0.1 0
+0 0.1 -0.1 0
+0.14142135623731 0.14142135623731 -0.14142135623731 0
+Triangles
+0
+ Tetrahedra
+2
+1 2 3 4 0
+2 3 4 5 0
+Edges
+0
+ End
+
+||

@@ -18,7 +18,9 @@ option(bartels_USE_PARDISO OFF)
 #     set(bartels_USE_OPENMP OFF CACHE BOOL "Override option" FORCE)
 # endif()
 
-find_package(LIBIGL REQUIRED)
+#Old style find_package(LIBIGL REQUIRED)
+#new style
+include(libigl) 
 
 if(bartels_USE_OPENMP)
     find_package(OpenMP REQUIRED)
