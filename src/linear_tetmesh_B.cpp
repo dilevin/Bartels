@@ -6,7 +6,7 @@ template<typename DerivedRet, int Options, typename StorageIndex, typename Deriv
 void sim::linear_tetmesh_B(Eigen::SparseMatrix<DerivedRet, Options, StorageIndex> &B, const Eigen::MatrixBase<DerivedV> &V,  Eigen::Ref<const Eigen::MatrixXi> E) {
 
     
-    Eigen::MatrixXd dX;
+    Eigen::Matrix<DerivedRet, Eigen::Dynamic, Eigen::Dynamic> dX;
     linear_tetmesh_dphi_dX(dX, V,  E);
 
     auto assemble_func = [](auto &dX, auto &e, auto &dX_dense) { 

@@ -16,6 +16,6 @@ npe_begin_code()
 
     sim::linear_tetmesh_mass_matrix(M, V, E, densities_vec, volumes_vec);
 
-    return std::make_tuple(npe::move(M));
+    return npe::move(M);
 
 npe_end_code()
