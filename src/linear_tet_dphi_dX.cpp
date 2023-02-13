@@ -7,7 +7,7 @@ void sim::linear_tet_dphi_dX(Eigen::DenseBase<DerivedP> &dphi, const  Eigen::Mat
                             Eigen::Ref<const Eigen::RowVectorXi> element, 
                             Eigen::MatrixBase<DerivedR> const & X) {
 
-        Eigen::Matrix3d tmp;
+        Eigen::Matrix<typename DerivedP::Scalar, 3,3> tmp;
         dphi.block(1,0,3,3) << (V.row(element(1)) - V.row(element(0))), (V.row(element(2)) - V.row(element(0))), (V.row(element(3)) - V.row(element(0)));
 
         dphi.block(1,0,3,3).transposeInPlace();
