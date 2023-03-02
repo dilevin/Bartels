@@ -7,7 +7,7 @@
 namespace sim {
 
     template<typename OutputType, typename SType, typename ParameterType>
-    void d2psi_arap_dS2(Eigen::Matrix3x<OutputType> &ds, const Eigen::Vector3x<SType>  &S, const Eigen::MatrixBase<ParameterType> &params);
+    void d2psi_arap_dS2(Eigen::Matrix6x<OutputType> &ds, const Eigen::Vector6x<SType>  &S, const Eigen::MatrixBase<ParameterType> &params);
     
 }
 

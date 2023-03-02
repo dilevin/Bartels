@@ -133,9 +133,9 @@ inline void inverse22(Eigen::Ref<Eigen::Matrix2d> result, Eigen::Ref<const Eigen
 
 }
 
-auto default_callback = [](auto &element_matrix){};
+inline auto default_callback = [](auto &element_matrix){};
 
-auto default_linesearch_callback = [](auto &x) {};
+inline auto default_linesearch_callback = [](auto &x) {};
 
 //include flatten operations
 #include <flatten.h>
