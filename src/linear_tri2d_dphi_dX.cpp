@@ -7,7 +7,8 @@ void sim::linear_tri2d_dphi_dX(Eigen::DenseBase<DerivedP> &dphi, const  Eigen::M
                             Eigen::Ref<const Eigen::RowVectorXi> element, 
                             Eigen::MatrixBase<DerivedR> const & X) {
 
-        Eigen::Matrix2d tmp;
+        using Scalar = typename DerivedP::Scalar;
+        Eigen::Matrix<Scalar, 2,2> tmp;
         dphi.block(1,0,2,2) << (V.row(element(1)) - V.row(element(0))), (V.row(element(2)) - V.row(element(0)));
 
         dphi.block(1,0,2,2).transposeInPlace();
