@@ -25,6 +25,20 @@ namespace sim {
                        ArgTypeB::RowsAtCompileTime*ArgTypeB::ColsAtCompileTime> MatrixType;
 
     };
+    
+    template<class ArgTypeA, class ArgTypeB>
+    struct flatten_multiply_right_helper {
+
+        //flatten to a column vector
+        typedef Eigen::Matrix<typename ArgTypeA::Scalar,
+                       ArgTypeA::RowsAtCompileTime*ArgTypeB::ColsAtCompileTime,
+                       ArgTypeA::RowsAtCompileTime*ArgTypeA::ColsAtCompileTime,
+                       Eigen::ColMajor,
+                       ArgTypeA::RowsAtCompileTime*ArgTypeB::ColsAtCompileTime,
+                       ArgTypeA::RowsAtCompileTime*ArgTypeA::ColsAtCompileTime> MatrixType;
+
+    };
+    
 
     //access approriate parts of matrix to flatten
     template<class ArgTypeA, class ArgTypeB>
@@ -37,7 +51,7 @@ namespace sim {
             //for some reason I can only get these to work with linear indexes 
             const typename ArgTypeA::Scalar operator()(size_t index) const {
 
-                using MatrixType = typename flatten_multiply_helper<ArgTypeA, ArgTypeB>::MatrixType;
+                using MatrixType = typename flatten_multiply_right_helper<ArgTypeA, ArgTypeB>::MatrixType;
 
                 constexpr size_t rowsOut = ArgTypeA::RowsAtCompileTime;
                 constexpr size_t colsOut = ArgTypeB::ColsAtCompileTime;
@@ -63,13 +77,13 @@ namespace sim {
 
     template<class ArgTypeA, class ArgTypeB>
     Eigen::CwiseNullaryOp<flatten_multiply_right_functor<ArgTypeA, ArgTypeB>,
-                          typename flatten_multiply_helper<ArgTypeA, ArgTypeB>::MatrixType>
+                          typename flatten_multiply_right_helper<ArgTypeA, ArgTypeB>::MatrixType>
     flatten_multiply_right(const Eigen::MatrixBase<ArgTypeB> &arg) {
 
-        using MatrixType = typename flatten_multiply_helper<ArgTypeA, ArgTypeB>::MatrixType;
+        using MatrixType = typename flatten_multiply_right_helper<ArgTypeA, ArgTypeB>::MatrixType;
 
         return MatrixType::NullaryExpr(ArgTypeA::RowsAtCompileTime*ArgTypeB::ColsAtCompileTime,
-                                       ArgTypeB::RowsAtCompileTime*ArgTypeB::ColsAtCompileTime, 
+                                       ArgTypeA::RowsAtCompileTime*ArgTypeA::ColsAtCompileTime, 
                                        flatten_multiply_right_functor<ArgTypeA, ArgTypeB>(arg.derived()));
     }
 
