@@ -109,7 +109,7 @@ inline void inverse33(Eigen::DenseBase<DerivedR> & result, const Eigen::DenseBas
     Scalar determinant =    +A(0,0)*(A(1,1)*A(2,2)-A(2,1)*A(1,2))
                             -A(0,1)*(A(1,0)*A(2,2)-A(1,2)*A(2,0))
                             +A(0,2)*(A(1,0)*A(2,1)-A(1,1)*A(2,0));
-    Scalar invdet = 1/determinant;
+    Scalar invdet = static_cast<Scalar>(1.)/determinant;
     result(0,0) =  (A(1,1)*A(2,2)-A(2,1)*A(1,2))*invdet;
     result(1,0) = -(A(0,1)*A(2,2)-A(0,2)*A(2,1))*invdet;
     result(2,0) =  (A(0,1)*A(1,2)-A(0,2)*A(1,1))*invdet;
@@ -122,10 +122,13 @@ inline void inverse33(Eigen::DenseBase<DerivedR> & result, const Eigen::DenseBas
     result.transposeInPlace();
 }
 
-inline void inverse22(Eigen::Ref<Eigen::Matrix2d> result, Eigen::Ref<const Eigen::Matrix2d> A) {
-    double determinant = A(0,0)*A(1,1) - A(0,1)*A(1,0);
+template <typename DerivedR, typename DerivedA>
+inline void inverse22(Eigen::DenseBase<DerivedR> &result, const Eigen::DenseBase<DerivedA> &A) {
+    using Scalar = typename DerivedR::Scalar;
+    
+    Scalar determinant = A(0,0)*A(1,1) - A(0,1)*A(1,0);
 
-    double invdet = 1./determinant;
+    Scalar invdet = static_cast<Scalar>(1.)/determinant;
     result(0,0) =  A(1,1)*invdet;
     result(1,0) = -A(1,0)*invdet;
     result(0,1) = -A(0,1)*invdet;
@@ -133,9 +136,9 @@ inline void inverse22(Eigen::Ref<Eigen::Matrix2d> result, Eigen::Ref<const Eigen
 
 }
 
-auto default_callback = [](auto &element_matrix){};
+inline auto default_callback = [](auto &element_matrix){};
 
-auto default_linesearch_callback = [](auto &x) {};
+inline auto default_linesearch_callback = [](auto &x) {};
 
 //include flatten operations
 #include <flatten.h>

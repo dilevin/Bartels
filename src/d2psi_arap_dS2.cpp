@@ -4,10 +4,10 @@
 #endif
 
 template<typename OutputType, typename SType, typename ParameterType>
-void sim::d2psi_arap_dS2(Eigen::Matrix3x<OutputType> &ds, const Eigen::Vector3x<SType>  &S, const Eigen::MatrixBase<ParameterType> &params) {
+void sim::d2psi_arap_dS2(Eigen::Matrix6x<OutputType> &ds, const Eigen::Vector6x<SType>  &S, const Eigen::MatrixBase<ParameterType> &params) {
                       
     ds.setIdentity();
-    ds *= static_cast<OutputType>(2)*params(0);
+    ds *= static_cast<OutputType>(2)*params(0,0);
     
 }
 
