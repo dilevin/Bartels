@@ -1,0 +1,114 @@
+newmtl mat000
+Ka 0.5000 0.5000 0.5000
+Kd 1.64929e-38 1.64929e-38 1.64929e-38
+Tr 1.64929e-38
+illum 1
+
+newmtl mat001
+Ka 0.5000 0.5000 0.5000
+Kd 0 0 0
+Tr 0
+illum 1
+
+newmtl mat010
+Ka 0.5000 0.5000 0.5000
+Kd nan nan nan
+Tr nan
+illum 1
+
+newmtl mat011
+Ka 0.5000 0.5000 0.5000
+Kd nan nan nan
+Tr nan
+illum 1
+
+newmtl mat012
+Ka 0.5000 0.5000 0.5000
+Kd nan nan nan
+Tr nan
+illum 1
+
+newmtl mat013
+Ka 0.5000 0.5000 0.5000
+Kd 0 -1.68683 -0
+Tr 1.75532
+illum 1
+
+newmtl mat014
+Ka 0.5000 0.5000 0.5000
+Kd 3.68935e+19 1.65144 -3.68935e+19
+Tr 1.63657
+illum 1
+
+newmtl mat015
+Ka 0.5000 0.5000 0.5000
+Kd -0 -1.52019 1.0842e-19
+Tr -1.50048
+illum 1
+
+newmtl mat016
+Ka 0.5000 0.5000 0.5000
+Kd 1.72308e-38 1.72308e-38 1.72308e-38
+Tr 1.72304e-38
+illum 1
+
+newmtl mat017
+Ka 0.5000 0.5000 0.5000
+Kd 3.68935e+19 -1.62039 2
+Tr 1.2559
+illum 1
+
+newmtl mat018
+Ka 0.5000 0.5000 0.5000
+Kd nan nan nan
+Tr nan
+illum 1
+
+newmtl mat002
+Ka 0.5000 0.5000 0.5000
+Kd nan nan nan
+Tr nan
+illum 1
+
+newmtl mat003
+Ka 0.5000 0.5000 0.5000
+Kd 3.77676e-39 3.86896e-39 3.96115e-39
+Tr 3.96115e-39
+illum 1
+
+newmtl mat004
+Ka 0.5000 0.5000 0.5000
+Kd nan nan nan
+Tr nan
+illum 1
+
+newmtl mat005
+Ka 0.5000 0.5000 0.5000
+Kd nan nan nan
+Tr nan
+illum 1
+
+newmtl mat006
+Ka 0.5000 0.5000 0.5000
+Kd nan nan nan
+Tr nan
+illum 1
+
+newmtl mat007
+Ka 0.5000 0.5000 0.5000
+Kd 1.66773e-38 1.66769e-38 1.66769e-38
+Tr 1.66769e-38
+illum 1
+
+newmtl mat008
+Ka 0.5000 0.5000 0.5000
+Kd 1.68613e-38 1.68613e-38 1.68613e-38
+Tr 1.68613e-38
+illum 1
+
+newmtl mat009
+Ka 0.5000 0.5000 0.5000
+Kd nan nan nan
+Tr nan
+illum 1
+
