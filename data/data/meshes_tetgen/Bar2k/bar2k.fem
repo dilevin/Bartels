@@ -1,0 +1,63 @@
+#Mesh
+mesh ../../../resources/fem/bar2k/bar2k
+
+#Material Model Parameters
+E 1e4
+mu 0.45
+
+#Constraints
+f 0
+f 1
+f 2
+f 3
+f 8
+f 9
+f 10
+f 11
+f 20
+f 21
+f 22
+f 23
+f 24
+f 33
+f 34
+f 35
+f 36
+f 37
+f 50
+f 51
+f 52
+f 61
+f 62
+f 63
+f 64
+f 65
+f 78
+f 79
+f 80
+f 81
+f 87
+f 88
+f 89
+f 115
+f 116
+f 152
+f 189
+f 243
+f 254
+f 255
+f 256
+f 301
+f 311
+f 315
+f 316
+f 342
+f 368
+f 369
+
+#Time Stepper Parameters
+cgIter 50
+dt 0.01
+nodeMass 0.00001
+density 1000
+
